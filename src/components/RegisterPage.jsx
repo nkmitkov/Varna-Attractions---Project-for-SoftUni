@@ -71,6 +71,17 @@ export default function RegisterPage() {
                                             data-validation-required-message="Please enter a repeat password" />
                                         <p className="help-block text-danger" />
                                     </div>
+                                    <div className="control-group">
+                                        <input
+                                            type="text"
+                                            name="avatar"
+                                            className="form-control p-4"
+                                            id="avatar"
+                                            placeholder="Avatar - http/https"
+                                            required="required"
+                                            data-validation-required-message="Please enter an URL for your Avatar" />
+                                        <p className="help-block text-danger" />
+                                    </div>
                                     
                                     <div className="text-center">
                                         <button className="btn btn-primary py-3 px-4" type="submit" id="registerButton" >
