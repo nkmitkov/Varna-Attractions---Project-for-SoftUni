@@ -10,12 +10,6 @@ export default function AttractionsPageAttraction(props) {
                                 <i className="fa fa-map-marker-alt text-primary mr-2" />
                                 {props.data.address}
                             </small>
-                            {/* <small className="m-0">
-                                <i className="fa fa-calendar-alt text-primary mr-2" />3 days
-                            </small>
-                            <small className="m-0">
-                                <i className="fa fa-user text-primary mr-2" />2 Person
-                            </small> */}
                         </div>
                         <a className="h5 text-decoration-none" href={props.data.website}>
                             {props.data.name}
