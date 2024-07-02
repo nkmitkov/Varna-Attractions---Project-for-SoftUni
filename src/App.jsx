@@ -9,7 +9,8 @@ import LoginPage from "./components/LoginPage";
 import ProfilePage from "./components/ProfilePage";
 import WrongUrlPage from "./components/404";
 
-import attractions from "../../data.json";
+import attractions from "../data.json";
+import users from "../users.json"
 
 function App() {
     return (
@@ -102,7 +103,7 @@ function App() {
             </div>
 
             
-            <LoginPage data={ attractions[2] } />
+            <ProfilePage data={ attractions[2] } userInfo={ users[0] } />
             
 
             <div className="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style={{ marginTop: 90 }} >
