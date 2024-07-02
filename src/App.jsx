@@ -102,7 +102,7 @@ function App() {
             </div>
 
             
-            <DetailsPage data={ attractions[0] } />
+            <LoginPage data={ attractions[2] } />
             
 
             <div className="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style={{ marginTop: 90 }} >

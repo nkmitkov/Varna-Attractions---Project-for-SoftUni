@@ -16,15 +16,12 @@ export default function LoginPage() {
             <div className="container-fluid py-5">
                 <div className="container py-5">
                     <div className="text-center mb-3 pb-3">
-                        <h6
-                            className="text-primary text-uppercase"
-                            style={{ letterSpacing: 5 }}
-                        >
+                        <h6 className="text-primary text-uppercase" style={{ letterSpacing: 5 }} >
                             Login form
                         </h6>
                         <h1>Login So You Can Help Others</h1>
                     </div>
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center" style={{ width: "750px", margin: "auto" }}>
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
@@ -33,6 +30,7 @@ export default function LoginPage() {
                                     <div className="control-group">
                                         <input
                                             type="text"
+                                            name="email"
                                             className="form-control p-4"
                                             id="email"
                                             placeholder="Email"
@@ -44,6 +42,7 @@ export default function LoginPage() {
                                     <div className="control-group">
                                         <input
                                             type="password"
+                                            name="password"
                                             className="form-control p-4"
                                             id="password"
                                             placeholder="Password"
@@ -54,11 +53,7 @@ export default function LoginPage() {
                                     </div>
 
                                     <div className="text-center">
-                                        <button
-                                            className="btn btn-primary py-3 px-4"
-                                            type="submit"
-                                            id="loginButton"
-                                        >
+                                        <button className="btn btn-primary py-3 px-4" type="submit" id="loginButton" >
                                             Login
                                         </button>
                                     </div>
