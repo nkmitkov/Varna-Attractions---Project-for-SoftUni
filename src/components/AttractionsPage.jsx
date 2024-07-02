@@ -25,10 +25,7 @@ export default function AttractionsPage() {
             <div className="container-fluid py-5">
                 <div className="container pt-5 pb-3">
                     <div className="text-center mb-3 pb-3">
-                        <h6
-                            className="text-primary text-uppercase"
-                            style={{ letterSpacing: 5 }}
-                        >
+                        <h6 className="text-primary text-uppercase" style={{ letterSpacing: 5 }} >
                             Attractions
                         </h6>
                         <h1>Attractions you must see in Varna</h1>
