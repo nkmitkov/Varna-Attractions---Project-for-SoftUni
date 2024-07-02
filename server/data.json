@@ -1,0 +1,52 @@
+[
+    {
+        "name": "The 'Dormition of the Mother of God' Cathedral",
+        "description": "Located in the heart of Varna The Cathedral has become one of the landmarks of the city. Situated on “St. Cyril and St. Methodius” square in the very center it is a top sight of The Sea capital. The first stone set in the construction of the temple was placed by Prince Alexander I of Battenberg (1857 - 1893) in 1880. After the consecration, the prince reprieved all the prisoners from Varna prison, for whom three months of their sentences were remaining. The name that was chosen, The Assumption of Holy Mother, was to the memory of the Russian Empress Maria Alexanrovna, benefactor of Bulgaria and aunt of the Prince.",
+        "opened": "1886",
+        "address": "Hristo BotevOdesos, 2 Saints Cyril and Methodius Square, 9000 Varna",
+        "hours": "Everyday - 7am - 5:30pm",
+        "phone": "052 613 005",
+        "price": "Free",
+        "website" : "https://visit.varna.bg/en/church_dormission.html"
+    },
+    {
+        "name": "Archaeological Museum Varna",
+        "description": "The Archaeological Museum of Varna was established in 1887 by the brothers Karel and Herman Shkorpil (archaeologists and scientists of Czech and Bulgarian origin, founders of the Bulgarian archaeology and museum activity). The building housing the museum was constructed in 1892 – 1898 for a school – a Girls High School. It was built in late baroque style with basement premises and two floors. It has almost square shape and spacious internal yard. The exposition area of the museum is 2 150 square meters. There are also funds, a library and children education museum.",
+        "opened": "1906",
+        "address": "Archaeological Museum, CenterOdesos, 41 Princess Maria Louisa Boulevard, 9000 Varna",
+        "hours": "Everyday - 10am-5pm",
+        "phone": "052 681 030",
+        "price": "BGN 10",
+        "website" : "https://visit.varna.bg/en/arhaeological_museum.html"
+    },
+    {
+        "name": "Aladzha Monastery",
+        "description": "Aladzha Monastery is the most famous medieval cave monastery along the Bulgarian Black Sea coast. It was inhabited by hermit monks during the XIII- XIV centuries. It was in the end of XIX century when the founders of the Bulgarian archaeology- Shkorpil brothers, Karel and Hermin, began systematically to study this Christian monument. In 1927, Aladzha Monastery was declared a public historical monument and in 1968 it was declared an architectural cultural monument of national significance.",
+        "opened": "1968",
+        "address": "61 Abay Street, Primorski, 9000 Varna",
+        "hours": "Everyday - 9am - 5pm",
+        "phone": "088 893 9277",
+        "price": "BGN 5",
+        "website" : "https://visit.varna.bg/en/aladzha_monastery.html"
+    },
+    {
+        "name": "Dolphinarium Varna",
+        "description": "Dolphinarium Varna is one of a kind attraction in Bulgaria. It is set amidst greenery in the northern part of the Varna Sea Garden with a wonderful sea view. It was opened on 11.08.1984 and is a symbol not only of Varna but also of the tourist attractions in Bulgaria. The Dolphinarium is a must in the programs of all tourists visiting the Bulgarian seaside.",
+        "opened": "1984",
+        "address": "Dolphinarium Varna, Primorski Park, Saltanat district, 9000 Varna",
+        "hours": "Everyday - 9am - 5pm",
+        "phone": "052 302 199",
+        "price": "BGN 40",
+        "website" : "https://dolphinariumvarna.bg/the-dolphinarium-2.html"
+    },
+    {
+        "name": "Residence Euxinograd",
+        "description": "Prince Battenberg visited Varna in 1880 and he was welcomed at the monastery “St. Dimitar”, which was situated at the same place, where now the residence stands. The monarch liked the local nature so much, that two years later the Varna municipality bestowed him the monastery and its adjoining lands. The palace park is an integral component of the Euxinograd complex. Prince Ferdinand attracted French park architects to design the 800 decare park in 1888. The project involved a rare tree species collection – from black oak to Atlantic cedar, which are the only species on the Balkan Peninsula. The bare and stony areas were covered in fertile soil, mostly taken from the valley of Kamchiya river. Greenhouses were built northeast of the palace for wintering of the palm trees and flower production. More than 500 flower species and 200 sapling species are grown there and in the arboretum.",
+        "opened": "1885",
+        "address": "Euxinograd Residence, Evksinograd, 9002 Varna, Bulgaria",
+        "hours": "Tues - Sat - 9am - 5pm",
+        "phone": "052 393 140",
+        "price": "BGN 8",
+        "website" : "https://visit.varna.bg/en/euxinograde.html"
+    }
+]
