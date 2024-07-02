@@ -100,7 +100,7 @@ function App() {
             </div>
 
             
-            <ProfilePage />
+            <HomePage />
             
 
             <div className="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style={{ marginTop: 90 }} >
