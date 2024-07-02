@@ -5,7 +5,7 @@ export default function HomePageAttraction(props) {
                 <div className="destination-item position-relative overflow-hidden mb-2">
                     <img className="img-fluid" src={ props.data.image } alt="" />
                     <a className="destination-overlay text-white text-decoration-none" href="/" >
-                        <h5 className="text-white">{ props.data.name }</h5>
+                        <h5 className="text-white" style={{ textAlign: "center" }} >{ props.data.name }</h5>
                         {/* <span>100 Cities</span> */}
                     </a>
                 </div>
