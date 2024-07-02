@@ -3,7 +3,7 @@ export default function AttractionsPageAttraction(props) {
         <>
             <div className="col-lg-4 col-md-6 mb-4">
                 <div className="package-item bg-white mb-2">
-                    <img className="img-fluid" src={props.data.image} alt="{ props.data.name }" />
+                    <img className="img-fluid" src={props.data.image} alt="{ props.data.name }" style={{ width: "500px", height: "250px" }}/>
                     <div className="p-4">
                         <div className="d-flex justify-content-between mb-3">
                             <small className="m-0">
