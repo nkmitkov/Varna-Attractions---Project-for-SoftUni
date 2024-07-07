@@ -6,7 +6,7 @@ import AboutVarnaPage from "./components/AboutVarnaPage";
 import DetailsPage from "./components/DetailsPage";
 import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
-// import CreatePage from "./components/CreatePage";
+import CreatePage from "./components/CreatePage";
 // import EditPage from "./components/EditPage";
 import ProfilePage from "./components/ProfilePage";
 import WrongUrlPage from "./components/404/404";
@@ -16,8 +16,7 @@ function App() {
         <>
             <Navigation />
             
-            {/* <AttractionsPage data={ attractions[2] } userInfo={ users[0] } /> */}
-            <AttractionsPage />
+            <CreatePage />
             
             <Footer />
 

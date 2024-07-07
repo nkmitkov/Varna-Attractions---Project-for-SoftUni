@@ -31,7 +31,7 @@ export default function AttractionsPageAttraction({
                                     4.5 <small>(250)</small>
                                 </h6>
                                 <h5 className="m-0">
-                                    {Number(price) ? "BGN " : ""}{price}
+                                    {!!Number(price) ? "BGN " : ""}{price}
                                 </h5>
                             </div>
                         </div>
