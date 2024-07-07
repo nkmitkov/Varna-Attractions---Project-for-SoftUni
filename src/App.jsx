@@ -7,7 +7,7 @@ import DetailsPage from "./components/DetailsPage";
 import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
 import CreatePage from "./components/CreatePage";
-// import EditPage from "./components/EditPage";
+import EditPage from "./components/EditPage";
 import ProfilePage from "./components/ProfilePage";
 import WrongUrlPage from "./components/404/404";
 
@@ -16,7 +16,7 @@ function App() {
         <>
             <Navigation />
             
-            <CreatePage />
+            <AttractionsPage />
             
             <Footer />
 

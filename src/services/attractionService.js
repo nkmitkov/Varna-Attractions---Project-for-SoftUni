@@ -9,6 +9,13 @@ export const getAll = async () => {
     return data;
 };
 
+export const getOneById = async (id) => {
+    const response = await fetch(`${baseUrl}/${id}`);
+    const result = await response.json();
+
+    return result;
+};
+
 export const create = async (data) => {
     const response = await fetch(baseUrl, {
         method: "POST",
