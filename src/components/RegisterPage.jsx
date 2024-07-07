@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
-
 import * as userService from "../services/userService";
 
 export default function RegisterPage() {
-    const [user, setUser] = useState(null);
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
@@ -22,7 +19,8 @@ export default function RegisterPage() {
         try {
             const createdUser = await userService.create(data);
 
-            console.log(createdUser);
+            // after success send token - "X-Authorization": {token}
+            // redirect to attractions
         } catch (error) {
             console.log(error);
         }

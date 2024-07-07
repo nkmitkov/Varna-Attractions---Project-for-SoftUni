@@ -1,4 +1,23 @@
+import * as userService from "../services/userService";
+
 export default function LoginPage() {
+
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData);
+
+        try {
+            const user = await userService.login(data);
+
+            // send token and redirect
+            console.log(user);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
 
@@ -25,7 +44,7 @@ export default function LoginPage() {
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
-                                <form name="register" id="contactForm" noValidate="novalidate">
+                                <form name="login" id="loginForm" noValidate="novalidate" onSubmit={onSubmitHandler}>
                                     
                                     <div className="control-group">
                                         <input

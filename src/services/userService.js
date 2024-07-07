@@ -23,13 +23,6 @@ export const create = async (userData) => {
 };
 
 export const login = async (userData) => {
-    // Get the user
-
-    // Check if user exists
-
-    // Check if passwords match
-
-    // Return user;
     const response = await fetch(baseUrl, {
         method: "POST",
         headers: {
