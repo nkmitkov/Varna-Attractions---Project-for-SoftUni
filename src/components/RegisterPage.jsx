@@ -1,4 +1,33 @@
+import { useEffect, useState } from "react";
+
+import * as userService from "../services/userService";
+
 export default function RegisterPage() {
+    const [user, setUser] = useState(null);
+
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData);
+
+        // Validate if both passwords match
+        if (data.password !== data.rePassword) {
+            console.log("Both password don't match!");
+        }
+        // Validate if user with the current email already exists
+        // Remove rePassword property so we don't save it in the server
+        delete data.rePassword;
+
+        try {
+            const createdUser = await userService.create(data);
+
+            console.log(createdUser);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
 
@@ -25,7 +54,7 @@ export default function RegisterPage() {
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
-                                <form name="register" id="contactForm" noValidate="novalidate" >
+                                <form name="register" id="contactForm" noValidate="novalidate" onSubmit={onSubmitHandler}>
                                     
                                     <div className="control-group">
                                         <input
