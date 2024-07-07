@@ -1,10 +1,20 @@
+import { useState, useEffect } from "react";
+
 import AttractionsPageAttraction from "./partials/AttractionsPageAttraction";
-import attractions from "../../data.json";
+import * as attractionService from "../services/attractionService";
 
 export default function AttractionsPage() {
+    const [attractions, setAttractions] = useState([]);
+
+    useEffect(() => {
+        attractionService.getAll()
+            .then((result) => setAttractions(result))
+            .catch((error) => console.log(error));
+    }, []);
+
     return (
         <>
-           
+
             <div className="container-fluid p-0">
                 <div id="header-carousel" className="carousel slide" data-ride="carousel">
                     <div className="carousel-inner">
@@ -21,7 +31,7 @@ export default function AttractionsPage() {
                     </div>
                 </div>
             </div>
-            
+
             <div className="container-fluid py-5">
                 <div className="container pt-5 pb-3">
                     <div className="text-center mb-3 pb-3">
@@ -31,15 +41,18 @@ export default function AttractionsPage() {
                         <h1>Attractions you must see in Varna</h1>
                     </div>
                     <div className="row">
-                        <AttractionsPageAttraction data={ attractions[0] } />
-                        <AttractionsPageAttraction data={ attractions[1] } />
-                        <AttractionsPageAttraction data={ attractions[2] } />
-                        <AttractionsPageAttraction data={ attractions[3] } />
-                        <AttractionsPageAttraction data={ attractions[4] } />
+
+                        {attractions.map(attr => (
+                            <AttractionsPageAttraction
+                                key={attr.name}
+                                {...attr}
+                            />
+                        ))}
+
                     </div>
                 </div>
             </div>
 
-            </>
-        );
-    };
+        </>
+    );
+};

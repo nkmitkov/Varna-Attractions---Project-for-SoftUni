@@ -11,16 +11,13 @@ import LoginPage from "./components/LoginPage";
 import ProfilePage from "./components/ProfilePage";
 import WrongUrlPage from "./components/404/404";
 
-import attractions from "../data.json";
-import users from "../users.json"
-
 function App() {
     return (
         <>
             <Navigation />
             
             {/* <AttractionsPage data={ attractions[2] } userInfo={ users[0] } /> */}
-            <RegisterPage />
+            <AttractionsPage />
             
             <Footer />
 
