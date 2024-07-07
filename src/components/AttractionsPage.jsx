@@ -12,6 +12,10 @@ export default function AttractionsPage() {
             .catch((error) => console.log(error));
     }, []);
 
+    const onDeleteHandler = (e, id) => {
+        console.log(`Delete attraction with id: ${id._id}`);
+    };
+
     return (
         <>
 
@@ -46,6 +50,7 @@ export default function AttractionsPage() {
                             <AttractionsPageAttraction
                                 key={attr.name}
                                 {...attr}
+                                onDeleteClick={onDeleteHandler}
                             />
                         ))}
 

@@ -1,6 +1,7 @@
 import "./attraction.css";
 
 export default function AttractionsPageAttraction({
+    _id,
     name,
     description,
     image,
@@ -9,6 +10,7 @@ export default function AttractionsPageAttraction({
     phone,
     price,
     website,
+    onDeleteClick
 }) {
 
     return (
@@ -55,7 +57,7 @@ export default function AttractionsPageAttraction({
                         <div className="border-top mt-4 pt-4">
                             <div className="d-flex justify-content-between">
                                 <button>Edit</button>
-                                <button>Delete</button>
+                                <button onClick={(e) => onDeleteClick(e, { _id: "randomId" })}>Delete</button>
                             </div>
                         </div>
                     </div>

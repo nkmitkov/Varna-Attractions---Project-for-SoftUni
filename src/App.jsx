@@ -11,7 +11,9 @@ import EditPage from "./components/EditPage";
 import ProfilePage from "./components/ProfilePage";
 import WrongUrlPage from "./components/404/404";
 
+
 function App() {
+
     return (
         <>
             <Navigation />

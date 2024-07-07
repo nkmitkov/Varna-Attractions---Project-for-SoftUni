@@ -59,16 +59,16 @@ export default function Navigation() {
                         >
                             <span className="navbar-toggler-icon" />
                         </button>
-                        <div
-                            className="collapse navbar-collapse justify-content-between px-3"
-                            id="navbarCollapse"
-                        >
+                        <div className="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse" >
                             <div className="navbar-nav ml-auto py-0">
                                 <a href="index.html" className="nav-item nav-link active">
                                     Home
                                 </a>
                                 <a href="service.html" className="nav-item nav-link">
                                     Attractions
+                                </a>
+                                <a href="service.html" className="nav-item nav-link">
+                                    Add Attraction
                                 </a>
                                 <a href="about.html" className="nav-item nav-link">
                                     About Varna
