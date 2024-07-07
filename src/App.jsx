@@ -7,7 +7,7 @@ import LoginPage from "./components/LoginPage";
 // import CreatePage from "./components/CreatePage";
 // import EditPage from "./components/EditPage";
 import ProfilePage from "./components/ProfilePage";
-import WrongUrlPage from "./components/404";
+import WrongUrlPage from "./components/404/404";
 
 import attractions from "../data.json";
 import users from "../users.json"
@@ -88,6 +88,9 @@ function App() {
                                     About Varna
                                 </a>
                                 <a href="package.html" className="nav-item nav-link">
+                                    Profile
+                                </a>
+                                <a href="package.html" className="nav-item nav-link">
                                     Login
                                 </a>
                                 <a href="contact.html" className="nav-item nav-link">
@@ -103,7 +106,7 @@ function App() {
             </div>
 
             
-            <ProfilePage data={ attractions[2] } userInfo={ users[0] } />
+            <WrongUrlPage data={ attractions[2] } userInfo={ users[0] } />
             
 
             <div className="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style={{ marginTop: 90 }} >
