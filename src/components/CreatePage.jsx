@@ -1,11 +1,21 @@
+import * as attractionService from "../services/attractionService";
+
 export default function CreatePage() {
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData);
 
-        console.log(data);
+        // Check if all fields are filled and valid
+
+        try {
+            const newAttraction = await attractionService.create(data);
+
+            // Redirect to attractions page
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
