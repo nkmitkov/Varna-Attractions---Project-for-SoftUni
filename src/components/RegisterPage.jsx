@@ -1,26 +1,91 @@
+import { useEffect, useState } from "react";
+
 import * as userService from "../services/userService";
 
+const FORM_KEYS = {
+    name: "name",
+    email: "email",
+    password: "password",
+    rePassword: "rePassword",
+    avatar: "avatar",
+};
+
+const formInitialState = {
+    [FORM_KEYS.name]: "",
+    [FORM_KEYS.email]: "",
+    [FORM_KEYS.password]: "",
+    [FORM_KEYS.rePassword]: "",
+    [FORM_KEYS.avatar]: "",
+}
+
 export default function RegisterPage() {
+    const [formValues, setFormValues] = useState(formInitialState);
+    const [errors, setErrors] = useState({});
+
+    const onChangeHandler = (e) => {
+        setFormValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const onBlurValidationHandler = (e) => {
+        let message = "";
+
+        switch (e.target.name) {
+            case "name":
+                formValues.name.length < 2 ? message = "Name must be at least 2 characters" : "";
+                break;
+            case "email":
+                const emailRegExp = /\w+@\w+\.\w+/;
+                const emailMatch = formValues.email.match(emailRegExp);
+
+                !emailMatch ? message = "Email must be valid" : "";
+                break;
+            case "password":
+                formValues.password.length < 8 ? message = "Password must be at least 8 characters" : "";
+                break;
+            case "rePassword":
+                formValues.rePassword !== formValues.password ? message = "Both passwords must match" : "";
+                break;
+            case "avatar":
+                const avatarRegExp = /^https?:\/\//;
+                const avatarMatch = formValues.avatar.match(avatarRegExp);
+
+                !avatarMatch ? message = "Avatar must be a valid URL" : "";
+                break;
+        }
+
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: message,
+        }));
+    }
+
+    const resetFormHandler = (e) => setFormValues(formInitialState);
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
-        const data = Object.fromEntries(formData);
-
-        // Validate if both passwords match
-        if (data.password !== data.rePassword) {
-            console.log("Both password don't match!");
+        if (!formValues.name || !formValues.email || !formValues.password || formValues.password !== formValues.rePassword || !formValues.avatar) {
+            return;
         }
+        // todo: if some value is falty i must do something
         // Validate if user with the current email already exists
         // Remove rePassword property so we don't save it in the server
-        delete data.rePassword;
+        const data = {
+            name: formValues.name,
+            email: formValues.email,
+            password: formValues.password,
+            avatar: formValues.avatar,
+        }
 
         try {
             const createdUser = await userService.create(data);
-
+            console.log(createdUser)
             // after success send token - "X-Authorization": {token}
             // redirect to attractions
+            resetFormHandler();
         } catch (error) {
             console.log(error);
         }
@@ -52,8 +117,8 @@ export default function RegisterPage() {
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
-                                <form name="register" id="contactForm" noValidate="novalidate" onSubmit={onSubmitHandler}>
-                                    
+                                <form name="register" id="registerForm" onSubmit={onSubmitHandler}>
+
                                     <div className="control-group">
                                         <input
                                             type="text"
@@ -62,8 +127,15 @@ export default function RegisterPage() {
                                             id="name"
                                             placeholder="Name"
                                             required="required"
-                                            data-validation-required-message="Please enter a name" />
+                                            data-validation-required-message="Please enter a name"
+                                            value={formValues.name}
+                                            onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
+                                        />
                                         <p className="help-block text-danger" />
+
+                                        {errors.name && ( <p>{errors.name}</p> )}
+
                                     </div>
                                     <div className="control-group">
                                         <input
@@ -73,8 +145,15 @@ export default function RegisterPage() {
                                             id="email"
                                             placeholder="Email"
                                             required="required"
-                                            data-validation-required-message="Please enter an email" />
+                                            data-validation-required-message="Please enter an email"
+                                            value={formValues.email}
+                                            onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
+                                        />
                                         <p className="help-block text-danger" />
+
+                                        {errors.email && <p>{errors.email}</p>}
+
                                     </div>
                                     <div className="control-group">
                                         <input
@@ -84,8 +163,15 @@ export default function RegisterPage() {
                                             id="password"
                                             placeholder="Password"
                                             required="required"
-                                            data-validation-required-message="Please enter a password" />
+                                            data-validation-required-message="Please enter a password"
+                                            value={formValues.password}
+                                            onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
+                                        />
                                         <p className="help-block text-danger" />
+
+                                        {errors.password && <p>{errors.password}</p>}
+
                                     </div>
                                     <div className="control-group">
                                         <input
@@ -95,8 +181,15 @@ export default function RegisterPage() {
                                             id="rePassword"
                                             placeholder="Repeat Password"
                                             required="required"
-                                            data-validation-required-message="Please enter a repeat password" />
+                                            data-validation-required-message="Please enter a repeat password"
+                                            value={formValues.rePassword}
+                                            onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
+                                        />
                                         <p className="help-block text-danger" />
+
+                                        {errors.rePassword && <p>{errors.rePassword}</p>}
+
                                     </div>
                                     <div className="control-group">
                                         <input
@@ -106,13 +199,32 @@ export default function RegisterPage() {
                                             id="avatar"
                                             placeholder="Avatar - http/https"
                                             required="required"
-                                            data-validation-required-message="Please enter an URL for your Avatar" />
+                                            data-validation-required-message="Please enter an URL for your Avatar"
+                                            value={formValues.avatar}
+                                            onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
+                                        />
                                         <p className="help-block text-danger" />
+
+                                        {errors.avatar && <p>{errors.avatar}</p>}
+
                                     </div>
-                                    
+
                                     <div className="text-center">
-                                        <button className="btn btn-primary py-3 px-4" type="submit" id="registerButton" >
+                                        <button className="btn btn-primary py-3 px-4"
+                                            type="submit"
+                                            id="registerButton"
+                                            disabled={Object.values(errors).some(x => x)}
+                                        >
                                             Register
+                                        </button>
+                                        <button
+                                            className="btn btn-primary py-3 px-4"
+                                            type="button"
+                                            id="resetButton"
+                                            onClick={resetFormHandler}
+                                        >
+                                            Reset
                                         </button>
                                     </div>
 

@@ -18,7 +18,7 @@ function App() {
         <>
             <Navigation />
             
-            <AttractionsPage />
+            <RegisterPage />
             
             <Footer />
 

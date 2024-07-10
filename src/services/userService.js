@@ -8,13 +8,13 @@ export const getOneById = async (id) => {
     return result;
 };
 
-export const create = async (userData) => {
+export const create = async (data) => {
     const response = await fetch(baseUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(data),
     });
 
     const result = await response.json();
@@ -22,13 +22,13 @@ export const create = async (userData) => {
     return result;
 };
 
-export const login = async (userData) => {
+export const login = async (data) => {
     const response = await fetch(baseUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(data),
     });
 
     const result = await response.json();
