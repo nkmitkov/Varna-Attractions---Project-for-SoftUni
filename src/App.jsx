@@ -19,6 +19,10 @@ import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 function App() {
     const [error, setError] = useState("");
 
+    const setErrorHandler = (message) => {
+        setError(message);
+    };
+
     return (
         <>
             <Navigation />
@@ -26,7 +30,7 @@ function App() {
             {error && <ErrorComponent msg={error} />}
             
             {/* <DetailsPage data={attractions[0]}/> */}
-            <LoginPage />
+            <LoginPage setErrorHandler={setErrorHandler} />
 
             <Footer />
 

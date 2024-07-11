@@ -13,7 +13,9 @@ const formInitialState = {
     [FORM_KEYS.password]: "",
 }
 
-export default function LoginPage() {
+export default function LoginPage({
+    setErrorHandler
+}) {
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
 
@@ -62,7 +64,7 @@ export default function LoginPage() {
             // send token
             // redirect
         } catch (error) {
-            console.log(error);
+            setErrorHandler(error.message);
         }
     };
 

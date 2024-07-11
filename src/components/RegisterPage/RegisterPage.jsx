@@ -19,7 +19,9 @@ const formInitialState = {
     [FORM_KEYS.avatar]: "",
 }
 
-export default function RegisterPage() {
+export default function RegisterPage({
+    setErrorHandler
+}) {
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
 
@@ -88,7 +90,7 @@ export default function RegisterPage() {
             // redirect to attractions
             resetFormHandler();
         } catch (error) {
-            console.log(error);
+            setErrorHandler(error.message);
         }
     };
 
