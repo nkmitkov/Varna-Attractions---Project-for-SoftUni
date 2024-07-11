@@ -1,18 +1,66 @@
-import * as userService from "../services/userService";
+import { useState } from "react";
+
+import * as userService from "../../services/userService";
+import styles from "./LoginPage.module.css";
+
+const FORM_KEYS = {
+    email: "email",
+    password: "password",
+};
+
+const formInitialState = {
+    [FORM_KEYS.email]: "",
+    [FORM_KEYS.password]: "",
+}
 
 export default function LoginPage() {
+    const [formValues, setFormValues] = useState(formInitialState);
+    const [errors, setErrors] = useState({});
+
+    const onChangeHandler = (e) => {
+        setFormValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }))
+    };
+
+    const onBlurValidationHandler = (e) => {
+        const inputName = e.target.name;
+        let message = "";
+
+        if (inputName === "email") {
+            const emailRegExp = /\w+@\w+\.\w+/;
+            const emailMatch = formValues.email.match(emailRegExp);
+
+            !emailMatch ? message = "Email must be valid" : "";
+        } else if (inputName === "password") {
+            formValues.password.length < 8 ? message = "Password must be at least 8 characters" : "";
+        }
+
+        setErrors(state => ({
+            ...state,
+            [inputName]: message,
+        }));
+    };
+
+    const resetFormHandler = (e) => {
+        setFormValues(formInitialState);
+    }
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
-        const data = Object.fromEntries(formData);
+        if (!formValues.email || !formValues.password) {
+            return;
+        }
 
         try {
-            const user = await userService.login(data);
+            const user = await userService.login(formValues);
 
-            // send token and redirect
             console.log(user);
+            resetFormHandler();
+            // send token
+            // redirect
         } catch (error) {
             console.log(error);
         }
@@ -45,35 +93,59 @@ export default function LoginPage() {
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
                                 <form name="login" id="loginForm" noValidate="novalidate" onSubmit={onSubmitHandler}>
-                                    
+
                                     <div className="control-group">
                                         <input
                                             type="text"
                                             name="email"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${errors.email && styles["input-error"]}`}
                                             id="email"
                                             placeholder="Email"
                                             required="required"
                                             data-validation-required-message="Please enter an email"
+                                            value={formValues.email}
+                                            onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.email && <p className={styles["error-message"]}>{errors.email}</p>}
+
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="password"
                                             name="password"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${errors.password && styles["input-error"]}`}
                                             id="password"
                                             placeholder="Password"
                                             required="required"
                                             data-validation-required-message="Please enter a password"
+                                            value={formValues.password}
+                                            onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.password && <p className={styles["error-message"]}>{errors.password}</p>}
+
                                     </div>
 
                                     <div className="text-center">
-                                        <button className="btn btn-primary py-3 px-4" type="submit" id="loginButton" >
+                                        <button
+                                            className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
+                                            type="submit"
+                                            id="loginButton"
+                                        >
                                             Login
+                                        </button>
+                                        <button
+                                            className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
+                                            type="button"
+                                            id="resetButton"
+                                            onClick={resetFormHandler}
+                                        >
+                                            Reset
                                         </button>
                                     </div>
 

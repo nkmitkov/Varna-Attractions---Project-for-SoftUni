@@ -227,7 +227,7 @@ export default function RegisterPage() {
                                     </div>
 
                                     <div className="text-center">
-                                        <button className="btn btn-primary py-3 px-4"
+                                        <button className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
                                             type="submit"
                                             id="registerButton"
                                             disabled={Object.values(errors).some(x => x)}
@@ -235,7 +235,7 @@ export default function RegisterPage() {
                                             Register
                                         </button>
                                         <button
-                                            className="btn btn-primary py-3 px-4"
+                                            className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
                                             type="button"
                                             id="resetButton"
                                             onClick={resetFormHandler}
