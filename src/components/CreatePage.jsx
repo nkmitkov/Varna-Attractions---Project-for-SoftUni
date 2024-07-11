@@ -1,17 +1,47 @@
+import { useState } from "react";
 import * as attractionService from "../services/attractionService";
 
+const FORM_KEYS = {
+    name: "name",
+    image: "image",
+    address: "address",
+    hours: "hours",
+    phone: "phone",
+    price: "price",
+    website: "website",
+    description: "description",
+};
+
+const formInitialState = {
+    [FORM_KEYS.name]: "",
+    [FORM_KEYS.image]: "",
+    [FORM_KEYS.address]: "",
+    [FORM_KEYS.hours]: "",
+    [FORM_KEYS.phone]: "",
+    [FORM_KEYS.price]: "",
+    [FORM_KEYS.website]: "",
+    [FORM_KEYS.description]: "",
+};
+
 export default function CreatePage() {
+    const [formValues, setFormValues] = useState(formInitialState);
+
+    const onChangeHandler = (e) => {
+        setFormValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }))
+    };
+
     const onSubmitHandler = async (e) => {
         e.preventDefault();
-
-        const formData = new FormData(e.currentTarget);
-        const data = Object.fromEntries(formData);
 
         // Check if all fields are filled and valid
 
         try {
-            const newAttraction = await attractionService.create(data);
+            const newAttraction = await attractionService.create(formValues);
 
+            console.log(newAttraction);
             // Redirect to attractions page
         } catch (error) {
             console.log(error);
@@ -44,34 +74,101 @@ export default function CreatePage() {
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
-                                <form name="sentMessage" id="createForm" noValidate="novalidate" onSubmit={onSubmitHandler}>
+                                <form name="sentMessage" id="createForm" onSubmit={onSubmitHandler}>
 
                                     <div className="control-group">
-                                        <input type="text" className="form-control p-4" id="name" name="name" placeholder="Name" required="required" data-validation-required-message="Please enter a name" />
+                                        <input
+                                            type="text"
+                                            className="form-control p-4"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Name"
+                                            required="required"
+                                            data-validation-required-message="Please enter a name"
+                                            value={formValues.name}
+                                            onChange={onChangeHandler}
+                                        />
                                         <p className="help-block text-danger" />
                                     </div>
                                     <div className="control-group">
-                                        <input type="text" className="form-control p-4" id="image" name="image" placeholder="Image" required="required" data-validation-required-message="Please enter an image URL" />
-                                        <p className="help-block text-danger" />
-                                    </div>                                    
-                                    <div className="control-group">
-                                        <input type="text" className="form-control p-4" id="address" name="address" placeholder="Address" required="required" data-validation-required-message="Please enter an address" />
-                                        <p className="help-block text-danger" />
-                                    </div>
-                                    <div className="control-group">
-                                        <input type="text" className="form-control p-4" id="hours" name="hours" placeholder="Operating hours" required="required" data-validation-required-message="Please enter operating hours" />
-                                        <p className="help-block text-danger" />
-                                    </div>
-                                    <div className="control-group">
-                                        <input type="text" className="form-control p-4" id="phone" name="phone" placeholder="Phone" required="required" data-validation-required-message="Please enter phone number" />
+                                        <input
+                                            type="text"
+                                            className="form-control p-4"
+                                            id="image"
+                                            name="image"
+                                            placeholder="Image"
+                                            required="required"
+                                            data-validation-required-message="Please enter an image URL"
+                                            value={formValues.image}
+                                            onChange={onChangeHandler}
+                                        />
                                         <p className="help-block text-danger" />
                                     </div>
                                     <div className="control-group">
-                                        <input type="text" className="form-control p-4" id="price" name="price" placeholder="Entrance fee" required="required" data-validation-required-message="Please enter an entrance fee" />
+                                        <input
+                                            type="text"
+                                            className="form-control p-4"
+                                            id="address"
+                                            name="address"
+                                            placeholder="Address"
+                                            required="required"
+                                            data-validation-required-message="Please enter an address"
+                                            value={formValues.address}
+                                            onChange={onChangeHandler}
+                                        />
                                         <p className="help-block text-danger" />
                                     </div>
                                     <div className="control-group">
-                                        <input type="text" className="form-control p-4" id="website" name="website" placeholder="Website" required="required" data-validation-required-message="Please enter a website" />
+                                        <input
+                                            type="text"
+                                            className="form-control p-4"
+                                            id="hours"
+                                            name="hours"
+                                            placeholder="Operating hours"
+                                            required="required"
+                                            data-validation-required-message="Please enter operating hours"
+                                            value={formValues.hours}
+                                            onChange={onChangeHandler}
+                                        />
+                                        <p className="help-block text-danger" />
+                                    </div>
+                                    <div className="control-group">
+                                        <input
+                                            type="text"
+                                            className="form-control p-4"
+                                            id="phone"
+                                            name="phone"
+                                            placeholder="Phone"
+                                            required="required"
+                                            data-validation-required-message="Please enter phone number"
+                                            value={formValues.phone}
+                                            onChange={onChangeHandler}
+                                        />
+                                        <p className="help-block text-danger" />
+                                    </div>
+                                    <div className="control-group">
+                                        <input type="text" className="form-control p-4" id="price"
+                                            name="price"
+                                            placeholder="Entrance fee"
+                                            required="required"
+                                            data-validation-required-message="Please enter an entrance fee"
+                                            value={formValues.price}
+                                            onChange={onChangeHandler}
+                                        />
+                                        <p className="help-block text-danger" />
+                                    </div>
+                                    <div className="control-group">
+                                        <input
+                                            type="text"
+                                            className="form-control p-4"
+                                            id="website"
+                                            name="website"
+                                            placeholder="Website"
+                                            required="required"
+                                            data-validation-required-message="Please enter a website"
+                                            value={formValues.website}
+                                            onChange={onChangeHandler}
+                                        />
                                         <p className="help-block text-danger" />
                                     </div>
                                     <div className="control-group">
@@ -83,7 +180,8 @@ export default function CreatePage() {
                                             placeholder="Description"
                                             required="required"
                                             data-validation-required-message="Please enter a description"
-                                            defaultValue={""}
+                                            value={formValues.description}
+                                            onChange={onChangeHandler}
                                         />
                                         <p className="help-block text-danger" />
                                     </div>

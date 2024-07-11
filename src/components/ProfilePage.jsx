@@ -1,7 +1,13 @@
 import ProfilePageAttraction from "./partials/ProfilePageAttraction";
-// import attractions from "../../data.json";
+import attractions from "../../data.json";
 
-export default function ProfilePage(props) {
+export default function ProfilePage({
+    _id,
+    name,
+    email,
+    createdAt,
+    avatar
+}) {
     return (
         <>
 
@@ -26,7 +32,7 @@ export default function ProfilePage(props) {
                         <div className="col-lg-3 col-md-4 col-sm-6 pb-2" style={{ margin: "auto" }}>
                             <div className="team-item bg-white mb-4">
                                 <div className="team-img position-relative overflow-hidden">
-                                    <img className="img-fluid w-100" src={ props.userInfo.avatar } alt={ props.userInfo.name } />
+                                    <img className="img-fluid w-100" src={ avatar } alt={ name } />
                                     <div className="team-social">
                                         <a className="btn btn-outline-primary btn-square" href="#twitter-link">
                                             <i className="fab fa-twitter" />
@@ -43,8 +49,8 @@ export default function ProfilePage(props) {
                                     </div>
                                 </div>
                                 <div className="text-center py-4">
-                                    <h5 className="text-truncate">{ props.userInfo.name}</h5>
-                                    <p className="m-0">{ props.userInfo.email}</p>
+                                    <h5 className="text-truncate">{ name }</h5>
+                                    <p className="m-0">{ email }</p>
                                 </div>
                             </div>
                         </div>
@@ -66,9 +72,9 @@ export default function ProfilePage(props) {
                     </div>
                     <div className="row pb-3">
 
-                        <ProfilePageAttraction data={ props.data } />
-                        <ProfilePageAttraction data={ props.data } />
-                        <ProfilePageAttraction data={ props.data } />
+                        <ProfilePageAttraction data={ attractions[1] } />
+                        <ProfilePageAttraction data={ attractions[2] } />
+                        <ProfilePageAttraction data={ attractions[3] } />
 
                     </div>
                 </div>
