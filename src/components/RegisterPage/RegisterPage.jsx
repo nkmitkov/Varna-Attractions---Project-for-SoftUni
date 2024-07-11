@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-import * as userService from "../services/userService";
+import * as userService from "../../services/userService";
+import styles from "./RegisterPage.module.css";
 
 const FORM_KEYS = {
     name: "name",
@@ -123,7 +124,10 @@ export default function RegisterPage() {
                                         <input
                                             type="text"
                                             name="name"
-                                            className="form-control p-4"
+                                            className={
+                                                `form-control p-4 
+                                                ${errors.name && styles["input-error"]}`
+                                            }
                                             id="name"
                                             placeholder="Name"
                                             required="required"
@@ -134,14 +138,17 @@ export default function RegisterPage() {
                                         />
                                         <p className="help-block text-danger" />
 
-                                        {errors.name && ( <p>{errors.name}</p> )}
+                                        {errors.name && ( <p className={styles["error-message"]}>{errors.name}</p> )}
 
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="text"
                                             name="email"
-                                            className="form-control p-4"
+                                            className={
+                                                `form-control p-4 
+                                                ${errors.email && styles["input-error"]}`
+                                            }
                                             id="email"
                                             placeholder="Email"
                                             required="required"
@@ -152,14 +159,17 @@ export default function RegisterPage() {
                                         />
                                         <p className="help-block text-danger" />
 
-                                        {errors.email && <p>{errors.email}</p>}
+                                        {errors.email && <p className={styles["error-message"]}>{errors.email}</p>}
 
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="password"
                                             name="password"
-                                            className="form-control p-4"
+                                            className={
+                                                `form-control p-4 
+                                                ${errors.password && styles["input-error"]}`
+                                            }
                                             id="password"
                                             placeholder="Password"
                                             required="required"
@@ -170,14 +180,17 @@ export default function RegisterPage() {
                                         />
                                         <p className="help-block text-danger" />
 
-                                        {errors.password && <p>{errors.password}</p>}
+                                        {errors.password && <p className={styles["error-message"]}>{errors.password}</p>}
 
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="password"
                                             name="rePassword"
-                                            className="form-control p-4"
+                                            className={
+                                                `form-control p-4 
+                                                ${errors.rePassword && styles["input-error"]}`
+                                            }
                                             id="rePassword"
                                             placeholder="Repeat Password"
                                             required="required"
@@ -188,14 +201,17 @@ export default function RegisterPage() {
                                         />
                                         <p className="help-block text-danger" />
 
-                                        {errors.rePassword && <p>{errors.rePassword}</p>}
+                                        {errors.rePassword && <p className={styles["error-message"]}>{errors.rePassword}</p>}
 
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="text"
                                             name="avatar"
-                                            className="form-control p-4"
+                                            className={
+                                                `form-control p-4 
+                                                ${errors.avatar && styles["input-error"]}`
+                                            }
                                             id="avatar"
                                             placeholder="Avatar - http/https"
                                             required="required"
@@ -206,7 +222,7 @@ export default function RegisterPage() {
                                         />
                                         <p className="help-block text-danger" />
 
-                                        {errors.avatar && <p>{errors.avatar}</p>}
+                                        {errors.avatar && <p className={styles["error-message"]}>{errors.avatar}</p>}
 
                                     </div>
 
