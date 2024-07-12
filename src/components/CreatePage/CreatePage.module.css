@@ -1,0 +1,11 @@
+.error-message {
+    color: red;
+}
+
+.input-error {
+    border: 1px solid red;
+}
+
+.buttons-margin {
+    margin: 0 15px;
+}

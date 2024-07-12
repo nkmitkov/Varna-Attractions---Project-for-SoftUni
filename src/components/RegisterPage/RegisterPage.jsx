@@ -70,9 +70,6 @@ export default function RegisterPage({
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
-        if (!formValues.name || !formValues.email || !formValues.password || formValues.password !== formValues.rePassword || !formValues.avatar) {
-            return;
-        }
         // todo: if some value is falty i must do something
         // Validate if user with the current email already exists
         // Remove rePassword property so we don't save it in the server
@@ -84,6 +81,10 @@ export default function RegisterPage({
         }
 
         try {
+            if (!formValues.name || !formValues.email || !formValues.password || formValues.password !== formValues.rePassword || !formValues.avatar) {
+                throw new Error("All input fields are required");
+            }
+
             const createdUser = await userService.create(data);
             console.log(createdUser)
             // after success send token - "X-Authorization": {token}
@@ -140,7 +141,7 @@ export default function RegisterPage({
                                         />
                                         <p className="help-block text-danger" />
 
-                                        {errors.name && ( <p className={styles["error-message"]}>{errors.name}</p> )}
+                                        {errors.name && (<p className={styles["error-message"]}>{errors.name}</p>)}
 
                                     </div>
                                     <div className="control-group">

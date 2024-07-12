@@ -1,5 +1,7 @@
 import { useState } from "react";
-import * as attractionService from "../services/attractionService";
+
+import * as attractionService from "../../services/attractionService";
+import styles from "./CreatePage.module.css";
 
 const FORM_KEYS = {
     name: "name",
@@ -23,8 +25,11 @@ const formInitialState = {
     [FORM_KEYS.description]: "",
 };
 
-export default function CreatePage() {
+export default function CreatePage({
+    setErrorHandler
+}) {
     const [formValues, setFormValues] = useState(formInitialState);
+    const [errors, setErrors] = useState({});
 
     const onChangeHandler = (e) => {
         setFormValues(state => ({
@@ -33,18 +38,74 @@ export default function CreatePage() {
         }))
     };
 
+    const onBlurValidationHandler = (e) => {
+        let message = "";
+
+        switch (e.target.name) {
+            case "name":
+                e.target.value.length < 4 ? message = "Name must be at least 4 characters" : "";
+                break;
+            case "image":
+                const imageRegExp = /^https?:\/\//;
+                const imageMatch = e.target.value.match(imageRegExp);
+
+                !imageMatch ? message = "Image must be a valid URL address" : "";
+                break;
+            case "address":
+                e.target.value.length < 4 ? message = "Address must be at least 4 characters" : "";
+                break;
+            case "hours":
+                e.target.value.length < 4 ? message = "Operating hours must be at least 4 characters" : "";
+                break;
+            case "phone":
+                e.target.value.length < 9 ? message = "Phone number must be valid." : "";
+                break;
+            case "price":
+                if (Number(e.target.value)) {
+                    Number(e.target.value) < 0 ? message = "Price must be 'free' or a positive number" : "";
+                } else {
+                    e.target.value !== "free" ? message = "Price must be 'free' or a positive number" : "";
+                }
+                break;
+            case "website":
+                const websiteRegExp = /^https?:\/\//;
+                const websiteMatch = e.target.value.match(websiteRegExp);
+
+                !websiteMatch ? message = "Website must be a valid URL address" : "";
+                break;
+            case "description":
+                if (e.target.value.length < 10 || e.target.value.length > 200) {
+                    message = "Description must be between 10 and 200 characters";
+                }
+                break;
+        }
+
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: message,
+        }));
+    }
+
+    const resetFormHandler = () => {
+        setFormValues(formInitialState);
+    }
+
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
-        // Check if all fields are filled and valid
-
         try {
+            if (!formValues.name || !formValues.image || !formValues.address || !formValues.hours ||
+                !formValues.phone || !formValues.price || !formValues.website || !formValues.description) {
+                throw new Error("All input fields are required");
+            }
+
             const newAttraction = await attractionService.create(formValues);
 
             console.log(newAttraction);
             // Redirect to attractions page
+            resetFormHandler();
         } catch (error) {
-            console.log(error);
+            setErrorHandler(error.message);
         }
     };
 
@@ -74,7 +135,7 @@ export default function CreatePage() {
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
-                                <form name="sentMessage" id="createForm" onSubmit={onSubmitHandler}>
+                                <form name="create" id="createForm" onSubmit={onSubmitHandler}>
 
                                     <div className="control-group">
                                         <input
@@ -84,11 +145,14 @@ export default function CreatePage() {
                                             name="name"
                                             placeholder="Name"
                                             required="required"
-                                            data-validation-required-message="Please enter a name"
                                             value={formValues.name}
                                             onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.name && (<p className={styles["error-message"]}>{errors.name}</p>)}
+
                                     </div>
                                     <div className="control-group">
                                         <input
@@ -98,11 +162,14 @@ export default function CreatePage() {
                                             name="image"
                                             placeholder="Image"
                                             required="required"
-                                            data-validation-required-message="Please enter an image URL"
                                             value={formValues.image}
                                             onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.image && (<p className={styles["error-message"]}>{errors.image}</p>)}
+
                                     </div>
                                     <div className="control-group">
                                         <input
@@ -112,11 +179,14 @@ export default function CreatePage() {
                                             name="address"
                                             placeholder="Address"
                                             required="required"
-                                            data-validation-required-message="Please enter an address"
                                             value={formValues.address}
                                             onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.address && (<p className={styles["error-message"]}>{errors.address}</p>)}
+
                                     </div>
                                     <div className="control-group">
                                         <input
@@ -126,11 +196,14 @@ export default function CreatePage() {
                                             name="hours"
                                             placeholder="Operating hours"
                                             required="required"
-                                            data-validation-required-message="Please enter operating hours"
                                             value={formValues.hours}
                                             onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.hours && (<p className={styles["error-message"]}>{errors.hours}</p>)}
+
                                     </div>
                                     <div className="control-group">
                                         <input
@@ -138,24 +211,30 @@ export default function CreatePage() {
                                             className="form-control p-4"
                                             id="phone"
                                             name="phone"
-                                            placeholder="Phone"
+                                            placeholder="Start with 052 for a stationary number"
                                             required="required"
-                                            data-validation-required-message="Please enter phone number"
                                             value={formValues.phone}
                                             onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.phone && (<p className={styles["error-message"]}>{errors.phone}</p>)}
+
                                     </div>
                                     <div className="control-group">
                                         <input type="text" className="form-control p-4" id="price"
                                             name="price"
                                             placeholder="Entrance fee"
                                             required="required"
-                                            data-validation-required-message="Please enter an entrance fee"
                                             value={formValues.price}
                                             onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.price && (<p className={styles["error-message"]}>{errors.price}</p>)}
+
                                     </div>
                                     <div className="control-group">
                                         <input
@@ -165,11 +244,14 @@ export default function CreatePage() {
                                             name="website"
                                             placeholder="Website"
                                             required="required"
-                                            data-validation-required-message="Please enter a website"
                                             value={formValues.website}
                                             onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.website && (<p className={styles["error-message"]}>{errors.website}</p>)}
+
                                     </div>
                                     <div className="control-group">
                                         <textarea
@@ -177,17 +259,28 @@ export default function CreatePage() {
                                             rows={5}
                                             id="description"
                                             name="description"
-                                            placeholder="Description"
+                                            placeholder="Short description"
                                             required="required"
-                                            data-validation-required-message="Please enter a description"
                                             value={formValues.description}
                                             onChange={onChangeHandler}
+                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
+
+                                        {errors.description && (<p className={styles["error-message"]}>{errors.description}</p>)}
+
                                     </div>
                                     <div className="text-center">
                                         <button className="btn btn-primary py-3 px-4" type="submit" id="createButton" >
                                             Create
+                                        </button>
+                                        <button
+                                            className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
+                                            type="button"
+                                            id="resetButton"
+                                            onClick={resetFormHandler}
+                                        >
+                                            Reset
                                         </button>
                                     </div>
 

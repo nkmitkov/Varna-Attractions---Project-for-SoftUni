@@ -52,11 +52,11 @@ export default function LoginPage({
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
-        if (!formValues.email || !formValues.password) {
-            return;
-        }
-
         try {
+            if (!formValues.email || !formValues.password) {
+                throw new Error("Both input fields are required");
+            }
+
             const user = await userService.login(formValues);
 
             console.log(user);

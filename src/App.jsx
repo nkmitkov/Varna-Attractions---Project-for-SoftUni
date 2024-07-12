@@ -8,7 +8,7 @@ import AboutVarnaPage from "./components/AboutVarnaPage";
 import DetailsPage from "./components/DetailsPage";
 import RegisterPage from "./components/RegisterPage/RegisterPage";
 import LoginPage from "./components/LoginPage/LoginPage";
-import CreatePage from "./components/CreatePage";
+import CreatePage from "./components/CreatePage/CreatePage";
 import EditPage from "./components/EditPage";
 import ProfilePage from "./components/ProfilePage";
 import WrongUrlPage from "./components/404/404";
@@ -18,22 +18,21 @@ import attractions from "../data.json";
 import users from "../users.json";
 
 function App() {
-    const [error, setError] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const setErrorHandler = (message) => {
-        setError(message);
+        setErrorMessage(message);
     };
 
     return (
         <>
             <Navigation />
 
-            {error && <ErrorComponent msg={error} />}
+            {errorMessage && <ErrorComponent msg={errorMessage} />}
             
-            <CreatePage />
+            <CreatePage setErrorHandler={setErrorHandler} />
             {/* <ProfilePage data={users[0]} /> */}
             {/* <DetailsPage data={attractions[0]}/> */}
-            {/* <LoginPage setErrorHandler={setErrorHandler} /> */}
 
             <Footer />
 
