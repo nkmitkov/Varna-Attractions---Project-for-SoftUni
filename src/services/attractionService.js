@@ -29,3 +29,20 @@ export const create = async (data) => {
 
     return result;
 };
+
+export const update = async (id, data) => {
+    // i need to use token to update
+
+    const response = await fetch(`${baseUrl}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Authorization": "",
+        },
+        body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    return result;
+}

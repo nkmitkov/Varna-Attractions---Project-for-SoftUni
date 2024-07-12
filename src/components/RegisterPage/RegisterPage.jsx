@@ -65,7 +65,10 @@ export default function RegisterPage({
         }));
     }
 
-    const resetFormHandler = (e) => setFormValues(formInitialState);
+    const resetFormHandler = (e) => {
+        setFormValues(formInitialState)
+        setErrors({});
+    };
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();

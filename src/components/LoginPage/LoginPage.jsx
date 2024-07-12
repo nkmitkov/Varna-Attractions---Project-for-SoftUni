@@ -47,6 +47,7 @@ export default function LoginPage({
 
     const resetFormHandler = (e) => {
         setFormValues(formInitialState);
+        setErrors({});
     }
 
     const onSubmitHandler = async (e) => {

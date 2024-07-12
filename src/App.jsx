@@ -9,7 +9,7 @@ import DetailsPage from "./components/DetailsPage";
 import RegisterPage from "./components/RegisterPage/RegisterPage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import CreatePage from "./components/CreatePage/CreatePage";
-import EditPage from "./components/EditPage";
+import EditPage from "./components/EditPage/EditPage";
 import ProfilePage from "./components/ProfilePage";
 import WrongUrlPage from "./components/404/404";
 import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
@@ -30,7 +30,7 @@ function App() {
 
             {errorMessage && <ErrorComponent msg={errorMessage} />}
             
-            <CreatePage setErrorHandler={setErrorHandler} />
+            <EditPage setErrorHandler={setErrorHandler} id={"3d188930-2159-4145-84da-341279981f09"} />
             {/* <ProfilePage data={users[0]} /> */}
             {/* <DetailsPage data={attractions[0]}/> */}
 
