@@ -1,4 +1,4 @@
-import "./attraction.css";
+import "./AttractionsPageAttraction.module.css";
 
 export default function AttractionsPageAttraction({
     _id,

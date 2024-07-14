@@ -1,10 +1,19 @@
 export default function AboutVarnaPage() {
     return (
         <>
-            <div className="container-fluid page-header">
-                <div className="container">
-                    <div className="d-flex flex-column align-items-center justify-content-center" style={{ minHeight: 400 }} >
-                        <h3 className="display-4 text-white text-uppercase">About Varna</h3>
+            <div className="container-fluid p-0">
+                <div id="header-carousel" className="carousel slide" data-ride="carousel">
+                    <div className="carousel-inner">
+                        <div className="carousel-item active">
+                            <img className="w-100" src="img/varna-seaport-and-lighthouse.jpg" alt="Image" />
+                            <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div className="p-3" style={{ maxWidth: 900 }}>
+                                    <h1 className="display-3 text-white mb-md-4">
+                                        ABOUT VARNA
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
-// import "./css/font-awesome.min.css";
+import { Link } from "react-router-dom";
+
 import "./css/style.css";
 
 export default function WrongUrlPage() {
@@ -10,7 +11,7 @@ export default function WrongUrlPage() {
                     <h1>404</h1>
                 </div>
                 <h2 style={{ color: "#212121" }}>Oops! Page Not Found</h2>
-                <a href="/"><h2 style={{ color: "#7AB730" }}>Back To Homepage</h2></a>
+                <Link to="/"><h2 style={{ color: "#7AB730" }}>Back To Homepage</h2></Link>
             </div>
         </div>
     );

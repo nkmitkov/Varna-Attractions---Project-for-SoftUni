@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 export default function Navigation() {
+
     return (
         <>
             <div className="container-fluid bg-light pt-3 d-none d-lg-block">
@@ -46,11 +49,11 @@ export default function Navigation() {
                     style={{ zIndex: 9 }}
                 >
                     <nav className="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
-                        <a href="" className="navbar-brand">
+                        <Link to={"/"} className="navbar-brand">
                             <h1 className="m-0 text-primary">
                                 <span className="text-dark">VARNA </span>ATTRACTIONS
                             </h1>
-                        </a>
+                        </Link>
                         <button
                             type="button"
                             className="navbar-toggler"
@@ -61,30 +64,14 @@ export default function Navigation() {
                         </button>
                         <div className="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse" >
                             <div className="navbar-nav ml-auto py-0">
-                                <a href="index.html" className="nav-item nav-link active">
-                                    Home
-                                </a>
-                                <a href="service.html" className="nav-item nav-link">
-                                    Attractions
-                                </a>
-                                <a href="service.html" className="nav-item nav-link">
-                                    Add Attraction
-                                </a>
-                                <a href="about.html" className="nav-item nav-link">
-                                    About Varna
-                                </a>
-                                <a href="package.html" className="nav-item nav-link">
-                                    Profile
-                                </a>
-                                <a href="package.html" className="nav-item nav-link">
-                                    Login
-                                </a>
-                                <a href="contact.html" className="nav-item nav-link">
-                                    Register
-                                </a>
-                                <a href="contact.html" className="nav-item nav-link">
-                                    Contacts
-                                </a>
+                                <Link to={"/"} className="nav-item nav-link active">Home</Link>
+                                <Link to={"/attractions"} className="nav-item nav-link">Attractions</Link>
+                                <Link to={"/attractions/create"} className="nav-item nav-link">Add Attraction</Link>
+                                <Link to={"/about"} className="nav-item nav-link">About Varna</Link>
+                                <Link to={"/profile"} className="nav-item nav-link">Profile</Link>
+                                <Link to={"/login"} className="nav-item nav-link">Login</Link>
+                                <Link to={"/register"} className="nav-item nav-link">Register</Link>
+                                {/* <Link to={"/contacts"} className="nav-item nav-link">Contacts</Link> */}
                             </div>
                         </div>
                     </nav>

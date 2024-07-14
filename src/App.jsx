@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
@@ -29,8 +30,20 @@ function App() {
             <Navigation />
 
             {errorMessage && <ErrorComponent msg={errorMessage} />}
-            
-            <EditPage setErrorHandler={setErrorHandler} id={"3d188930-2159-4145-84da-341279981f09"} />
+
+            <Routes>
+                <Route path="/" element={<HomePage />}>Home</Route>
+                <Route path="/attractions" element={<AttractionsPage />}>Attractions</Route>
+                <Route path="/attractions/create" element={<CreatePage />}>Add Attraction</Route>
+                <Route path="/about" element={<AboutVarnaPage />}>About Varna</Route>
+                <Route path="/profile" element={<ProfilePage />}>Profile</Route>
+                <Route path="/login" element={<LoginPage />}>Login</Route>
+                <Route path="/register" element={<RegisterPage />}>Register</Route>
+                {/* <Route path="/contacts" element={<ContactsPage />}>Contacts</Route> */}
+                <Route path="*" element={<WrongUrlPage />}></Route>
+            </Routes>
+
+            {/* <EditPage setErrorHandler={setErrorHandler} id={"3d188930-2159-4145-84da-341279981f09"} /> */}
             {/* <ProfilePage data={users[0]} /> */}
             {/* <DetailsPage data={attractions[0]}/> */}
 
