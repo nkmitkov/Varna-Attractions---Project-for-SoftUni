@@ -49,7 +49,7 @@ export default function RegisterPage({
                 !emailMatch ? message = "Email must be valid" : "";
                 break;
             case "password":
-                formValues.password.length < 2 ? message = "Password must be at least 8 characters" : "";
+                formValues.password.length < 2 ? message = "Password must be at least 2 characters" : "";
                 break;
             case "rePassword":
                 formValues.rePassword !== formValues.password ? message = "Both passwords must match" : "";

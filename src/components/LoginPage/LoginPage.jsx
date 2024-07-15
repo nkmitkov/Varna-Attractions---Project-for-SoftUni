@@ -33,14 +33,14 @@ export default function LoginPage({
         const inputName = e.target.name;
         let message = "";
 
-        // if (inputName === "email") {
-        //     const emailRegExp = /\w+@\w+\.\w+/;
-        //     const emailMatch = formValues.email.match(emailRegExp);
+        if (inputName === "email") {
+            const emailRegExp = /\w+@\w+\.\w+/;
+            const emailMatch = formValues.email.match(emailRegExp);
 
-        //     !emailMatch ? message = "Email must be valid" : "";
-        // } else if (inputName === "password") {
-        //     formValues.password.length < 8 ? message = "Password must be at least 8 characters" : "";
-        // }
+            !emailMatch ? message = "Email must be valid" : "";
+        } else if (inputName === "password") {
+            formValues.password.length < 2 ? message = "Password must be at least 2 characters" : "";
+        }
 
         setErrors(state => ({
             ...state,
@@ -48,7 +48,21 @@ export default function LoginPage({
         }));
     };
 
-    const resetFormHandler = (e) => {
+    const resetFormHandler = (error) => {
+        if (error?.code === 403) {
+            setFormValues(state => ({
+                ...state,
+                ["password"]: ""
+            }))
+
+            setErrors(state => ({
+                ...state,
+                ["email"]: error.message,
+            }))
+
+            return;
+        }
+
         setFormValues(formInitialState);
         setErrors({});
     }
@@ -61,11 +75,17 @@ export default function LoginPage({
                 throw new Error("Both input fields are required");
             }
 
-            const user = await userService.login(formValues);
+            const info = await userService.login(formValues);
 
-            sessionStorage.setSessionStorage(user);
-            navigate("/attractions");
+            if (info?.code === 403) { 
+                resetFormHandler(info);
+                throw new Error(info.message);
+            }
+
+            sessionStorage.setSessionStorage(info);
+            setErrorHandler();
             resetFormHandler();
+            navigate("/attractions");
         } catch (error) {
             setErrorHandler(error.message);
         }
@@ -148,7 +168,7 @@ export default function LoginPage({
                                             className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
                                             type="button"
                                             id="resetButton"
-                                            onClick={resetFormHandler}
+                                            onClick={(e) => resetFormHandler()}
                                         >
                                             Reset
                                         </button>
