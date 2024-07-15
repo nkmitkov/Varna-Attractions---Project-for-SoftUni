@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import * as userService from "../../services/userService";
+import * as sessionStorage from "../../services/sessionStorage";
 import styles from "./LoginPage.module.css";
 
 const FORM_KEYS = {
@@ -18,6 +20,7 @@ export default function LoginPage({
 }) {
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     const onChangeHandler = (e) => {
         setFormValues(state => ({
@@ -30,14 +33,14 @@ export default function LoginPage({
         const inputName = e.target.name;
         let message = "";
 
-        if (inputName === "email") {
-            const emailRegExp = /\w+@\w+\.\w+/;
-            const emailMatch = formValues.email.match(emailRegExp);
+        // if (inputName === "email") {
+        //     const emailRegExp = /\w+@\w+\.\w+/;
+        //     const emailMatch = formValues.email.match(emailRegExp);
 
-            !emailMatch ? message = "Email must be valid" : "";
-        } else if (inputName === "password") {
-            formValues.password.length < 8 ? message = "Password must be at least 8 characters" : "";
-        }
+        //     !emailMatch ? message = "Email must be valid" : "";
+        // } else if (inputName === "password") {
+        //     formValues.password.length < 8 ? message = "Password must be at least 8 characters" : "";
+        // }
 
         setErrors(state => ({
             ...state,
@@ -60,10 +63,9 @@ export default function LoginPage({
 
             const user = await userService.login(formValues);
 
-            console.log(user);
+            sessionStorage.setSessionStorage(user);
+            navigate("/attractions");
             resetFormHandler();
-            // send token
-            // redirect
         } catch (error) {
             setErrorHandler(error.message);
         }
