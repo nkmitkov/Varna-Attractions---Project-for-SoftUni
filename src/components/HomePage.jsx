@@ -1,24 +1,17 @@
-import HomePageAttraction from "./partials/HomePageAttraction";
-// import attractions from "../../data.json";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const base_url = "http://localhost:3030/jsonstore";
+import HomePageAttraction from "./partials/HomePageAttraction";
+import * as attractionService from "../services/attractionService";
 
 export default function HomePage() {
     const [attractions, setAttractions] = useState([]);
 
     useEffect(() => {
-        fetch(base_url + "/data")
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error("Something is wrong with fetching data")
-                }
-
-                return res.json();
-            })
+        attractionService.getAll()
             .then(data => setAttractions(Object.values(data)))
             .catch(err => console.log(err));
+            
+            // todo: DO THE CATCH FUNCTIONALITY
     }, [attractions]);
 
     return (

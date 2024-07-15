@@ -32,15 +32,16 @@ function App() {
             {errorMessage && <ErrorComponent msg={errorMessage} />}
 
             <Routes>
-                <Route path="/" element={<HomePage />}>Home</Route>
-                <Route path="/attractions" element={<AttractionsPage />}>Attractions</Route>
-                <Route path="/attractions/create" element={<CreatePage />}>Add Attraction</Route>
-                <Route path="/about" element={<AboutVarnaPage />}>About Varna</Route>
-                <Route path="/profile" element={<ProfilePage />}>Profile</Route>
-                <Route path="/login" element={<LoginPage />}>Login</Route>
-                <Route path="/register" element={<RegisterPage />}>Register</Route>
-                {/* <Route path="/contacts" element={<ContactsPage />}>Contacts</Route> */}
-                <Route path="*" element={<WrongUrlPage />}></Route>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/attractions" element={<AttractionsPage />} />
+                <Route path="/attractions/create" element={<CreatePage />} />
+                <Route path="/attractions/:id" element={<DetailsPage />} />
+                <Route path="/about" element={<AboutVarnaPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                {/* <Route path="/contacts" element={<ContactsPage />}>Contact /s */}
+                <Route path="*" element={<WrongUrlPage />} />
             </Routes>
 
             {/* <EditPage setErrorHandler={setErrorHandler} id={"3d188930-2159-4145-84da-341279981f09"} /> */}
