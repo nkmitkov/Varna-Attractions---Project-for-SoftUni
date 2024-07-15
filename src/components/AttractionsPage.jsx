@@ -12,10 +12,6 @@ export default function AttractionsPage() {
             .catch((error) => console.log(error));
     }, []);
 
-    const onDeleteHandler = (e, id) => {
-        console.log(`Delete attraction with id: ${id._id}`);
-    };
-
     return (
         <>
 
@@ -48,9 +44,8 @@ export default function AttractionsPage() {
 
                         {attractions.map(attr => (
                             <AttractionsPageAttraction
-                                key={attr.name}
+                                key={attr._id}
                                 {...attr}
-                                onDeleteClick={onDeleteHandler}
                             />
                         ))}
 

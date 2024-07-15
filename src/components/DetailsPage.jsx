@@ -15,12 +15,23 @@ export default function DetailsPage() {
         // todo: MAKE CATCH FUNCTIONALITY
     }, []);
 
+    const onEditHandler = (e) => {
+        console.log(`Edit - ${id}`)
+        // I need to have state for the form with the inital state of the chosen attration
+        // Has to be controlled form
+    };
+    
+    const onDeleteHandler = (e) => {
+        attractionService.remove(id)
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+    };
+
     return (
         <>
             <div className="container-fluid page-header">
                 <div className="container">
                     <div className="d-flex flex-column align-items-center justify-content-center" style={{ minHeight: 400 }} >
-                        {/* ABOUT DETAILS */}
                         <h3 className="display-4 text-white text-uppercase">{attraction.name}</h3>
                     </div>
                 </div>
@@ -31,7 +42,6 @@ export default function DetailsPage() {
                     <div className="row">
                         <div className="col-lg-6" style={{ minHeight: 500 }}>
                             <div className="position-relative h-100">
-                                {/* IMAGE ON THE LEFT SIDE */}
                                 <img className="position-absolute w-100 h-100" src={attraction.image} style={{ objectFit: "cover" }} />
                             </div>
                         </div>
@@ -63,6 +73,12 @@ export default function DetailsPage() {
                                             <h6 className="m-0">Go to the website..</h6>
                                         </a>
                                         <h4 className="m-0">{Number(attraction.price) ? "BGN " : ""}{attraction.price}</h4>
+                                    </div>
+                                </div>
+                                <div className="border-top mt-4 pt-4">
+                                    <div className="d-flex justify-content-between">
+                                        <button onClick={onEditHandler}>Edit</button>
+                                        <button onClick={onDeleteHandler}>Delete</button>
                                     </div>
                                 </div>
                             </div>

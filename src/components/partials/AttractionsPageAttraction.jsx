@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./AttractionsPageAttraction.module.css";
 
 export default function AttractionsPageAttraction({
@@ -10,7 +11,6 @@ export default function AttractionsPageAttraction({
     phone,
     price,
     website,
-    onDeleteClick
 }) {
 
     return (
@@ -30,7 +30,7 @@ export default function AttractionsPageAttraction({
                         </a>
                         <div className="d-flex justify-content-between mb-3">
                             <small className="m-0">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{description}
+                                {description}
                             </small>
                         </div>
                         <div className="d-flex justify-content-between mb-3">
@@ -56,8 +56,7 @@ export default function AttractionsPageAttraction({
 
                         <div className="border-top mt-4 pt-4">
                             <div className="d-flex justify-content-between">
-                                <button>Edit</button>
-                                <button onClick={(e) => onDeleteClick(e, { _id: "randomId" })}>Delete</button>
+                            <Link to={`/attractions/${_id}`}><button>Details</button></Link>
                             </div>
                         </div>
                     </div>

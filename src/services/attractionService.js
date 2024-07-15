@@ -46,3 +46,17 @@ export const update = async (id, data) => {
 
     return result;
 }
+
+export const remove = async (id) => {
+    const response = await fetch(`${baseUrl}/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Authorization": "",
+        },
+    });
+
+    const result = await response.json();
+
+    return result;
+};
