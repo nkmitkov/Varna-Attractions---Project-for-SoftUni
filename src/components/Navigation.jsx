@@ -1,6 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import * as userService from "../services/userService";
+import * as sessionStorage from "../services/sessionStorage";
 
 export default function Navigation() {
+    const navigate = useNavigate();
+
+    const logout = async (e) => {
+        await userService.logout();
+        sessionStorage.clearAll();
+        navigate("/");
+    };
 
     return (
         <>
@@ -71,6 +81,7 @@ export default function Navigation() {
                                 <Link to={"/profile"} className="nav-item nav-link">Profile</Link>
                                 <Link to={"/login"} className="nav-item nav-link">Login</Link>
                                 <Link to={"/register"} className="nav-item nav-link">Register</Link>
+                                <Link onClick={logout} className="nav-item nav-link">Logout</Link>
                                 {/* <Link to={"/contacts"} className="nav-item nav-link">Contacts</Link> */}
                             </div>
                         </div>

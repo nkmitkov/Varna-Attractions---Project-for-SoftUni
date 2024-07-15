@@ -12,7 +12,7 @@ export default function HomePage() {
             .catch(err => console.log(err));
             
             // todo: DO THE CATCH FUNCTIONALITY
-    }, [attractions]);
+    }, []);
 
     return (
         <>

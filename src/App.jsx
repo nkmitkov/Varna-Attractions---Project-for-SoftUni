@@ -15,9 +15,6 @@ import ProfilePage from "./components/ProfilePage";
 import WrongUrlPage from "./components/404/404";
 import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 
-import attractions from "../data.json";
-import users from "../users.json";
-
 function App() {
     const [errorMessage, setErrorMessage] = useState("");
 

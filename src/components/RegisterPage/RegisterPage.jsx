@@ -114,7 +114,7 @@ export default function RegisterPage({
                 throw new Error(info.message);
             }
 
-            sessionStorage.setSessionStorage(info);
+            sessionStorage.setStorage(info);
             resetFormHandler();
             setErrorHandler();
             navigate("/attractions");

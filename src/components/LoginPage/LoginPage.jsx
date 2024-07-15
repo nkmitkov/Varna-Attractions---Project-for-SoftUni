@@ -82,7 +82,7 @@ export default function LoginPage({
                 throw new Error(info.message);
             }
 
-            sessionStorage.setSessionStorage(info);
+            sessionStorage.setStorage(info);
             setErrorHandler();
             resetFormHandler();
             navigate("/attractions");

@@ -1,5 +1,4 @@
 import ProfilePageAttraction from "./partials/ProfilePageAttraction";
-import attractions from "../../data.json";
 
 export default function ProfilePage({
     _id,

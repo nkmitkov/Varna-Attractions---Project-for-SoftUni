@@ -1,12 +1,6 @@
+import * as sessionStorage from "../services/sessionStorage"
+
 const baseUrl = "http://localhost:3030/users";
-
-
-export const getOneById = async (id) => {
-    const response = await fetch(`${baseUrl}/${id}`);
-    const result = await response.json();
-
-    return result;
-};
 
 export const register = async (data) => {
     const response = await fetch(`${baseUrl}/register`, {
@@ -34,4 +28,15 @@ export const login = async (data) => {
     const result = await response.json();
 
     return result;
+};
+
+export const logout = async () => {
+    const response = await fetch(`${baseUrl}/logout`, {
+        method: "GET",
+        headers: {
+            "X-Authorization": sessionStorage.getStorageItem("accessToken"),
+        }
+    });
+
+    return response;
 };
