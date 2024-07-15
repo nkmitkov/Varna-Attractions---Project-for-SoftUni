@@ -1,7 +1,26 @@
 import HomePageAttraction from "./partials/HomePageAttraction";
-import attractions from "../../data.json";
+// import attractions from "../../data.json";
+import { useState } from "react";
+import { useEffect } from "react";
+
+const base_url = "http://localhost:3030/jsonstore";
 
 export default function HomePage() {
+    const [attractions, setAttractions] = useState([]);
+
+    useEffect(() => {
+        fetch(base_url + "/data")
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("Something is wrong with fetching data")
+                }
+
+                return res.json();
+            })
+            .then(data => setAttractions(Object.values(data)))
+            .catch(err => console.log(err));
+    }, [attractions]);
+
     return (
         <>
             
@@ -26,16 +45,19 @@ export default function HomePage() {
                 <div className="container pt-5 pb-3">
                     <div className="text-center mb-3 pb-3">
                         <h6 className="text-primary text-uppercase" style={{ letterSpacing: 5 }} >
-                            Attractions
+                            Top Attractions
                         </h6>
                         <h1>Explore Top Attractions</h1>
                     </div>
                     <div className="row">
-                        <HomePageAttraction data={ attractions[0] } />
+
+                        {attractions.map(attr => (<HomePageAttraction key={attr._id} {...attr} />))}
+
+                        {/* <HomePageAttraction data={ attractions[0] } />
                         <HomePageAttraction data={ attractions[1] } />
                         <HomePageAttraction data={ attractions[2] } />
                         <HomePageAttraction data={ attractions[3] } />
-                        <HomePageAttraction data={ attractions[4] } />
+                        <HomePageAttraction data={ attractions[4] } /> */}
                     </div>
                 </div>
             </div>
