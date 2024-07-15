@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import * as userService from "../../services/userService";
+import * as sessionStorage from "../../services/sessionStorage";
 import styles from "./RegisterPage.module.css";
 
 const FORM_KEYS = {
@@ -24,6 +26,7 @@ export default function RegisterPage({
 }) {
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     const onChangeHandler = (e) => {
         setFormValues(state => ({
@@ -46,7 +49,7 @@ export default function RegisterPage({
                 !emailMatch ? message = "Email must be valid" : "";
                 break;
             case "password":
-                formValues.password.length < 8 ? message = "Password must be at least 8 characters" : "";
+                formValues.password.length < 2 ? message = "Password must be at least 8 characters" : "";
                 break;
             case "rePassword":
                 formValues.rePassword !== formValues.password ? message = "Both passwords must match" : "";
@@ -65,7 +68,23 @@ export default function RegisterPage({
         }));
     }
 
-    const resetFormHandler = (e) => {
+    const resetFormHandler = (error) => {
+        // code 409 is when the email is already taken
+        if (error?.code === 409) {
+            setFormValues(state => ({
+                ...state,
+                ["password"]: "",
+                ["rePassword"]: "",
+            }))
+
+            setErrors(state => ({
+                ...state,
+                ["email"]: "Email already exists"
+            }));
+
+            return;
+        }
+
         setFormValues(formInitialState)
         setErrors({});
     };
@@ -88,11 +107,17 @@ export default function RegisterPage({
                 throw new Error("All input fields are required");
             }
 
-            const createdUser = await userService.create(data);
-            console.log(createdUser)
-            // after success send token - "X-Authorization": {token}
-            // redirect to attractions
+            const info = await userService.register(data);
+
+            if (info?.code === 409) {
+                resetFormHandler(info);
+                throw new Error(info.message);
+            }
+
+            sessionStorage.setSessionStorage(info);
             resetFormHandler();
+            setErrorHandler();
+            navigate("/attractions");
         } catch (error) {
             setErrorHandler(error.message);
         }
@@ -244,7 +269,7 @@ export default function RegisterPage({
                                             className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
                                             type="button"
                                             id="resetButton"
-                                            onClick={resetFormHandler}
+                                            onClick={(e) => resetFormHandler()}
                                         >
                                             Reset
                                         </button>

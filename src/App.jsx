@@ -39,7 +39,7 @@ function App() {
                 <Route path="/about" element={<AboutVarnaPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/login" element={<LoginPage setErrorHandler={setErrorHandler} />} />
-                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/register" element={<RegisterPage setErrorHandler={setErrorHandler} />} />
                 {/* <Route path="/contacts" element={<ContactsPage />}>Contact /s */}
                 <Route path="*" element={<WrongUrlPage />} />
             </Routes>

@@ -1,5 +1,5 @@
-export const setSessionStorage = ({username, email, _id, accessToken}) => {
-    sessionStorage.setItem("username", username);
+export const setSessionStorage = ({name, email, _id, accessToken}) => {
+    sessionStorage.setItem("username", name);
     sessionStorage.setItem("email", email);
     sessionStorage.setItem("id", _id);
     sessionStorage.setItem("accessToken", accessToken);
