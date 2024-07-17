@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import * as attractionService from "../../services/attractionService";
 import styles from "./CreatePage.module.css";
@@ -30,6 +31,7 @@ export default function CreatePage({
 }) {
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     const onChangeHandler = (e) => {
         setFormValues(state => ({
@@ -60,7 +62,7 @@ export default function CreatePage({
                 break;
             case "phone":
                 if (!Number(value) || value.length < 9) {
-                    message = "Phone number must be valid."
+                    message = "Phone number must be valid. Use only numbers."
                 }
                 break;
             case "price":
@@ -103,10 +105,10 @@ export default function CreatePage({
                 throw new Error("All input fields are required");
             }
 
-            const newAttraction = await attractionService.create(formValues);
+            await attractionService.create(formValues);
 
-            // Redirect to attractions page
             resetFormHandler();
+            navigate("/attractions");
         } catch (error) {
             setErrorHandler(error.message);
         }
