@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import * as attractionService from "../services/attractionService";
 
 export default function DetailsPage() {
     const { id } = useParams();
     const [attraction, setAttraction] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         attractionService.getOneById(id)
@@ -23,7 +24,7 @@ export default function DetailsPage() {
     
     const onDeleteHandler = (e) => {
         attractionService.remove(id)
-            .then(data => console.log(data))
+            .then(data => navigate("/attractions"))
             .catch(err => console.log(err));
     };
 

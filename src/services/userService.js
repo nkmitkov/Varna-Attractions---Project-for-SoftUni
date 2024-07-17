@@ -2,6 +2,20 @@ import * as sessionStorage from "../services/sessionStorage"
 
 const baseUrl = "http://localhost:3030/users";
 
+export const getMe = async (id) => {
+    const response = await fetch(`${baseUrl}/me`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Authorization": sessionStorage.getStorageItem("accessToken"),
+        }
+    });
+
+    const result = await response.json();
+
+    return result;
+};
+
 export const register = async (data) => {
     const response = await fetch(`${baseUrl}/register`, {
         method: "POST",
