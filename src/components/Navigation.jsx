@@ -7,19 +7,26 @@ import * as sessionStorage from "../services/sessionStorage";
 export default function Navigation() {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
+    // ! Navigation is not working !
+    // ! Navigation is not working !
+    // ! Navigation is not working !
+
     useEffect(() => {
         const token = sessionStorage.getStorageItem("accessToken");
 
         if (token) {
-            setIsUserLoggedIn(true);
+            return setIsUserLoggedIn(true);
         }
-    }, []);
+
+        return () => setIsUserLoggedIn(false);
+    }, [isUserLoggedIn]);
 
     const navigate = useNavigate();
 
     const logout = async (e) => {
         await userService.logout();
         sessionStorage.clearAll();
+        setIsUserLoggedIn(false);
         navigate("/");
     };
 
@@ -85,7 +92,7 @@ export default function Navigation() {
                         </button>
                         <div className="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse" >
 
-                            {isUserLoggedIn ?
+                            {isUserLoggedIn &&
                                 <div className="navbar-nav ml-auto py-0">
                                     <Link to={"/"} className="nav-item nav-link active">Home</Link>
                                     <Link to={"/attractions"} className="nav-item nav-link">Attractions</Link>
@@ -95,7 +102,8 @@ export default function Navigation() {
                                     <Link onClick={logout} className="nav-item nav-link">Logout</Link>
                                     {/* <Link to={"/contacts"} className="nav-item nav-link">Contacts</Link> */}
                                 </div>
-                                :
+                            }
+                            {!isUserLoggedIn &&
                                 <div className="navbar-nav ml-auto py-0">
                                     <Link to={"/"} className="nav-item nav-link active">Home</Link>
                                     <Link to={"/attractions"} className="nav-item nav-link">Attractions</Link>
@@ -105,6 +113,7 @@ export default function Navigation() {
                                     {/* <Link to={"/contacts"} className="nav-item nav-link">Contacts</Link> */}
                                 </div>
                             }
+
                         </div>
                     </nav>
                 </div>

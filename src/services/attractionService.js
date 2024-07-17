@@ -1,3 +1,5 @@
+import * as sessionStorage from "../services/sessionStorage";
+
 const baseUrl = "http://localhost:3030/jsonstore/data";
 
 export const getAll = async () => {
@@ -16,7 +18,19 @@ export const getOneById = async (id) => {
     return result;
 };
 
+export const getUserAttractions = async (id) => {
+    // do the query string for _ownerId equals id
+    const querystring = `?where=_ownerId=${id}`;
+    const encodedQuery = encodeURI(querystring);
+    const response = await fetch(`${baseUrl}${encodedQuery}`)
+    const result = await response.json();
+    
+    return result;
+};
+
 export const create = async (data) => {
+    data._ownerId = sessionStorage.getStorageItem("id");
+
     const response = await fetch(baseUrl, {
         method: "POST",
         headers: {
@@ -37,7 +51,7 @@ export const update = async (id, data) => {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "X-Authorization": "",
+            "X-Authorization": sessionStorage.getStorageItem("accessToken"),
         },
         body: JSON.stringify(data),
     });
@@ -52,7 +66,7 @@ export const remove = async (id) => {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
-            "X-Authorization": "",
+            "X-Authorization": sessionStorage.getStorageItem("accessToken"),
         },
     });
 
