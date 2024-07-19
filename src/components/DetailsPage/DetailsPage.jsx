@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import * as attractionService from "../../services/attractionService";
+import DeleteAttractionModal from "./DeleteAttractionModal";
 
 export default function DetailsPage() {
     const { id } = useParams();
     const [attraction, setAttraction] = useState({});
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,11 +24,20 @@ export default function DetailsPage() {
         // I need to have state for the form with the inital state of the chosen attration
         // Has to be controlled form
     };
-    
+
     const onDeleteHandler = (e) => {
         attractionService.remove(id)
             .then(data => navigate("/attractions"))
             .catch(err => console.log(err));
+    };
+
+
+    const onDeleteModalShow = () => {
+        setShowDeleteModal(true);
+    };
+
+    const onDeleteModalClose = () => {
+        setShowDeleteModal(false);
     };
 
     return (
@@ -79,7 +91,7 @@ export default function DetailsPage() {
                                 <div className="border-top mt-4 pt-4">
                                     <div className="d-flex justify-content-between">
                                         <button onClick={onEditHandler}>Edit</button>
-                                        <button onClick={onDeleteHandler}>Delete</button>
+                                        <button onClick={onDeleteModalShow}>Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -87,6 +99,13 @@ export default function DetailsPage() {
                     </div>
                 </div>
             </div>
+
+            <DeleteAttractionModal
+                show={showDeleteModal}
+                onDeleteModalClose={onDeleteModalClose}
+                onDeleteHandler={onDeleteHandler}
+                name={attraction.name}
+            />
 
         </>
     );
