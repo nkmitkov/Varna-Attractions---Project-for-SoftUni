@@ -7,7 +7,6 @@ import * as attractionService from "../../services/attractionService";
 export default function ProfilePage() {
     const [user, setUser] = useState({});
     const [userAttractions, setUserAttractions] = useState({});
-    console.log(user);
 
     useEffect(() => {
         userService.getMe()

@@ -1,6 +1,6 @@
 import * as sessionStorage from "../services/sessionStorage";
 
-const baseUrl = "http://localhost:3030/jsonstore/data";
+const baseUrl = "http://localhost:3030/jsonstore/attractions";
 
 export const getAll = async () => {
     const response = await fetch(baseUrl);

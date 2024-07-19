@@ -31,8 +31,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/attractions" element={<AttractionsPage />} />
-                <Route path="/attractions/create" element={<CreatePage />} />
+                <Route path="/attractions/create" element={<CreatePage setErrorHandler={setErrorHandler} />} />
                 <Route path="/attractions/:id" element={<DetailsPage />} />
+                {/* <Route path="/attractions/:id/edit" element={<DetailsPage />} /> */}
                 <Route path="/about" element={<AboutVarnaPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/login" element={<LoginPage setErrorHandler={setErrorHandler} />} />
@@ -40,10 +41,6 @@ function App() {
                 {/* <Route path="/contacts" element={<ContactsPage />}>Contact /s */}
                 <Route path="*" element={<WrongUrlPage />} />
             </Routes>
-
-            {/* <EditPage setErrorHandler={setErrorHandler} id={"3d188930-2159-4145-84da-341279981f09"} /> */}
-            {/* <ProfilePage data={users[0]} /> */}
-            {/* <DetailsPage data={attractions[0]}/> */}
 
             <Footer />
 

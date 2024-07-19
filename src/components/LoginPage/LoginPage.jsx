@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// import { useForm } from "../../hooks/useForm";
 import * as userService from "../../services/userService";
 import * as sessionStorage from "../../services/sessionStorage";
 import styles from "./LoginPage.module.css";
@@ -18,6 +19,12 @@ const formInitialState = {
 export default function LoginPage({
     setErrorHandler
 }) {
+    // const {
+    //     formValues,
+    //     onChangeHandler,
+    //     resetFormHandler,
+    //     onSubmit,
+    // } = useForm(formInitialState, (values) => console.log(values));
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
