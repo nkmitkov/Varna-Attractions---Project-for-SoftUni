@@ -19,13 +19,20 @@ export const getOneById = async (id) => {
 };
 
 export const getUserAttractions = async (id) => {
+    const query = new URLSearchParams({
+        where: `_ownerId=${id}`,
+    });
     // do the query string for _ownerId equals id
-    const querystring = `?where=_ownerId=${id}`;
-    const encodedQuery = encodeURI(querystring);
-    const response = await fetch(`${baseUrl}${encodedQuery}`)
-    const result = await response.json();
+    const querystring = `=${id}`;
+    const encodedQuery = encodeURIComponent(querystring);
+
+    console.log(query);
+    console.log(encodedQuery);
+
+    // const response = await fetch(`${baseUrl}?where=_ownerId${encodedQuery}`)
+    // const result = await response.json();
     
-    return result;
+    // return result;
 };
 
 export const create = async (data) => {

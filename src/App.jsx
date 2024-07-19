@@ -3,15 +3,15 @@ import { Routes, Route } from "react-router-dom";
 
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-import HomePage from "./components/HomePage";
-import AttractionsPage from "./components/AttractionsPage";
-import AboutVarnaPage from "./components/AboutVarnaPage";
-import DetailsPage from "./components/DetailsPage";
+import HomePage from "./components/HomePage/HomePage";
+import AttractionsPage from "./components/AttractionsPage/AttractionsPage";
+import AboutVarnaPage from "./components/AboutVarnaPage/AboutVarnaPage";
+import DetailsPage from "./components/DetailsPage/DetailsPage";
 import RegisterPage from "./components/RegisterPage/RegisterPage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import CreatePage from "./components/CreatePage/CreatePage";
 import EditPage from "./components/EditPage/EditPage";
-import ProfilePage from "./components/ProfilePage";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
 import WrongUrlPage from "./components/404/404";
 import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 

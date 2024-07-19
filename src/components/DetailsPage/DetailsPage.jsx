@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import * as attractionService from "../services/attractionService";
+import * as attractionService from "../../services/attractionService";
 
 export default function DetailsPage() {
     const { id } = useParams();
