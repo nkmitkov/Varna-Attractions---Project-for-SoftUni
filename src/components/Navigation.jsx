@@ -8,7 +8,7 @@ export default function Navigation() {
 
     const isUserLoggedIn = !!sessionStorage.getStorageItem("accessToken");
 
-    const logout = async (e) => {
+    const onLogout = async (e) => {
         await userService.logout();
         sessionStorage.clearAll();
         navigate("/");
@@ -75,52 +75,26 @@ export default function Navigation() {
                             <span className="navbar-toggler-icon" />
                         </button>
                         <div className="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse" >
+                            <div className="navbar-nav ml-auto py-0">
 
-                            {isUserLoggedIn ?
-                                <div className="navbar-nav ml-auto py-0">
-                                    <Link
-                                        to={"/"}
-                                        className="nav-item nav-link"
-                                    >Home
-                                    </Link>
-                                    <NavLink
-                                        to={"/attractions"}
-                                        className="nav-item nav-link"
-                                    >Attractions
-                                    </NavLink>
-                                    <NavLink
-                                        to={"/attractions/create"}
-                                        className="nav-item nav-link"
-                                    >Add Attraction
-                                    </NavLink>
-                                    <NavLink
-                                        to={"/about"}
-                                        className="nav-item nav-link"
-                                    >About Varna
-                                    </NavLink>
-                                    <NavLink
-                                        to={"/profile"}
-                                        className="nav-item nav-link"
-                                    >Profile
-                                    </NavLink>
-                                    <NavLink
-                                        onClick={logout}
-                                        className="nav-item nav-link"
-                                    >Logout
-                                    </NavLink>
-                                    {/* <NavLink to={"/contacts"} className="nav-item nav-link">Contacts</NavLink> */}
-                                </div>
-                                :
-                                <div className="navbar-nav ml-auto py-0">
-                                    <NavLink to={"/"} className="nav-item nav-link active">Home</NavLink>
-                                    <NavLink to={"/attractions"} className="nav-item nav-link">Attractions</NavLink>
-                                    <NavLink to={"/about"} className="nav-item nav-link">About Varna</NavLink>
-                                    <NavLink to={"/login"} className="nav-item nav-link">Login</NavLink>
-                                    <NavLink to={"/register"} className="nav-item nav-link">Register</NavLink>
-                                    {/* <NavLink to={"/contacts"} className="nav-item nav-link">Contacts</NavLink> */}
-                                </div>
-                            }
+                                <NavLink to={"/"} className="nav-item nav-link" >Home</NavLink>
+                                <NavLink to={"/attractions"} className="nav-item nav-link" >Attractions</NavLink>
+                                <NavLink to={"/about"} className="nav-item nav-link" >About Varna</NavLink>
 
+                                {isUserLoggedIn ?
+                                    <>
+                                        <NavLink to={"/attractions/create"} className="nav-item nav-link" >Add Attraction</NavLink>
+                                        <NavLink to={"/profile"} className="nav-item nav-link" >Profile</NavLink>
+                                        <NavLink onClick={onLogout} className="nav-item nav-link" >Logout</NavLink>
+                                    </>
+                                    :
+                                    <>
+                                        <NavLink to={"/login"} className="nav-item nav-link">Login</NavLink>
+                                        <NavLink to={"/register"} className="nav-item nav-link">Register</NavLink>
+                                    </>
+                                }
+
+                            </div>
                         </div>
                     </nav>
                 </div>
