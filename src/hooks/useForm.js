@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useForm = (initialValues, onSubmitHandler) => {
-    const [formValues, setFormValues] = useState(initialValues);
+    const [formValues, setFormValues] = useState({});
+
+    /* the first render initialValues is {} because I have to fetch the data at the Details Page
+    this is the reason I'm using useEffect to update the formValues with the correct information */
+    useEffect(() => {
+        setFormValues(initialValues);
+    }, [initialValues]);
 
     const onChangeHandler = (e) => {
         setFormValues(state => ({
             ...state,
-            [e.taget.name]: e.target.value,
+            [e.target.name]: e.target.value,
         }));
     };
 
-    const resetFormHandler = () => {};
+    const resetFormHandler = () => {
+        setFormValues(initialValues);
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -22,5 +30,6 @@ export const useForm = (initialValues, onSubmitHandler) => {
         formValues,
         onChangeHandler,
         onSubmit,
-    };
+        resetFormHandler
+    }
 };

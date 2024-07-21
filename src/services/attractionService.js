@@ -52,8 +52,6 @@ export const create = async (data) => {
 };
 
 export const update = async (id, data) => {
-    // i need to use token to update
-
     const response = await fetch(`${baseUrl}/${id}`, {
         method: "PUT",
         headers: {

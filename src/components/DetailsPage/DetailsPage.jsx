@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import * as attractionService from "../../services/attractionService";
 import * as sessionStorage from "../../services/sessionStorage";
+
 import DeleteAttractionModal from "./DeleteAttractionModal";
 import EditAttractionModal from "./EditAttractionModal";
 
@@ -24,10 +25,10 @@ export default function DetailsPage() {
     }, []);
 
     // Edit modal functions
-    const onEditHandler = () => {
-        console.log(`Edit - ${attraction._id}`)
-        // I need to have state for the form with the inital state of the chosen attration
-        // Has to be controlled form
+    const onEditHandler = async (editFormValues) => {
+        const result = await attractionService.update(attraction._id, editFormValues);
+        setAttraction(result);
+        setShowEditModal(false);
     };
 
     const onEditModalShow = () => {
@@ -124,7 +125,7 @@ export default function DetailsPage() {
                 show={showEditModal}
                 onEditModalClose={onEditModalClose}
                 onEditHandler={onEditHandler}
-                data={attraction}
+                attraction={attraction}
             />
 
             <DeleteAttractionModal
