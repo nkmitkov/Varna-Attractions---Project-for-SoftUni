@@ -8,10 +8,6 @@ export default function Navigation() {
 
     const isUserLoggedIn = !!sessionStorage.getStorageItem("accessToken");
 
-    // ! Navigation is not working !
-    // ! Navigation is not working !
-    // ! Navigation is not working !
-
     const logout = async (e) => {
         await userService.logout();
         sessionStorage.clearAll();

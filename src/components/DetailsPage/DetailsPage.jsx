@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import * as attractionService from "../../services/attractionService";
+import * as sessionStorage from "../../services/sessionStorage";
 import DeleteAttractionModal from "./DeleteAttractionModal";
 import EditAttractionModal from "./EditAttractionModal";
 
@@ -9,9 +10,10 @@ export default function DetailsPage() {
     const { id } = useParams();
     const [attraction, setAttraction] = useState({});
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(true);
+    const [showEditModal, setShowEditModal] = useState(false);
 
     const navigate = useNavigate();
+    const isUserLoggedIn = sessionStorage.getStorageItem("accessToken");
 
     useEffect(() => {
         attractionService.getOneById(id)
@@ -99,19 +101,26 @@ export default function DetailsPage() {
                                         <h4 className="m-0">{Number(attraction.price) ? "BGN " : ""}{attraction.price}</h4>
                                     </div>
                                 </div>
-                                <div className="border-top mt-4 pt-4">
-                                    <div className="d-flex justify-content-between">
-                                        <button onClick={onEditModalShow}>Edit</button>
-                                        <button onClick={onDeleteModalShow}>Delete</button>
+
+                                {isUserLoggedIn 
+                                    ?
+                                    <div className="border-top mt-4 pt-4">
+                                        <div className="d-flex justify-content-between">
+                                            <button onClick={onEditModalShow}>Edit</button>
+                                            <button onClick={onDeleteModalShow}>Delete</button>
+                                        </div>
                                     </div>
-                                </div>
+                                    :
+                                    ""
+                                }
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <EditAttractionModal 
+            <EditAttractionModal
                 show={showEditModal}
                 onEditModalClose={onEditModalClose}
                 onEditHandler={onEditHandler}
