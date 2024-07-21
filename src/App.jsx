@@ -18,6 +18,8 @@ import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 function App() {
     const [errorMessage, setErrorMessage] = useState("");
 
+    //! After show error message i don't know how to hide the modal
+
     const setErrorHandler = (message) => {
         setErrorMessage(message);
     };
@@ -30,7 +32,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/attractions" element={<AttractionsPage />} />
+                <Route path="/attractions" element={<AttractionsPage setErrorHandler={setErrorHandler} />} />
                 <Route path="/attractions/create" element={<CreatePage setErrorHandler={setErrorHandler} />} />
                 <Route path="/attractions/:id" element={<DetailsPage />} />
                 {/* <Route path="/attractions/:id/edit" element={<DetailsPage />} /> */}

@@ -1,32 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import * as userService from "../services/userService";
 import * as sessionStorage from "../services/sessionStorage";
 
 export default function Navigation() {
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-
-    // ! Navigation is not working !
-    // ! Navigation is not working !
-    // ! Navigation is not working !
-
-    useEffect(() => {
-        const token = sessionStorage.getStorageItem("accessToken");
-
-        if (token) {
-            return setIsUserLoggedIn(true);
-        }
-
-        return () => setIsUserLoggedIn(false);
-    }, [isUserLoggedIn]);
-
     const navigate = useNavigate();
+
+    const isUserLoggedIn = !!sessionStorage.getStorageItem("accessToken");
+
+    // ! Navigation is not working !
+    // ! Navigation is not working !
+    // ! Navigation is not working !
 
     const logout = async (e) => {
         await userService.logout();
         sessionStorage.clearAll();
-        setIsUserLoggedIn(false);
         navigate("/");
     };
 
@@ -92,25 +80,48 @@ export default function Navigation() {
                         </button>
                         <div className="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse" >
 
-                            {isUserLoggedIn &&
+                            {isUserLoggedIn ?
                                 <div className="navbar-nav ml-auto py-0">
-                                    <Link to={"/"} className="nav-item nav-link active">Home</Link>
-                                    <Link to={"/attractions"} className="nav-item nav-link">Attractions</Link>
-                                    <Link to={"/attractions/create"} className="nav-item nav-link">Add Attraction</Link>
-                                    <Link to={"/about"} className="nav-item nav-link">About Varna</Link>
-                                    <Link to={"/profile"} className="nav-item nav-link">Profile</Link>
-                                    <Link onClick={logout} className="nav-item nav-link">Logout</Link>
-                                    {/* <Link to={"/contacts"} className="nav-item nav-link">Contacts</Link> */}
+                                    <Link
+                                        to={"/"}
+                                        className="nav-item nav-link"
+                                    >Home
+                                    </Link>
+                                    <NavLink
+                                        to={"/attractions"}
+                                        className="nav-item nav-link"
+                                    >Attractions
+                                    </NavLink>
+                                    <NavLink
+                                        to={"/attractions/create"}
+                                        className="nav-item nav-link"
+                                    >Add Attraction
+                                    </NavLink>
+                                    <NavLink
+                                        to={"/about"}
+                                        className="nav-item nav-link"
+                                    >About Varna
+                                    </NavLink>
+                                    <NavLink
+                                        to={"/profile"}
+                                        className="nav-item nav-link"
+                                    >Profile
+                                    </NavLink>
+                                    <NavLink
+                                        onClick={logout}
+                                        className="nav-item nav-link"
+                                    >Logout
+                                    </NavLink>
+                                    {/* <NavLink to={"/contacts"} className="nav-item nav-link">Contacts</NavLink> */}
                                 </div>
-                            }
-                            {!isUserLoggedIn &&
+                                :
                                 <div className="navbar-nav ml-auto py-0">
-                                    <Link to={"/"} className="nav-item nav-link active">Home</Link>
-                                    <Link to={"/attractions"} className="nav-item nav-link">Attractions</Link>
-                                    <Link to={"/about"} className="nav-item nav-link">About Varna</Link>
-                                    <Link to={"/login"} className="nav-item nav-link">Login</Link>
-                                    <Link to={"/register"} className="nav-item nav-link">Register</Link>
-                                    {/* <Link to={"/contacts"} className="nav-item nav-link">Contacts</Link> */}
+                                    <NavLink to={"/"} className="nav-item nav-link active">Home</NavLink>
+                                    <NavLink to={"/attractions"} className="nav-item nav-link">Attractions</NavLink>
+                                    <NavLink to={"/about"} className="nav-item nav-link">About Varna</NavLink>
+                                    <NavLink to={"/login"} className="nav-item nav-link">Login</NavLink>
+                                    <NavLink to={"/register"} className="nav-item nav-link">Register</NavLink>
+                                    {/* <NavLink to={"/contacts"} className="nav-item nav-link">Contacts</NavLink> */}
                                 </div>
                             }
 
