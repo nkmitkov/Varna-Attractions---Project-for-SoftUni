@@ -1,56 +1,27 @@
-import * as sessionStorage from "../services/sessionStorage"
+import * as request from "../lib/request";
 
 const baseUrl = "http://localhost:3030/users";
 
 export const getMe = async (id) => {
-    const response = await fetch(`${baseUrl}/me`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "X-Authorization": sessionStorage.getStorageItem("accessToken"),
-        }
-    });
-
-    const result = await response.json();
+    const result = await request.get(`${baseUrl}/me`);
 
     return result;
 };
 
 export const register = async (data) => {
-    const response = await fetch(`${baseUrl}/register`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
+    const result = await request.post(`${baseUrl}/register`, data);
 
     return result;
 };
 
 export const login = async (data) => {
-    const response = await fetch(`${baseUrl}/login`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
+    const result = await request.post(`${baseUrl}/login`, data);
 
     return result;
 };
 
 export const logout = async () => {
-    const response = await fetch(`${baseUrl}/logout`, {
-        method: "GET",
-        headers: {
-            "X-Authorization": sessionStorage.getStorageItem("accessToken"),
-        }
-    });
+    const result = await request.get(`${baseUrl}/logout`);
 
-    return response;
+    return result;
 };
