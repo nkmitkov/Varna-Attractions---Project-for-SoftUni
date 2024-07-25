@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import * as attractionService from "../../services/attractionService";
-import * as sessionStorage from "../../services/sessionStorage";
 
 import DeleteAttractionModal from "./DeleteAttractionModal";
 import EditAttractionModal from "./EditAttractionModal";
@@ -14,7 +13,7 @@ export default function DetailsPage() {
     const [showEditModal, setShowEditModal] = useState(false);
 
     const navigate = useNavigate();
-    const isUserLoggedIn = sessionStorage.getStorageItem("accessToken");
+    const isUserLoggedIn = localStorage.getItem("accessToken");
 
     useEffect(() => {
         attractionService.getOneById(id)

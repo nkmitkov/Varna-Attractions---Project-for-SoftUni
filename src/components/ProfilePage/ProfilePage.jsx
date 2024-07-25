@@ -8,15 +8,15 @@ export default function ProfilePage() {
     const [user, setUser] = useState({});
     const [userAttractions, setUserAttractions] = useState({});
 
+    // ! I have to fetch the user's attractions
+
     useEffect(() => {
         userService.getMe()
             .then(data => setUser(data))
             .catch(err => console.log(err));
-
-        attractionService.getUserAttractions(user._id) // second fetch doesn't work because fetches withour user's data
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
     }, []);
+
+
 
     return (
         <>

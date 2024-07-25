@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as userService from "../../services/userService";
-import * as sessionStorage from "../../services/sessionStorage";
 import styles from "./RegisterPage.module.css";
 
 const FORM_KEYS = {
@@ -114,7 +113,7 @@ export default function RegisterPage({
                 throw new Error(info.message);
             }
 
-            sessionStorage.setStorage(info);
+            localStorage.setItem("accessToken", info.accessToken);
             resetFormHandler();
             setErrorHandler();
             navigate("/attractions");

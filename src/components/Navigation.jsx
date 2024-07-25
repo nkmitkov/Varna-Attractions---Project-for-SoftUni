@@ -1,16 +1,15 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import * as userService from "../services/userService";
-import * as sessionStorage from "../services/sessionStorage";
 
 export default function Navigation() {
     const navigate = useNavigate();
 
-    const isUserLoggedIn = !!sessionStorage.getStorageItem("accessToken");
+    const isUserLoggedIn = !!localStorage.getItem("accessToken");
 
     const onLogout = async (e) => {
         await userService.logout();
-        sessionStorage.clearAll();
+        localStorage.removeItem("accessToken");
         navigate("/");
     };
 

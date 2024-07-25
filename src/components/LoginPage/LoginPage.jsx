@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 // import { useForm } from "../../hooks/useForm";
 import * as userService from "../../services/userService";
-import * as sessionStorage from "../../services/sessionStorage";
 import styles from "./LoginPage.module.css";
 
 const FORM_KEYS = {
@@ -89,7 +88,7 @@ export default function LoginPage({
                 throw new Error(info.message);
             }
 
-            sessionStorage.setStorage(info);
+            localStorage.setItem("accessToken" , info.accessToken);
             setErrorHandler();
             resetFormHandler();
             navigate("/attractions");
