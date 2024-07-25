@@ -26,12 +26,14 @@ function App() {
         return {};
     });
 
+    console.log(auth);
+
     const setAuthHandler = (user) => setAuth(user);
 
     const values = {
-        setAuthHandler,
         username: auth.username,
         email: auth.email,
+        userId: auth._id,
         isAuthenticated: !!auth.accessToken,
     };
 
@@ -46,9 +48,9 @@ function App() {
                 <Route path={Path.Details} element={<DetailsPage />} />
                 <Route path={Path.About} element={<AboutVarnaPage />} />
                 <Route path={Path.Profile} element={<ProfilePage />} />
-                <Route path={Path.Login} element={<LoginPage />} />
-                <Route path={Path.Register} element={<RegisterPage />} />
-                <Route path={Path.Logout} element={<Logout />} />
+                <Route path={Path.Login} element={<LoginPage setAuthHandler={setAuthHandler} />} />
+                <Route path={Path.Register} element={<RegisterPage setAuthHandler={setAuthHandler} />} />
+                <Route path={Path.Logout} element={<Logout setAuthHandler={setAuthHandler} />} />
                 <Route path="*" element={<WrongUrlPage />} />
             </Routes>
 

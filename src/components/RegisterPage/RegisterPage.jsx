@@ -106,13 +106,12 @@ export default function RegisterPage() {
 
             const info = await userService.register(data);
 
-            if (info?.code === 409) {
-                resetFormHandler(info);
-                throw new Error(info.message);
-            }
+            // if (info?.code === 409) {
+            //     resetFormHandler(info);
+            //     throw new Error(info.message);
+            // }
 
             localStorage.setItem("accessToken", info.accessToken);
-            resetFormHandler();
             navigate("/attractions");
         } catch (error) {
             console.log(error);
