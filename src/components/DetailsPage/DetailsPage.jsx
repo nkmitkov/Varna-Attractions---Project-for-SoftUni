@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import * as attractionService from "../../services/attractionService";
+import AuthContext from "../../contexts/authContext";
 
 import DeleteAttractionModal from "./DeleteAttractionModal";
 import EditAttractionModal from "./EditAttractionModal";
 
 export default function DetailsPage() {
+    const { userId } = useContext(AuthContext);
     const { id } = useParams();
     const [attraction, setAttraction] = useState({});
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
 
     const navigate = useNavigate();
-    const isUserLoggedIn = localStorage.getItem("accessToken");
+    const isOwner = attraction._ownerId === userId;
 
     useEffect(() => {
         attractionService.getOneById(id)
@@ -102,16 +104,13 @@ export default function DetailsPage() {
                                     </div>
                                 </div>
 
-                                {isUserLoggedIn 
-                                    ?
+                                {isOwner &&
                                     <div className="border-top mt-4 pt-4">
                                         <div className="d-flex justify-content-between">
                                             <button onClick={onEditModalShow}>Edit</button>
                                             <button onClick={onDeleteModalShow}>Delete</button>
                                         </div>
                                     </div>
-                                    :
-                                    ""
                                 }
 
                             </div>
