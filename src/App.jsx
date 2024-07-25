@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import AuthContext from "./contexts/authContext";
 
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
@@ -18,6 +19,13 @@ import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 
 function App() {
     const [errorMessage, setErrorMessage] = useState("");
+    const [auth, setAuth] = useState(() => {
+        localStorage.removeItem("accessToken");
+
+        return {};
+    });
+
+    const setAuthHandler = (user) => setAuth(user);
 
     //! After show error message i don't know how to hide the modal
 
@@ -25,8 +33,14 @@ function App() {
         setErrorMessage(message);
     };
 
+    const values = {
+        username: auth.username,
+        email: auth.email,
+        isAuthenticated: !!auth.accessToken,
+    };
+
     return (
-        <>
+        <AuthContext.Provider value={values}>
             <Navigation />
 
             {errorMessage && <ErrorComponent msg={errorMessage} />}
@@ -39,7 +53,7 @@ function App() {
                 {/* <Route path="/attractions/:id/edit" element={<DetailsPage />} /> */}
                 <Route path="/about" element={<AboutVarnaPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/login" element={<LoginPage setErrorHandler={setErrorHandler} />} />
+                <Route path="/login" element={<LoginPage setErrorHandler={setErrorHandler} setAuthHandler={setAuthHandler} />} />
                 <Route path="/register" element={<RegisterPage setErrorHandler={setErrorHandler} />} />
                 {/* <Route path="/contacts" element={<ContactsPage />}>Contact /s */}
                 <Route path="*" element={<WrongUrlPage />} />
@@ -50,7 +64,7 @@ function App() {
             <a href="#" className="btn btn-lg btn-primary btn-lg-square back-to-top">
                 <i className="fa fa-angle-double-up" />
             </a>
-        </>
+        </AuthContext.Provider>
     );
 };
 
