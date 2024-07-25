@@ -11,7 +11,6 @@ const FORM_KEYS = {
 };
 
 export default function LoginPage({
-    setErrorHandler,
     setAuthHandler
 }) {
     const [errors, setErrors] = useState({});
@@ -26,16 +25,11 @@ export default function LoginPage({
 
             const info = await userService.login(values);
 
-            // if (info?.code === 403 || info.status !== 200) { 
-            //     resetFormHandler();
-            //     throw new Error(info.message);
-            // }
-
             setAuthHandler(info);
             localStorage.setItem("accessToken" , info.accessToken);
             navigate("/attractions");
         } catch (error) {
-            setErrorHandler(error.message);
+            console.log(error);
         }
     };
 

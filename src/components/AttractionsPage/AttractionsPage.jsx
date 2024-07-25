@@ -3,15 +3,13 @@ import { useState, useEffect } from "react";
 import AttractionsPageAttraction from "./AttractionsPageAttraction";
 import * as attractionService from "../../services/attractionService";
 
-export default function AttractionsPage({
-    setErrorHandler
-}) {
+export default function AttractionsPage() {
     const [attractions, setAttractions] = useState([]);
 
     useEffect(() => {
         attractionService.getAll()
             .then((result) => setAttractions(result))
-            .catch((error) => setErrorHandler(error.message));
+            .catch((error) => console.log(error.message));
     }, []);
 
     return (

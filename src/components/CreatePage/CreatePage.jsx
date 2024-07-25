@@ -26,9 +26,7 @@ const formInitialState = {
     [FORM_KEYS.description]: "",
 };
 
-export default function CreatePage({
-    setErrorHandler
-}) {
+export default function CreatePage() {
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -110,7 +108,7 @@ export default function CreatePage({
             resetFormHandler();
             navigate("/attractions");
         } catch (error) {
-            setErrorHandler(error.message);
+            console.log(error);
         }
     };
 

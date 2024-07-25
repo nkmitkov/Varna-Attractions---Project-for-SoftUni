@@ -20,9 +20,7 @@ const formInitialState = {
     [FORM_KEYS.avatar]: "",
 }
 
-export default function RegisterPage({
-    setErrorHandler
-}) {
+export default function RegisterPage() {
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -115,10 +113,9 @@ export default function RegisterPage({
 
             localStorage.setItem("accessToken", info.accessToken);
             resetFormHandler();
-            setErrorHandler();
             navigate("/attractions");
         } catch (error) {
-            setErrorHandler(error.message);
+            console.log(error);
         }
     };
 

@@ -15,10 +15,9 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import CreatePage from "./components/CreatePage/CreatePage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import WrongUrlPage from "./components/404/404";
-import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
+// import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 
 function App() {
-    const [errorMessage, setErrorMessage] = useState("");
     const [auth, setAuth] = useState(() => {
         localStorage.removeItem("accessToken");
 
@@ -28,10 +27,6 @@ function App() {
     const setAuthHandler = (user) => setAuth(user);
 
     //! After show error message i don't know how to hide the modal
-
-    const setErrorHandler = (message) => {
-        setErrorMessage(message);
-    };
 
     const values = {
         username: auth.username,
@@ -43,18 +38,16 @@ function App() {
         <AuthContext.Provider value={values}>
             <Navigation />
 
-            {errorMessage && <ErrorComponent msg={errorMessage} />}
-
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/attractions" element={<AttractionsPage setErrorHandler={setErrorHandler} />} />
-                <Route path="/attractions/create" element={<CreatePage setErrorHandler={setErrorHandler} />} />
+                <Route path="/attractions" element={<AttractionsPage />} />
+                <Route path="/attractions/create" element={<CreatePage />} />
                 <Route path="/attractions/:id" element={<DetailsPage />} />
                 {/* <Route path="/attractions/:id/edit" element={<DetailsPage />} /> */}
                 <Route path="/about" element={<AboutVarnaPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/login" element={<LoginPage setErrorHandler={setErrorHandler} setAuthHandler={setAuthHandler} />} />
-                <Route path="/register" element={<RegisterPage setErrorHandler={setErrorHandler} />} />
+                <Route path="/login" element={<LoginPage setAuthHandler={setAuthHandler} />} />
+                <Route path="/register" element={<RegisterPage />} />
                 {/* <Route path="/contacts" element={<ContactsPage />}>Contact /s */}
                 <Route path="*" element={<WrongUrlPage />} />
             </Routes>
