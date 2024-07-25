@@ -14,9 +14,13 @@ export default function ProfilePage() {
         userService.getMe()
             .then(data => setUser(data))
             .catch(err => console.log(err));
+
+        // ! after i fetch the user data with the first request I can't use the data in the second request - undefined
+
+        attractionService.getUserAttractions(user._id)
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
     }, []);
-
-
 
     return (
         <>

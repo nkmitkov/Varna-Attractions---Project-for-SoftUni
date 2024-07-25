@@ -8,7 +8,7 @@ export default function HomePage() {
 
     useEffect(() => {
         attractionService.getAll()
-            .then(data => setAttractions(Object.values(data)))
+            .then(data => setAttractions(data))
             .catch(err => console.log(err));
             
             // todo: DO THE CATCH FUNCTIONALITY

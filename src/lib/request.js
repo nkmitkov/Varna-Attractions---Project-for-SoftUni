@@ -28,11 +28,11 @@ export const request = async (method, url, data) => {
         return response;
     };
 
-    if (!response.ok) {
-        throw response;
-    };
-
     const result = await response.json();
+
+    if (!response.ok) {
+        throw result;
+    };
 
     return result;
 };
