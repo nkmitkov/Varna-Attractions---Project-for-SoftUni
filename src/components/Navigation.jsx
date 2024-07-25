@@ -1,17 +1,10 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
-import * as userService from "../services/userService";
+import Path from "../paths";
 
 export default function Navigation() {
-    const navigate = useNavigate();
 
     const isUserLoggedIn = !!localStorage.getItem("accessToken");
-
-    const onLogout = async (e) => {
-        await userService.logout();
-        localStorage.removeItem("accessToken");
-        navigate("/");
-    };
 
     return (
         <>
@@ -76,20 +69,21 @@ export default function Navigation() {
                         <div className="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse" >
                             <div className="navbar-nav ml-auto py-0">
 
-                                <NavLink to={"/"} className="nav-item nav-link" >Home</NavLink>
-                                <NavLink to={"/attractions"} className="nav-item nav-link" >Attractions</NavLink>
-                                <NavLink to={"/about"} className="nav-item nav-link" >About Varna</NavLink>
+                                <NavLink to={Path.Home} className="nav-item nav-link" >Home</NavLink>
+                                <NavLink to={Path.Catalog} className="nav-item nav-link" >Attractions</NavLink>
+                                <NavLink to={Path.About} className="nav-item nav-link" >About Varna</NavLink>
 
-                                {isUserLoggedIn ?
+                                {isUserLoggedIn
+                                    ?
                                     <>
-                                        <NavLink to={"/attractions/create"} className="nav-item nav-link" >Add Attraction</NavLink>
-                                        <NavLink to={"/profile"} className="nav-item nav-link" >Profile</NavLink>
-                                        <NavLink onClick={onLogout} className="nav-item nav-link" >Logout</NavLink>
+                                        <NavLink to={Path.Create} className="nav-item nav-link" >Add Attraction</NavLink>
+                                        <NavLink to={Path.Profile} className="nav-item nav-link" >Profile</NavLink>
+                                        <NavLink onClick={Path.Logout} className="nav-item nav-link" >Logout</NavLink>
                                     </>
                                     :
                                     <>
-                                        <NavLink to={"/login"} className="nav-item nav-link">Login</NavLink>
-                                        <NavLink to={"/register"} className="nav-item nav-link">Register</NavLink>
+                                        <NavLink to={Path.Login} className="nav-item nav-link">Login</NavLink>
+                                        <NavLink to={Path.Register} className="nav-item nav-link">Register</NavLink>
                                     </>
                                 }
 

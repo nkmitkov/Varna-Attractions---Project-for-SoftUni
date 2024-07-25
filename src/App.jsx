@@ -3,16 +3,18 @@ import { Routes, Route } from "react-router-dom";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthContext from "./contexts/authContext";
+import Path from "./paths";
 
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage/HomePage";
-import AttractionsPage from "./components/AttractionsPage/AttractionsPage";
 import AboutVarnaPage from "./components/AboutVarnaPage/AboutVarnaPage";
+import AttractionsPage from "./components/AttractionsPage/AttractionsPage";
+import CreatePage from "./components/CreatePage/CreatePage";
 import DetailsPage from "./components/DetailsPage/DetailsPage";
 import RegisterPage from "./components/RegisterPage/RegisterPage";
 import LoginPage from "./components/LoginPage/LoginPage";
-import CreatePage from "./components/CreatePage/CreatePage";
+import Logout from "./components/Logout";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import WrongUrlPage from "./components/404/404";
 // import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
@@ -26,9 +28,8 @@ function App() {
 
     const setAuthHandler = (user) => setAuth(user);
 
-    //! After show error message i don't know how to hide the modal
-
     const values = {
+        setAuthHandler,
         username: auth.username,
         email: auth.email,
         isAuthenticated: !!auth.accessToken,
@@ -39,16 +40,15 @@ function App() {
             <Navigation />
 
             <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/attractions" element={<AttractionsPage />} />
-                <Route path="/attractions/create" element={<CreatePage />} />
-                <Route path="/attractions/:id" element={<DetailsPage />} />
-                {/* <Route path="/attractions/:id/edit" element={<DetailsPage />} /> */}
-                <Route path="/about" element={<AboutVarnaPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/login" element={<LoginPage setAuthHandler={setAuthHandler} />} />
-                <Route path="/register" element={<RegisterPage />} />
-                {/* <Route path="/contacts" element={<ContactsPage />}>Contact /s */}
+                <Route path={Path.Home} element={<HomePage />} />
+                <Route path={Path.Catalog} element={<AttractionsPage />} />
+                <Route path={Path.Create} element={<CreatePage />} />
+                <Route path={Path.Details} element={<DetailsPage />} />
+                <Route path={Path.About} element={<AboutVarnaPage />} />
+                <Route path={Path.Profile} element={<ProfilePage />} />
+                <Route path={Path.Login} element={<LoginPage />} />
+                <Route path={Path.Register} element={<RegisterPage />} />
+                <Route path={Path.Logout} element={<Logout />} />
                 <Route path="*" element={<WrongUrlPage />} />
             </Routes>
 
