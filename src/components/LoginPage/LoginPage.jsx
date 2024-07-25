@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// import { useForm } from "../../hooks/useForm";
+import { useForm } from "../../hooks/useForm";
 import * as userService from "../../services/userService";
 import styles from "./LoginPage.module.css";
 
@@ -10,30 +10,44 @@ const FORM_KEYS = {
     password: "password",
 };
 
-const formInitialState = {
-    [FORM_KEYS.email]: "",
-    [FORM_KEYS.password]: "",
-}
-
 export default function LoginPage({
-    setErrorHandler
+    setErrorHandler,
+    setAuthHandler
 }) {
-    // const {
-    //     formValues,
-    //     onChangeHandler,
-    //     resetFormHandler,
-    //     onSubmit,
-    // } = useForm(formInitialState, (values) => console.log(values));
-    const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
-    const onChangeHandler = (e) => {
-        setFormValues(state => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }))
+    const onSubmitHandler = async (values) => {
+
+        try {
+            if (!values.email || !values.password) {
+                throw new Error("Both input fields are required");
+            }
+
+            const info = await userService.login(values);
+
+            // if (info?.code === 403 || info.status !== 200) { 
+            //     resetFormHandler();
+            //     throw new Error(info.message);
+            // }
+
+            setAuthHandler(info);
+            localStorage.setItem("accessToken" , info.accessToken);
+            navigate("/attractions");
+        } catch (error) {
+            setErrorHandler(error.message);
+        }
     };
+
+    const {
+        formValues,
+        onChangeHandler,
+        resetFormHandler,
+        onSubmit,
+    } = useForm({
+        [FORM_KEYS.email]: "",
+        [FORM_KEYS.password]: "",
+    }, onSubmitHandler);
 
     const onBlurValidationHandler = (e) => {
         const inputName = e.target.name;
@@ -52,49 +66,6 @@ export default function LoginPage({
             ...state,
             [inputName]: message,
         }));
-    };
-
-    const resetFormHandler = (error) => {
-        if (error?.code === 403) {
-            setFormValues(state => ({
-                ...state,
-                ["password"]: ""
-            }))
-
-            setErrors(state => ({
-                ...state,
-                ["email"]: error.message,
-            }))
-
-            return;
-        }
-
-        setFormValues(formInitialState);
-        setErrors({});
-    }
-
-    const onSubmitHandler = async (e) => {
-        e.preventDefault();
-
-        try {
-            if (!formValues.email || !formValues.password) {
-                throw new Error("Both input fields are required");
-            }
-
-            const info = await userService.login(formValues);
-
-            if (info?.code === 403) { 
-                resetFormHandler(info);
-                throw new Error(info.message);
-            }
-
-            localStorage.setItem("accessToken" , info.accessToken);
-            setErrorHandler();
-            resetFormHandler();
-            navigate("/attractions");
-        } catch (error) {
-            setErrorHandler(error.message);
-        }
     };
 
     return (
@@ -123,7 +94,7 @@ export default function LoginPage({
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
-                                <form name="login" id="loginForm" noValidate="novalidate" onSubmit={onSubmitHandler}>
+                                <form name="login" id="loginForm" noValidate="novalidate" onSubmit={onSubmit}>
 
                                     <div className="control-group">
                                         <input
