@@ -40,7 +40,7 @@ export default function HomePage() {
                         <h6 className="text-primary text-uppercase" style={{ letterSpacing: 5 }} >
                             Latest Attractions
                         </h6>
-                        <h1>Latest Attractions</h1>
+                        <h1>Newly Added Attractions</h1>
                     </div>
                     <div className="row">
 

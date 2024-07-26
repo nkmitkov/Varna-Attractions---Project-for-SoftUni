@@ -1,10 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
 
 import Path from "../paths";
+import AuthContext from "../contexts/authContext";
 
 export default function Navigation() {
-
-    const isUserLoggedIn = !!localStorage.getItem("accessToken");
+    const { isAuthenticated } = useContext(AuthContext);
 
     return (
         <>
@@ -73,7 +74,7 @@ export default function Navigation() {
                                 <NavLink to={Path.Catalog} className="nav-item nav-link" >Attractions</NavLink>
                                 <NavLink to={Path.About} className="nav-item nav-link" >About Varna</NavLink>
 
-                                {isUserLoggedIn
+                                {isAuthenticated
                                     ?
                                     <>
                                         <NavLink to={Path.Create} className="nav-item nav-link" >Add Attraction</NavLink>
