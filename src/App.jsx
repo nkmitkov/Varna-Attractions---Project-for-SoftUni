@@ -26,14 +26,13 @@ function App() {
         return {};
     });
 
-    console.log(auth);
-
     const setAuthHandler = (user) => setAuth(user);
 
     const values = {
         username: auth.username,
         email: auth.email,
         userId: auth._id,
+        avatar: auth.avatar,
         isAuthenticated: !!auth.accessToken,
     };
 

@@ -41,25 +41,21 @@ export default function Footer() {
                             Usefull Links
                         </h5>
                         <div className="d-flex flex-column justify-content-start">
-                            <a className="text-white-50 mb-2" href="#">
+                            <a className="text-white-50 mb-2" href="#hotels-link">
                                 <i className="fa fa-angle-right mr-2" />
                                 Hotels links
                             </a>
-                            <a className="text-white-50 mb-2" href="#">
+                            <a className="text-white-50 mb-2" href="#restaurants-link">
                                 <i className="fa fa-angle-right mr-2" />
                                 Restaurants links
                             </a>
-                            <a className="text-white-50 mb-2" href="#">
+                            <a className="text-white-50 mb-2" href="#museums-link">
                                 <i className="fa fa-angle-right mr-2" />
                                 Museums links
                             </a>
-                            <a className="text-white-50 mb-2" href="#">
+                            <a className="text-white-50 mb-2" href="#buses-link">
                                 <i className="fa fa-angle-right mr-2" />
                                 Buses links
-                            </a>
-                            <a className="text-white-50 mb-2" href="#">
-                                <i className="fa fa-angle-right mr-2" />
-                                Other links
                             </a>
                         </div>
                     </div>
