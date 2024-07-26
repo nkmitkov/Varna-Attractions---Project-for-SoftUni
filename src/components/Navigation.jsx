@@ -79,7 +79,7 @@ export default function Navigation() {
                                     <>
                                         <NavLink to={Path.Create} className="nav-item nav-link" >Add Attraction</NavLink>
                                         <NavLink to={Path.Profile} className="nav-item nav-link" >Profile</NavLink>
-                                        <NavLink onClick={Path.Logout} className="nav-item nav-link" >Logout</NavLink>
+                                        <NavLink to={Path.Logout} className="nav-item nav-link" >Logout</NavLink>
                                     </>
                                     :
                                     <>
