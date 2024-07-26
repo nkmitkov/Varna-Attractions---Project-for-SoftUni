@@ -1,43 +1,61 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import * as userService from "../../services/userService";
 import styles from "./RegisterPage.module.css";
+import * as userService from "../../services/userService";
+import { useForm } from "../../hooks/useForm";
 
 const FORM_KEYS = {
-    name: "name",
+    username: "username",
     email: "email",
     password: "password",
     rePassword: "rePassword",
     avatar: "avatar",
 };
 
-const formInitialState = {
-    [FORM_KEYS.name]: "",
-    [FORM_KEYS.email]: "",
-    [FORM_KEYS.password]: "",
-    [FORM_KEYS.rePassword]: "",
-    [FORM_KEYS.avatar]: "",
-}
-
-export default function RegisterPage() {
-    const [formValues, setFormValues] = useState(formInitialState);
+export default function RegisterPage({
+    setAuthHandler
+}) {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
-    const onChangeHandler = (e) => {
-        setFormValues(state => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
+    const onSubmitHandler = async (values) => {
+        try {
+            if (!values.username || !values.email || !values.password || values.password !== values.rePassword || !formValues.avatar) {
+                throw new Error("All input fields are required");
+            }
+
+            delete values.rePassword;
+
+            const info = await userService.register(values);
+
+            setAuthHandler(info);
+            localStorage.setItem("accessToken", info.accessToken);
+            navigate("/attractions");
+        } catch (error) {
+            console.log(error);
+        }
     };
+
+    const {
+        formValues,
+        onChangeHandler,
+        onSubmit,
+        resetFormHandler
+    } = useForm({
+        [FORM_KEYS.username]: "",
+        [FORM_KEYS.email]: "",
+        [FORM_KEYS.password]: "",
+        [FORM_KEYS.rePassword]: "",
+        [FORM_KEYS.avatar]: "",
+    }, onSubmitHandler);
 
     const onBlurValidationHandler = (e) => {
         let message = "";
 
         switch (e.target.name) {
-            case "name":
-                formValues.name.length < 2 ? message = "Name must be at least 2 characters" : "";
+            case "username":
+                formValues.username.length < 2 ? message = "Name must be at least 2 characters" : "";
                 break;
             case "email":
                 const emailRegExp = /\w+@\w+\.\w+/;
@@ -65,59 +83,6 @@ export default function RegisterPage() {
         }));
     }
 
-    const resetFormHandler = (error) => {
-        // code 409 is when the email is already taken
-        if (error?.code === 409) {
-            setFormValues(state => ({
-                ...state,
-                ["password"]: "",
-                ["rePassword"]: "",
-            }))
-
-            setErrors(state => ({
-                ...state,
-                ["email"]: "Email already exists"
-            }));
-
-            return;
-        }
-
-        setFormValues(formInitialState)
-        setErrors({});
-    };
-
-    const onSubmitHandler = async (e) => {
-        e.preventDefault();
-
-        // todo: if some value is falty i must do something
-        // Validate if user with the current email already exists
-        // Remove rePassword property so we don't save it in the server
-        const data = {
-            name: formValues.name,
-            email: formValues.email,
-            password: formValues.password,
-            avatar: formValues.avatar,
-        }
-
-        try {
-            if (!formValues.name || !formValues.email || !formValues.password || formValues.password !== formValues.rePassword || !formValues.avatar) {
-                throw new Error("All input fields are required");
-            }
-
-            const info = await userService.register(data);
-
-            // if (info?.code === 409) {
-            //     resetFormHandler(info);
-            //     throw new Error(info.message);
-            // }
-
-            localStorage.setItem("accessToken", info.accessToken);
-            navigate("/attractions");
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     return (
         <>
 
@@ -144,27 +109,27 @@ export default function RegisterPage() {
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
-                                <form name="register" id="registerForm" onSubmit={onSubmitHandler}>
+                                <form name="register" id="registerForm" onSubmit={onSubmit}>
 
                                     <div className="control-group">
                                         <input
                                             type="text"
-                                            name="name"
+                                            name="username"
                                             className={
                                                 `form-control p-4 
-                                                ${errors.name && styles["input-error"]}`
+                                                ${errors.username && styles["input-error"]}`
                                             }
-                                            id="name"
+                                            id="username"
                                             placeholder="Name"
                                             required="required"
-                                            data-validation-required-message="Please enter a name"
-                                            value={formValues.name}
+                                            data-validation-required-message="Please enter a username"
+                                            value={formValues.username}
                                             onChange={onChangeHandler}
                                             onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
 
-                                        {errors.name && (<p className={styles["error-message"]}>{errors.name}</p>)}
+                                        {errors.username && (<p className={styles["error-message"]}>{errors.username}</p>)}
 
                                     </div>
                                     <div className="control-group">
@@ -264,7 +229,7 @@ export default function RegisterPage() {
                                             className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
                                             type="button"
                                             id="resetButton"
-                                            onClick={(e) => resetFormHandler()}
+                                            onClick={resetFormHandler}
                                         >
                                             Reset
                                         </button>
