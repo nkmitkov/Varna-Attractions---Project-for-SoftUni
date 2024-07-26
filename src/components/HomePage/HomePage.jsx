@@ -7,7 +7,7 @@ export default function HomePage() {
     const [attractions, setAttractions] = useState([]);
 
     useEffect(() => {
-        attractionService.getAll()
+        attractionService.getLatestThree()
             .then(data => setAttractions(data))
             .catch(err => console.log(err));
             
@@ -38,19 +38,14 @@ export default function HomePage() {
                 <div className="container pt-5 pb-3">
                     <div className="text-center mb-3 pb-3">
                         <h6 className="text-primary text-uppercase" style={{ letterSpacing: 5 }} >
-                            Top Attractions
+                            Latest Attractions
                         </h6>
-                        <h1>Explore Top Attractions</h1>
+                        <h1>Latest Attractions</h1>
                     </div>
                     <div className="row">
 
                         {attractions.map(attr => (<HomePageAttraction key={attr._id} {...attr} />))}
 
-                        {/* <HomePageAttraction data={ attractions[0] } />
-                        <HomePageAttraction data={ attractions[1] } />
-                        <HomePageAttraction data={ attractions[2] } />
-                        <HomePageAttraction data={ attractions[3] } />
-                        <HomePageAttraction data={ attractions[4] } /> */}
                     </div>
                 </div>
             </div>

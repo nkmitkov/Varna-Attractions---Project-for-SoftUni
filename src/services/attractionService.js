@@ -6,6 +6,12 @@ export const getAll = async () => await request.get(baseUrl);
 
 export const getOneById = async (id) => await request.get(`${baseUrl}/${id}`);
 
+export const getLatestThree = async () => {
+    const result = await request.get(`${baseUrl}?sortBy=_createdOn desc&pageSize=3`);
+    
+    return result;
+};
+
 export const getUserAttractions = async (id) => {
     const query = new URLSearchParams({
         where: `_ownerId="${id}"`,
