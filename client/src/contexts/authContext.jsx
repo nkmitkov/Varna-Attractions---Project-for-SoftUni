@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import usePersistedState from "../hooks/usePersistedState";
 
 const AuthContext = createContext();
 
@@ -7,11 +8,7 @@ AuthContext.displayName = "AuthContext";
 export const AuthProvider = ({
     children
 }) => {
-    const [auth, setAuth] = useState(() => {
-        localStorage.removeItem("auth");
-
-        return {};
-    });
+    const [auth, setAuth] = usePersistedState("auth", {});
 
     const setAuthHandler = (user) => setAuth(user);
 
