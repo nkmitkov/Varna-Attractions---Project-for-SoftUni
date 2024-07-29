@@ -27,10 +27,10 @@ export default function RegisterPage({
 
             delete values.rePassword;
 
-            const info = await userService.register(values);
+            const user = await userService.register(values);
 
-            setAuthHandler(info);
-            localStorage.setItem("accessToken", info.accessToken);
+            setAuthHandler(user);
+            localStorage.setItem("accessToken", user.accessToken);
             navigate("/attractions");
         } catch (error) {
             console.log(error);

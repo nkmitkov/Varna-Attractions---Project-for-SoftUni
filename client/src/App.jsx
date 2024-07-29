@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import AuthContext from "./contexts/authContext";
+import AuthContext, { AuthProvider } from "./contexts/authContext";
 import Path from "./paths";
 
 import Navigation from "./components/Navigation";
@@ -20,24 +19,15 @@ import WrongUrlPage from "./components/404/404";
 // import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 
 function App() {
-    const [auth, setAuth] = useState(() => {
-        localStorage.removeItem("accessToken");
-
-        return {};
-    });
-
-    const setAuthHandler = (user) => setAuth(user);
-
-    const values = {
-        username: auth.username,
-        email: auth.email,
-        userId: auth._id,
-        avatar: auth.avatar,
-        isAuthenticated: !!auth.accessToken,
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     };
 
     return (
-        <AuthContext.Provider value={values}>
+        <AuthProvider>
             <Navigation />
 
             <Routes>
@@ -47,18 +37,18 @@ function App() {
                 <Route path={Path.Details} element={<DetailsPage />} />
                 <Route path={Path.About} element={<AboutVarnaPage />} />
                 <Route path={Path.Profile} element={<ProfilePage />} />
-                <Route path={Path.Login} element={<LoginPage setAuthHandler={setAuthHandler} />} />
-                <Route path={Path.Register} element={<RegisterPage setAuthHandler={setAuthHandler} />} />
-                <Route path={Path.Logout} element={<Logout setAuthHandler={setAuthHandler} />} />
+                <Route path={Path.Login} element={<LoginPage />} />
+                <Route path={Path.Register} element={<RegisterPage />} />
+                <Route path={Path.Logout} element={<Logout />} />
                 <Route path="*" element={<WrongUrlPage />} />
             </Routes>
 
             <Footer />
 
-            <a href="#" className="btn btn-lg btn-primary btn-lg-square back-to-top">
+            <Link onClick={scrollToTop} className="btn btn-lg btn-primary btn-lg-square back-to-top">
                 <i className="fa fa-angle-double-up" />
-            </a>
-        </AuthContext.Provider>
+            </Link>
+        </AuthProvider>
     );
 };
 

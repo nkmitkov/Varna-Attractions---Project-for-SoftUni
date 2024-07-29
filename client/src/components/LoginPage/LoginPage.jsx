@@ -23,10 +23,10 @@ export default function LoginPage({
                 throw new Error("Both input fields are required");
             }
 
-            const info = await userService.login(values);
+            const user = await userService.login(values);
 
-            setAuthHandler(info);
-            localStorage.setItem("accessToken" , info.accessToken);
+            setAuthHandler(user);
+            localStorage.setItem("accessToken" , user.accessToken);
             navigate("/attractions");
         } catch (error) {
             console.log(error);
