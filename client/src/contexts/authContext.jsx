@@ -8,7 +8,7 @@ export const AuthProvider = ({
     children
 }) => {
     const [auth, setAuth] = useState(() => {
-        localStorage.removeItem("accessToken");
+        localStorage.removeItem("auth");
 
         return {};
     });

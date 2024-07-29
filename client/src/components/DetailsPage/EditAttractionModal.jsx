@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { useForm } from '../../hooks/useForm';
+import { useEffect, useState } from 'react';
 
 export default function EditAttractionModal({
     show,
@@ -10,12 +10,40 @@ export default function EditAttractionModal({
     onEditHandler,
     attraction,
 }) {
-    const {
-        formValues,
-        onChangeHandler,
-        onSubmit,
-        resetFormHandler
-    } = useForm(attraction, onEditHandler);
+    const [formValues, setFormValues] = useState({});
+
+    useEffect(() => {
+        setFormValues(attraction);
+    }, []);
+
+    const onChangeHandler = (e) => {
+        setFormValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const resetFormHandler = (isClear) => {
+        if (isClear) {
+            return setFormValues({
+                name: "",
+                image: "",
+                address: "",
+                hours: "",
+                phone: "",
+                price: "",
+                website: "",
+                description: "",
+            });
+        }
+        setFormValues(attraction)
+    };
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+
+        onEditHandler(formValues);
+    };
 
     return (
         <Modal show={show} onHide={onEditModalClose} onEscapeKeyDown={onEditModalClose}>
@@ -51,8 +79,9 @@ export default function EditAttractionModal({
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={onSubmit}>Edit</Button>
-                <Button variant="secondary" onClick={resetFormHandler}>Reset</Button>
+                <Button variant="primary" onClick={onSubmitHandler}>Save</Button>
+                <Button variant="secondary" onClick={(e) => resetFormHandler()}>Reset</Button>
+                <Button variant="secondary" onClick={(e) => resetFormHandler(true)}>Clear</Button>
                 <Button variant="secondary" onClick={onEditModalClose}>Close</Button>
             </Modal.Footer>
         </Modal>

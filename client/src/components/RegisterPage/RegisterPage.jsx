@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./RegisterPage.module.css";
 import * as userService from "../../services/userService";
 import { useForm } from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
-import { useNavigate } from "react-router-dom";
 
 const FORM_KEYS = {
     username: "username",

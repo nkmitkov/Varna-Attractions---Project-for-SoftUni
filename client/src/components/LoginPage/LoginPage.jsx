@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useForm } from "../../hooks/useForm";
 import * as userService from "../../services/userService";
 import styles from "./LoginPage.module.css";
 import AuthContext from "../../contexts/authContext";
-import { useNavigate } from "react-router-dom";
 
 const FORM_KEYS = {
     email: "email",
