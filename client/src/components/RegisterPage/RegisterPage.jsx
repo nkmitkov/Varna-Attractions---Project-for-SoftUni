@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 
 import styles from "./RegisterPage.module.css";
 import * as userService from "../../services/userService";
 import { useForm } from "../../hooks/useForm";
+import AuthContext from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 const FORM_KEYS = {
     username: "username",
@@ -13,11 +14,10 @@ const FORM_KEYS = {
     avatar: "avatar",
 };
 
-export default function RegisterPage({
-    setAuthHandler
-}) {
-    const [errors, setErrors] = useState({});
+export default function RegisterPage() {
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({});
+    const { setAuthHandler } = useContext(AuthContext);
 
     const onSubmitHandler = async (values) => {
         try {
@@ -29,8 +29,8 @@ export default function RegisterPage({
 
             const user = await userService.register(values);
 
+            localStorage.setItem("auth", JSON.stringify(user));
             setAuthHandler(user);
-            localStorage.setItem("accessToken", user.accessToken);
             navigate("/attractions");
         } catch (error) {
             console.log(error);

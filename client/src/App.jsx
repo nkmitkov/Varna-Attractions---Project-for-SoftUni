@@ -1,7 +1,7 @@
 import { Routes, Route, Link } from "react-router-dom";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import AuthContext, { AuthProvider } from "./contexts/authContext";
+import { AuthProvider } from "./contexts/authContext";
 import Path from "./paths";
 
 import Navigation from "./components/Navigation";
