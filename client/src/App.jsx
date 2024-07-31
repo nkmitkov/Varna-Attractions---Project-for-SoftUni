@@ -16,6 +16,8 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import Logout from "./components/Logout";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import WrongUrlPage from "./components/404/404";
+import AuthGuard from "./components/guards/AuthGuard";
+import GuestGuard from "./components/guards/GuestGuard";
 // import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 
 function App() {
@@ -33,13 +35,20 @@ function App() {
             <Routes>
                 <Route path={Path.Home} element={<HomePage />} />
                 <Route path={Path.Catalog} element={<AttractionsPage />} />
-                <Route path={Path.Create} element={<CreatePage />} />
                 <Route path={Path.Details} element={<DetailsPage />} />
                 <Route path={Path.About} element={<AboutVarnaPage />} />
-                <Route path={Path.Profile} element={<ProfilePage />} />
-                <Route path={Path.Login} element={<LoginPage />} />
-                <Route path={Path.Register} element={<RegisterPage />} />
-                <Route path={Path.Logout} element={<Logout />} />
+
+                <Route element={<AuthGuard />}>
+                    <Route path={Path.Create} element={<CreatePage />} />
+                    <Route path={Path.Profile} element={<ProfilePage />} />
+                    <Route path={Path.Logout} element={<Logout />} />
+                </Route>
+
+                <Route element={<GuestGuard />}>
+                    <Route path={Path.Login} element={<LoginPage />} />
+                    <Route path={Path.Register} element={<RegisterPage />} />
+                </Route>
+
                 <Route path="*" element={<WrongUrlPage />} />
             </Routes>
 

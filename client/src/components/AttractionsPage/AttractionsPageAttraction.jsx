@@ -25,9 +25,9 @@ export default function AttractionsPageAttraction({
                                 {address}
                             </small>
                         </div>
-                        <a className="h5 text-decoration-none" href={website} >
+                        <Link className="h5 text-decoration-none" to={`/attractions/${_id}`} >
                             {name}
-                        </a>
+                        </Link>
                         <div className="d-flex justify-content-between mb-3">
                             <small className="m-0">
                                 {description}
@@ -35,7 +35,7 @@ export default function AttractionsPageAttraction({
                         </div>
                         <div className="d-flex justify-content-between mb-3">
                             <small className="m-0">
-                                <a href={website}>Go to the website..</a>
+                                <a href={website} target="_blank">Go to the website..</a>
                             </small>
 
                             <h5 className="m-0">
