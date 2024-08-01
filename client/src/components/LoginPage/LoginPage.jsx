@@ -135,19 +135,19 @@ export default function LoginPage() {
 
                                     <div className="text-center">
                                         <button
-                                            className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
+                                            className={`btn btn-primary py-3 px-4 ${styles["buttons-margin"]}`}
                                             type="submit"
                                             id="loginButton"
                                         >
                                             Login
                                         </button>
                                         <button
-                                            className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
+                                            className={`btn btn-primary py-3 px-4 ${styles["buttons-margin"]}`}
                                             type="button"
                                             id="resetButton"
                                             onClick={(e) => resetFormHandler()}
                                         >
-                                            Reset
+                                            Clear
                                         </button>
                                     </div>
 

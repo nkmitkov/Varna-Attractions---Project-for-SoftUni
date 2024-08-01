@@ -23,7 +23,8 @@ export default function RegisterPage() {
 
     const onSubmitHandler = async (values) => {
         try {
-            if (!values.username || !values.email || !values.password || values.password !== values.rePassword || !values.avatar) {
+            if (!values.username || !values.email || !values.password || 
+                values.password !== values.rePassword || !values.avatar) {
                 throw new Error("All input fields are required");
             }
 
@@ -225,7 +226,7 @@ export default function RegisterPage() {
                                     </div>
 
                                     <div className="text-center">
-                                        <button className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
+                                        <button className={`btn btn-primary py-3 px-4 ${styles["buttons-margin"]}`}
                                             type="submit"
                                             id="registerButton"
                                             disabled={Object.values(errors).some(x => x)}
@@ -233,12 +234,12 @@ export default function RegisterPage() {
                                             Register
                                         </button>
                                         <button
-                                            className={`btn btn-primary py-3 px-4 ${true && styles["buttons-margin"]}`}
+                                            className={`btn btn-primary py-3 px-4 ${styles["buttons-margin"]}`}
                                             type="button"
                                             id="resetButton"
                                             onClick={resetFormHandler}
                                         >
-                                            Reset
+                                            Clear
                                         </button>
                                     </div>
 
