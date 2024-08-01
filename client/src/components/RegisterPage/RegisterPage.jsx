@@ -5,6 +5,7 @@ import styles from "./RegisterPage.module.css";
 import * as userService from "../../services/userService";
 import { useForm } from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
+import UserError from "../UserError/UserError";
 
 const FORM_KEYS = {
     username: "username",
@@ -17,15 +18,16 @@ const FORM_KEYS = {
 export default function RegisterPage() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
+    const [userErrorMessage, setUserErrorMessage] = useState("");
     const { setAuthHandler } = useContext(AuthContext);
 
     const onSubmitHandler = async (values) => {
         try {
-            if (!values.username || !values.email || !values.password || values.password !== values.rePassword || !formValues.avatar) {
+            if (!values.username || !values.email || !values.password || values.password !== values.rePassword || !values.avatar) {
                 throw new Error("All input fields are required");
             }
 
-            delete values.rePassword;
+            // delete values.rePassword;
 
             const user = await userService.register(values);
 
@@ -33,7 +35,9 @@ export default function RegisterPage() {
             setAuthHandler(user);
             navigate("/attractions");
         } catch (error) {
-            console.log(error);
+            setUserErrorMessage(error.message);
+
+            setTimeout(() => { setUserErrorMessage(""); }, 2500);
         }
     };
 
@@ -109,6 +113,9 @@ export default function RegisterPage() {
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
+
+                                {userErrorMessage && <UserError message={userErrorMessage} />}
+
                                 <form name="register" id="registerForm" onSubmit={onSubmit}>
 
                                     <div className="control-group">

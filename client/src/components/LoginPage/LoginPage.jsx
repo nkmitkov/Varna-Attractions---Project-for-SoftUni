@@ -5,6 +5,7 @@ import { useForm } from "../../hooks/useForm";
 import * as userService from "../../services/userService";
 import styles from "./LoginPage.module.css";
 import AuthContext from "../../contexts/authContext";
+import UserError from "../UserError/UserError";
 
 const FORM_KEYS = {
     email: "email",
@@ -14,10 +15,10 @@ const FORM_KEYS = {
 export default function LoginPage() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
+    const [userErrorMessage, setUserErrorMessage] = useState("");
     const { setAuthHandler } = useContext(AuthContext);
 
     const onSubmitHandler = async (values) => {
-
         try {
             if (!values.email || !values.password) {
                 throw new Error("Both input fields are required");
@@ -29,7 +30,9 @@ export default function LoginPage() {
             setAuthHandler(user);
             navigate("/attractions");
         } catch (error) {
-            console.log(error);
+            setUserErrorMessage(error.message);
+
+            setTimeout(() => { setUserErrorMessage(""); }, 2500);
         }
     };
 
@@ -88,6 +91,9 @@ export default function LoginPage() {
                         <div className="col-lg-8">
                             <div className="contact-form bg-white" style={{ padding: 30 }}>
                                 <div id="success" />
+
+                                {userErrorMessage && <UserError message={userErrorMessage} />}
+
                                 <form name="login" id="loginForm" noValidate="novalidate" onSubmit={onSubmit}>
 
                                     <div className="control-group">

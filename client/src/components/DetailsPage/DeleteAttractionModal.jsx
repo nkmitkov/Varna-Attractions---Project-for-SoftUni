@@ -10,7 +10,7 @@ export default function DeleteAttractionModal({
 
 
     return (
-        <Modal show={show} onHide={onDeleteModalClose} onEscapeKeyDown={onDeleteModalClose}>
+        <Modal show={show} onHide={onDeleteModalClose} onEscapeKeyDown={onDeleteModalClose} >
             <Modal.Header closeButton>
                 <Modal.Title>Confirmation</Modal.Title>
             </Modal.Header>
