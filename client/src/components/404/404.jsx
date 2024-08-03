@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import "./css/style.css";
+// import "./404.module.css";
 
 export default function WrongUrlPage() {
     return (
