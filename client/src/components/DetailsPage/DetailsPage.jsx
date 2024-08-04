@@ -120,7 +120,7 @@ export default function DetailsPage() {
                 </div>
             </div>
 
-            <Comments />
+            <Comments isOwner={isOwner} />
 
             <EditAttractionModal
                 show={showEditModal}
