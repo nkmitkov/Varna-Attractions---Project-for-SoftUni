@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
         <>
-            <div className="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style={{ marginTop: 90 }} >
+            <div className="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style={{ marginTop: 30 }} >
                 <div className="row pt-5">
                     <div className="col-lg-3 col-md-6 mb-5">
                         <a href="" className="navbar-brand">

@@ -6,6 +6,7 @@ import AuthContext from "../../contexts/authContext";
 
 import DeleteAttractionModal from "./DeleteAttractionModal";
 import EditAttractionModal from "./EditAttractionModal";
+import Comments from "./Comments/Comments";
 
 export default function DetailsPage() {
     const { userId } = useContext(AuthContext);
@@ -60,7 +61,7 @@ export default function DetailsPage() {
             <div className="container-fluid page-header">
                 <div className="container">
                     <div className="d-flex flex-column align-items-center justify-content-center" style={{ minHeight: 400 }} >
-                        <h3 className="display-4 text-white text-uppercase">{attraction.name}</h3>
+                        <h3 className="display-4 text-white text-uppercase" style={{ textAlign: "center" }}>{attraction.name}</h3>
                     </div>
                 </div>
             </div>
@@ -118,6 +119,8 @@ export default function DetailsPage() {
                     </div>
                 </div>
             </div>
+
+            <Comments />
 
             <EditAttractionModal
                 show={showEditModal}

@@ -26,8 +26,8 @@ export default function LoginPage() {
 
             const user = await userService.login(values);
 
-            localStorage.setItem("auth", JSON.stringify(user));
             setAuthHandler(user);
+            localStorage.setItem("auth", JSON.stringify(user));
             navigate("/attractions");
         } catch (error) {
             setUserErrorMessage(error.message);

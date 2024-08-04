@@ -12,8 +12,8 @@ export default function Logout() {
     useEffect(() => {
         userService.logout()
             .then(result => {
-                localStorage.removeItem("auth");
                 setAuthHandler({});
+                localStorage.removeItem("auth");
                 navigate(Path.Home);
             })
             .catch(err => console.log(err));
