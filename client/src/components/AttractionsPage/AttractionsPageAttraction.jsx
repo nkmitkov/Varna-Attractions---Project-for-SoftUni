@@ -18,7 +18,9 @@ export default function AttractionsPageAttraction({
         <>
             <div className="col-lg-4 col-md-6 mb-4">
                 <div className="package-item bg-white mb-2">
-                    <img className="img-fluid" src={image} alt={name} style={{ width: "500px", height: "250px" }} />
+                    <Link to={`/attractions/${_id}`}>
+                        <img className="img-fluid" src={image} alt={name} style={{ width: "500px", height: "250px" }} />
+                    </Link>
                     <div className="p-4">
                         <div className="d-flex justify-content-between mb-3">
                             <small className="m-0">
@@ -57,7 +59,7 @@ export default function AttractionsPageAttraction({
 
                         <div className="border-top mt-4 pt-4">
                             <div className="d-flex justify-content-between">
-                            <Link to={`/attractions/${_id}`}><button>Details</button></Link>
+                                <Link to={`/attractions/${_id}`}><button>Details</button></Link>
                             </div>
                         </div>
                     </div>
