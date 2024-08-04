@@ -5,7 +5,7 @@ export default function AboutVarnaPage() {
                 <div id="header-carousel" className="carousel slide" data-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img className="w-100" src="img/varna-seaport-and-lighthouse.jpg" alt="Image" />
+                            <img className="w-100" src="img/varna-seaport-and-lighthouse.jpg" alt="Image" style={{ maxHeight: "500px"}}/>
                             <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div className="p-3" style={{ maxWidth: 900 }}>
                                     <h1 className="display-3 text-white mb-md-4">
@@ -35,8 +35,8 @@ export default function AboutVarnaPage() {
                                     Population: 335,177 (2017)
                                 </h6>
                                 <p>
-                                Varna (Bulgarian: Варна, pronounced ['varnɐ]) is the largest city and seaside resort on the Bulgarian Black Sea Coast and in the Northern Bulgaria region. Situated strategically in the Gulf of Varna, the city has been a major economic, social and cultural centre for almost three millennia. Historically known as Odessos (Ancient Greek: Ὀδησσός), Varna developed from a Thracian seaside settlement to a major seaport on the Black Sea.&nbsp;
-                                <a href="https://en.wikipedia.org/wiki/Varna,_Bulgaria" target="_blank">Read More...</a>
+                                    Varna (Bulgarian: Варна, pronounced ['varnɐ]) is the largest city and seaside resort on the Bulgarian Black Sea Coast and in the Northern Bulgaria region. Situated strategically in the Gulf of Varna, the city has been a major economic, social and cultural centre for almost three millennia. Historically known as Odessos (Ancient Greek: Ὀδησσός), Varna developed from a Thracian seaside settlement to a major seaport on the Black Sea.&nbsp;
+                                    <a href="https://en.wikipedia.org/wiki/Varna,_Bulgaria" target="_blank">Read More...</a>
                                 </p>
                                 <div className="row mb-4">
                                     <div className="col-6">
@@ -46,6 +46,15 @@ export default function AboutVarnaPage() {
                                         <img className="img-fluid" src="img/varna-about-2.jpg" alt="" />
                                     </div>
                                 </div>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d186126.57799405605!2d27.64755366412188!3d43.204711548307515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a4538baaf3d7a1%3A0x5727941c71a58b7c!2sVarna!5e0!3m2!1sen!2sbg!4v1722776272300!5m2!1sen!2sbg"
+                                    width="400"
+                                    height="300"
+                                    style={{ border: 0 }}
+                                    allowfullscreen=""
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                ></iframe>
                             </div>
                         </div>
                     </div>
