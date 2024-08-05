@@ -1,19 +1,46 @@
-import { useContext, useState } from "react";
-import Comment from "./Comment";
-import AuthContext from "../../../contexts/authContext";
+import { useContext, useEffect, useState } from "react";
+
 import { useForm } from "../../../hooks/useForm";
+import AuthContext from "../../../contexts/authContext";
+import Comment from "./Comment";
+import * as commentService from "../../../services/commentService";
 
 export default function Comments({
-    isOwner
+    isOwner,
+    attractionId
 }) {
-    const { isAuthenticated } = useContext(AuthContext);
-    const [comments, setComments] = useState([{ text: "random text", username: "username", email: "email", avatar: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1722729600&semt=ais_hybrid" }]);
+    const {
+        username,
+        email,
+        userId,
+        avatar,
+        isAuthenticated,
+    } = useContext(AuthContext);
+    const [comments, setComments] = useState([]);
 
     const isValidToShow = !isOwner && isAuthenticated;
+
+    useEffect(() => {
+        commentService.getAll(attractionId)
+            .then(data => setComments(data))
+            .catch(err => console.log(err));
+    }, []);
     
-    const onSubmitHandler = (comment) => {
-        console.log(comment);
-        
+    const onSubmitHandler = async (comment) => {
+        const data = {
+            ...comment,
+            username,
+            avatar,
+        }
+
+        try {
+            const newComment = await commentService.create(attractionId, data);        
+            
+            setComments(state => [...state, newComment]);
+        } catch (error) {
+            console.log(error);
+            
+        }
     };
 
     const {

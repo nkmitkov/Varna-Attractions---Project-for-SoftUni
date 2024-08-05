@@ -1323,7 +1323,7 @@
             "35c62d76-8152-4626-8712-eeb96381bea8": {
                 email: "peter@abv.bg",
                 username: "Peter",
-                avatar: "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png",
+                avatar: "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg",
                 hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "847ec027-f659-4086-8032-5173e2f9c93a": {
@@ -1397,12 +1397,50 @@
             }
         },
         comments: {
-            "0a272c58-b7ea-4e09-a000-7ec988248f66": {
-                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-                content: "Great recipe!",
-                recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
-                _createdOn: 1614260681375,
-                _id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
+            "ffe80137-2815-4fd2-83db-4dd5511d3032": {
+                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+                "attractionId": "e34483b4-035e-482e-b36b-e8bf510e7378",
+                "comment": "This Cathedral is a masterpiece. Left me speechless",
+                "username": "George",
+                "avatar": "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721865600&semt=ais_user",
+                "_createdOn": 1722874019977,
+                "_id": "ffe80137-2815-4fd2-83db-4dd5511d3032"
+            },
+            "21c3ac82-d23c-4303-86c7-f328b44fa94c": {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "attractionId": "3b17e427-ffcf-4ab4-9f3c-5ed709df23f3",
+                "comment": "I had an amazing experience!",
+                "username": "Peter",
+                "avatar": "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg",
+                "_createdOn": 1722874195990,
+                "_id": "21c3ac82-d23c-4303-86c7-f328b44fa94c"
+            },
+            "9f93d2e9-7c97-4245-8307-567b08275758": {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "attractionId": "ff0c520f-377b-4702-aa6b-5f4912040f9b",
+                "comment": "The Residence is great. Worth visiting.",
+                "username": "Peter",
+                "avatar": "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg",
+                "_createdOn": 1722874279436,
+                "_id": "9f93d2e9-7c97-4245-8307-567b08275758"
+            },
+            "6a3cb35c-de4a-4b72-9563-06518458f737": {
+                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+                "attractionId": "0e70cc3d-c0db-4187-a14d-ef5e8154ecef",
+                "comment": "This cave monastery is majestic. It's a must.",
+                "username": "George",
+                "avatar": "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721865600&semt=ais_user",
+                "_createdOn": 1722874602399,
+                "_id": "6a3cb35c-de4a-4b72-9563-06518458f737"
+            },
+            "19175ab2-43ef-47e4-ac37-3ab364bd8ca6": {
+                "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+                "attractionId": "66406836-1782-42b0-a481-00f4b172f970",
+                "comment": "I felt like I was in a different world. Huge museum with a lot to explore.",
+                "username": "Admin",
+                "avatar": "https://cliply.co/wp-content/uploads/2020/09/442008572_ARTIST_AVATAR_3D_400.png",
+                "_createdOn": 1722875207191,
+                "_id": "19175ab2-43ef-47e4-ac37-3ab364bd8ca6"
             }
         },
         records: {
