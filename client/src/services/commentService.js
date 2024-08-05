@@ -13,9 +13,9 @@ export const getAll = async (attractionId) => {
     return result;
 };
 
-export const create = async (gameId, comment) => {
+export const create = async (attractionId, comment) => {
     const result = await request.post(url, {
-        gameId,
+        attractionId,
         ...comment
     });
 

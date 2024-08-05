@@ -1337,6 +1337,12 @@
                 username: "Admin",
                 avatar: "https://cliply.co/wp-content/uploads/2020/09/442008572_ARTIST_AVATAR_3D_400.png",
                 hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302"
+            },
+            "868a5e49-f2b3-4d7b-a06a-ce9cbc9179eb": {
+                email: "nkmitkov@abv.bg",
+                username: "Nikolay",
+                avatar: "https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             }
         },
         sessions: {
@@ -1441,6 +1447,33 @@
                 "avatar": "https://cliply.co/wp-content/uploads/2020/09/442008572_ARTIST_AVATAR_3D_400.png",
                 "_createdOn": 1722875207191,
                 "_id": "19175ab2-43ef-47e4-ac37-3ab364bd8ca6"
+            },
+            "54e8814d-15e6-4c6f-9d82-a44e33744c55": {
+                "_ownerId": "868a5e49-f2b3-4d7b-a06a-ce9cbc9179eb",
+                "attractionId": "e34483b4-035e-482e-b36b-e8bf510e7378",
+                "comment": "Magnifique!",
+                "username": "Nikolay",
+                "avatar": "https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745",
+                "_createdOn": 1722876224208,
+                "_id": "54e8814d-15e6-4c6f-9d82-a44e33744c55"
+            },
+            "ed270bfa-78d6-4e53-98dc-cab995862597": {
+                "_ownerId": "868a5e49-f2b3-4d7b-a06a-ce9cbc9179eb",
+                "attractionId": "3b17e427-ffcf-4ab4-9f3c-5ed709df23f3",
+                "comment": "Perfect experience for the whole family.",
+                "username": "Nikolay",
+                "avatar": "https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745",
+                "_createdOn": 1722876281333,
+                "_id": "ed270bfa-78d6-4e53-98dc-cab995862597"
+            },
+            "e1524fb3-cb88-4cec-84ba-3c1ba46587c1": {
+                "_ownerId": "868a5e49-f2b3-4d7b-a06a-ce9cbc9179eb",
+                "attractionId": "ff0c520f-377b-4702-aa6b-5f4912040f9b",
+                "comment": "I can live there forever.",
+                "username": "Nikolay",
+                "avatar": "https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745",
+                "_createdOn": 1722876329010,
+                "_id": "e1524fb3-cb88-4cec-84ba-3c1ba46587c1"
             }
         },
         records: {
