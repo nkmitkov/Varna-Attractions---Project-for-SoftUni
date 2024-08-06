@@ -1,6 +1,7 @@
 import * as request from "../lib/request";
 
-const url = "http://localhost:3030/data/comments";
+// const url = "http://localhost:3030/data/comments";
+const url = `${import.meta.env.VITE_API_URL}/data/comments`;
 
 export const getAll = async (attractionId) => {
     const query = new URLSearchParams({

@@ -18,9 +18,15 @@ import ProfilePage from "./components/ProfilePage/ProfilePage";
 import WrongUrlPage from "./components/404/404";
 import AuthGuard from "./components/guards/AuthGuard";
 import GuestGuard from "./components/guards/GuestGuard";
+import { useEffect } from "react";
 // import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 
 function App() {
+
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_URL}`)
+    });
+
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
