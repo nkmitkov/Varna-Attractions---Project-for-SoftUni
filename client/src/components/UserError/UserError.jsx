@@ -6,10 +6,6 @@ export default function UserError({
 }) {
     const [showAlert, setShowAlert] = useState(true);
 
-    // setTimeout(() => {
-    //     setShowAlert(false);
-    // }, 2500);
-
     return (
         <Alert 
             show={showAlert} 

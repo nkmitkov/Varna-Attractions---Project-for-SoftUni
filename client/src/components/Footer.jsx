@@ -43,19 +43,19 @@ export default function Footer() {
                         <div className="d-flex flex-column justify-content-start">
                             <a className="text-white-50 mb-2" href="#hotels-link">
                                 <i className="fa fa-angle-right mr-2" />
-                                Hotels links
+                                Hotels
                             </a>
                             <a className="text-white-50 mb-2" href="#restaurants-link">
                                 <i className="fa fa-angle-right mr-2" />
-                                Restaurants links
+                                Restaurants
                             </a>
                             <a className="text-white-50 mb-2" href="#museums-link">
                                 <i className="fa fa-angle-right mr-2" />
-                                Museums links
+                                Museums
                             </a>
                             <a className="text-white-50 mb-2" href="#buses-link">
                                 <i className="fa fa-angle-right mr-2" />
-                                Buses links
+                                Buses
                             </a>
                         </div>
                     </div>

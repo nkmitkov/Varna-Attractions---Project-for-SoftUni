@@ -23,12 +23,10 @@ export default function RegisterPage() {
 
     const onSubmitHandler = async (values) => {
         try {
-            if (!values.username || !values.email || !values.password || 
+            if (!values.username || !values.email || !values.password ||
                 values.password !== values.rePassword || !values.avatar) {
                 throw new Error("All input fields are required");
             }
-
-            // delete values.rePassword;
 
             const user = await userService.register(values);
 
@@ -223,6 +221,10 @@ export default function RegisterPage() {
 
                                         {errors.avatar && <p className={styles["error-message"]}>{errors.avatar}</p>}
 
+                                    </div>
+
+                                    <div className="text-center">
+                                        <h6>* All fields are required</h6>
                                     </div>
 
                                     <div className="text-center">

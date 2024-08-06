@@ -22,9 +22,7 @@ export default function DetailsPage() {
     useEffect(() => {
         attractionService.getOneById(id)
             .then(data => setAttraction(data))
-            .catch(err => console.log(err));
-
-        // todo: MAKE CATCH FUNCTIONALITY
+            .catch(err => navigate("/error"));
     }, []);
 
     // Edit modal functions

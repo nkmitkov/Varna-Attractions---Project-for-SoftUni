@@ -1,7 +1,7 @@
 import * as request from "../lib/request";
 
-// const url = "http://localhost:3030/data/comments";
-const url = `${import.meta.env.VITE_API_URL}/data/comments`;
+// const baseUrl = "http://localhost:3030/data/comments";
+const baseUrl = `${import.meta.env.VITE_API_URL}/data/comments`;
 
 export const getAll = async (attractionId) => {
     const query = new URLSearchParams({
@@ -9,13 +9,13 @@ export const getAll = async (attractionId) => {
         // load: `owner=_ownerId:users`,
     });
 
-    const result = await request.get(`${url}?${query}`);
+    const result = await request.get(`${baseUrl}?${query}`);
 
     return result;
 };
 
 export const create = async (attractionId, comment) => {
-    const result = await request.post(url, {
+    const result = await request.post(baseUrl, {
         attractionId,
         ...comment
     });

@@ -226,8 +226,8 @@ export default function CreatePage() {
 
                                     </div>
                                     <div className="control-group">
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             className={`form-control p-4 ${errors.price && styles["input-error"]}`}
                                             id="price"
                                             name="price"
@@ -276,6 +276,11 @@ export default function CreatePage() {
                                         {errors.description && (<p className={styles["error-message"]}>{errors.description}</p>)}
 
                                     </div>
+
+                                    <div className="text-center">
+                                        <h6>* All fields are required</h6>
+                                    </div>
+
                                     <div className="text-center">
                                         <button className="btn btn-primary py-3 px-4" type="submit" id="createButton" >
                                             Create
