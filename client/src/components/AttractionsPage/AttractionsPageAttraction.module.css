@@ -1,14 +1,11 @@
-/* a {
-    margin: auto;
-} */
-
 .details-btn {
-    padding: 2px 15px;
+    padding: 4px 15px;
     border-radius: 5px;
     border: white;
     color: white;
     background-color: #7AB730;
     font-size: 18px;
+    min-width: 100px;
 }
 
 .details-btn:hover {

@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-// import "./404.module.css";
-
 export default function WrongUrlPage() {
     return (
         <div id="notfound">
