@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import * as attractionService from "../../services/attractionService";
 import AuthContext from "../../contexts/authContext";
+import styles from "../AttractionsPage/AttractionsPageAttraction.module.css";
 
 import DeleteAttractionModal from "./DeleteAttractionModal";
 import EditAttractionModal from "./EditAttractionModal";
@@ -108,8 +109,8 @@ export default function DetailsPage() {
                                 {isOwner &&
                                     <div className="border-top mt-4 pt-4">
                                         <div className="d-flex justify-content-between">
-                                            <button onClick={onEditModalShow}>Edit</button>
-                                            <button onClick={onDeleteModalShow}>Delete</button>
+                                            <button className={styles["details-btn"]} onClick={onEditModalShow}>Edit</button>
+                                            <button className={styles["details-btn"]} onClick={onDeleteModalShow}>Delete</button>
                                         </div>
                                     </div>
                                 }

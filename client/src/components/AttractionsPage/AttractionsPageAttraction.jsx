@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import "./AttractionsPageAttraction.module.css";
+import styles from "./AttractionsPageAttraction.module.css";
 
 export default function AttractionsPageAttraction({
     _id,
@@ -59,7 +59,7 @@ export default function AttractionsPageAttraction({
 
                         <div className="border-top mt-4 pt-4">
                             <div className="d-flex justify-content-between">
-                                <Link to={`/attractions/${_id}`}><button>Details</button></Link>
+                                <Link to={`/attractions/${_id}`}><button className={styles["details-btn"]}>Details</button></Link>
                             </div>
                         </div>
                     </div>

@@ -1,8 +1,8 @@
-a {
+/* a {
     margin: auto;
-}
+} */
 
-button {
+.details-btn {
     padding: 2px 15px;
     border-radius: 5px;
     border: white;
@@ -11,6 +11,6 @@ button {
     font-size: 18px;
 }
 
-button:hover {
+.details-btn:hover {
     background-color: #669928;
 }
