@@ -4,6 +4,8 @@ Varna Attractions is a Single Page Application (SPA) showcasing the must-see att
 
 The HTML and CSS templates were adapted from https://www.free-css.com/free-css-templates/page281/traveler to better suit my vision for the application. The REST API, provided by SoftUni, allows me to illustrate my understanding of all CRUD operations via HTTP requests and responses.
 
+Use the link if you would like to check it out - https://varna-attractions.web.app .
+
 The project is divided into two parts: front-end (client side) and back-end (server side). Follow these instructions to run the project after downloading it:
 
     Front-End Setup:
