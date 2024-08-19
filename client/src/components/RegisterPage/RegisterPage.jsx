@@ -42,9 +42,7 @@ export default function RegisterPage() {
     localStorage.setItem("form", JSON.stringify(localStorageData));
 
     useEffect(() => {
-        return () => {
-            localStorage.removeItem("form");
-        };
+        return () => localStorage.removeItem("form");
     }, []);
 
     const onChangeHandler = (e) => {

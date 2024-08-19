@@ -33,9 +33,7 @@ export default function LoginPage() {
     localStorage.setItem("form", JSON.stringify({ email: formValues.email }));
 
     useEffect(() => {
-        return () => {
-            localStorage.removeItem("form");
-        };
+        return () => localStorage.removeItem("form");
     }, []);
     
     const onChangeHandler = (e) => {
