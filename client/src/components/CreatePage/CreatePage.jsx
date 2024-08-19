@@ -28,6 +28,7 @@ export default function CreatePage() {
         return initialValues;
     });
     const [userErrorMessage, setUserErrorMessage] = useState("");
+    const [inputError, setInputError] = useState("");
     const navigate = useNavigate();
 
     localStorage.setItem("form", JSON.stringify(formValues));
@@ -52,9 +53,10 @@ export default function CreatePage() {
         e.preventDefault();
 
         try {
-            const inputErrorMessage = inputValidations("Create", formValues)
+            const {inputErrorMessage, inputName} = inputValidations("Create", formValues)
 
             if (inputErrorMessage) {
+                setInputError(inputName);
                 throw new Error(inputErrorMessage);
             };
 
@@ -65,7 +67,7 @@ export default function CreatePage() {
         } catch (error) {
             setUserErrorMessage(error.message);
 
-            setTimeout(() => { setUserErrorMessage(""); }, 2500);
+            setTimeout(() => { setUserErrorMessage(""); }, 3000);
         }
     };
 
@@ -101,7 +103,7 @@ export default function CreatePage() {
                                     <div className="control-group">
                                         <input
                                             type="text"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "name" ? styles["input-error"] : ""}`}
                                             id="name"
                                             name="name"
                                             placeholder="Name"
@@ -114,7 +116,7 @@ export default function CreatePage() {
                                     <div className="control-group">
                                         <input
                                             type="text"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "image" ? styles["input-error"] : ""}`}
                                             id="image"
                                             name="image"
                                             placeholder="Image"
@@ -127,7 +129,7 @@ export default function CreatePage() {
                                     <div className="control-group">
                                         <input
                                             type="text"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "address" ? styles["input-error"] : ""}`}
                                             id="address"
                                             name="address"
                                             placeholder="Address"
@@ -140,7 +142,7 @@ export default function CreatePage() {
                                     <div className="control-group">
                                         <input
                                             type="text"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "hours" ? styles["input-error"] : ""}`}
                                             id="hours"
                                             name="hours"
                                             placeholder="Operating hours"
@@ -153,7 +155,7 @@ export default function CreatePage() {
                                     <div className="control-group">
                                         <input
                                             type="text"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "phone" ? styles["input-error"] : ""}`}
                                             id="phone"
                                             name="phone"
                                             placeholder="Phone number"
@@ -166,7 +168,7 @@ export default function CreatePage() {
                                     <div className="control-group">
                                         <input
                                             type="text"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "price" ? styles["input-error"] : ""}`}
                                             id="price"
                                             name="price"
                                             placeholder="Entrance fee"
@@ -179,7 +181,7 @@ export default function CreatePage() {
                                     <div className="control-group">
                                         <input
                                             type="text"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "website" ? styles["input-error"] : ""}`}
                                             id="website"
                                             name="website"
                                             placeholder="Website"
@@ -191,7 +193,7 @@ export default function CreatePage() {
                                     </div>
                                     <div className="control-group">
                                         <textarea
-                                            className="form-control py-3 px-4"
+                                            className={`form-control py-3 px-4 ${inputError === "description" ? styles["input-error"] : ""}`}
                                             rows={5}
                                             id="description"
                                             name="description"

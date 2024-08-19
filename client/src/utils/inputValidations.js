@@ -43,32 +43,59 @@ export default function inputValidations(formType, formData) {
             return "All input fields are required";
         };
         if (name.length < 4) {
-            return "Name must be at least 4 characters";
+            return {
+                inputErrorMessage: "Name must be at least 4 characters",
+                inputName: "name"
+            };
         };
         if (!urlValidator(image)) {
-            return "Image must be a valid link";
+            return {
+                inputErrorMessage: "Image must be a valid link",
+                inputName: "image"
+            };
         };
         if (address.length < 4) {
-            return "Address must be at least 4 characters";
+            return {
+                inputErrorMessage: "Address must be at least 4 characters",
+                inputName: "address"
+            };
         };
         if (hours.length < 4) {
-            return "Operating hours must be at least 4 characters";
+            return {
+                inputErrorMessage: "Operating hours must be at least 4 characters",
+                inputName: "hours"
+            };
         };
         if (!phoneValidator(phone)) {
-            return "Phone number must be valid. Use only numbers.";
+            return {
+                inputErrorMessage: "Phone number must be valid. Use only numbers.",
+                inputName: "phone"
+            };
         };
         if (!priceValidator(price)) {
-            return "Price must be 'Free' or a positive number";
+            return {
+                inputErrorMessage: "Price must be 'Free' or a positive number",
+                inputName: "price"
+            };
         };
         if (!urlValidator(website)) {
-            return "Website must be a valid URL address";
+            return {
+                inputErrorMessage: "Website must be a valid URL address",
+                inputName: "website"
+            };
         };
         if (description.length < 10 || description.length > 200) {
-            return "Description must be between 10 and 200 characters";
+            return {
+                inputErrorMessage: "Description must be between 10 and 200 characters",
+                inputName: "description"
+            };
         };
     };
 
-    return null;
+    return {
+        inputErrorMessage: null,
+        inputName: null,
+    };
 };
 
 function emailValidator(email) {
@@ -100,6 +127,6 @@ function priceValidator(price) {
     if (Number(price) < 0) {
         return false;
     }
-    
+
     return true;
 };
