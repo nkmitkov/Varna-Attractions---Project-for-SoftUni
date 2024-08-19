@@ -65,6 +65,7 @@ export default function CreatePage() {
             resetFormHandler();
             navigate("/attractions");
         } catch (error) {
+            setInputError("");
             setUserErrorMessage(error.message);
 
             setTimeout(() => { setUserErrorMessage(""); }, 3000);

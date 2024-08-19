@@ -21,19 +21,34 @@ export default function inputValidations(formType, formData) {
             return "All input fields are required";
         };
         if (username.length < 4) {
-            return "Username must be at least 4 characters";
+            return {
+                inputErrorMessage: "Username must be at least 4 characters",
+                inputName: "username"
+            };
         };
         if (!emailValidator(email)) {
-            return "Email must be valid";
+            return {
+                inputErrorMessage: "Email must be valid",
+                inputName: "email"
+            };
         };
         if (password.length < 6 ) {
-            return "Password must be at least 6 characters";
+            return {
+                inputErrorMessage: "Password must be at least 6 characters",
+                inputName: "password"
+            };
         };
         if (password !== rePassword) {
-            return "Both passwords must match";
+            return {
+                inputErrorMessage: "Both passwords must match",
+                inputName: "rePassword"
+            };
         };
         if (!urlValidator(avatar)) {
-            return "Avatar must be a valid link";
+            return {
+                inputErrorMessage: "Avatar must be a valid link",
+                inputName: "avatar"
+            };
         };
     }
     else if (formType === "Create") {

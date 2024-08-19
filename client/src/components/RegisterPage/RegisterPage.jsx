@@ -31,6 +31,7 @@ export default function RegisterPage() {
         return initialValues;
     });
     const [userErrorMessage, setUserErrorMessage] = useState("");
+    const [inputError, setInputError] = useState("");
     const { setAuthHandler } = useContext(AuthContext);
 
     const localStorageData = {
@@ -61,9 +62,10 @@ export default function RegisterPage() {
         e.preventDefault();
 
         try {
-            const inputErrorMessage = inputValidations("Register", formValues);
+            const {inputErrorMessage, inputName} = inputValidations("Register", formValues);
             
             if (inputErrorMessage) {
+                setInputError(inputName);
                 throw new Error(inputErrorMessage);
             }
 
@@ -79,6 +81,7 @@ export default function RegisterPage() {
                 rePassword: "",
             }));
             
+            setInputError("");
             setUserErrorMessage(error.message);
 
             setTimeout(() => { setUserErrorMessage(""); }, 2500);
@@ -118,7 +121,7 @@ export default function RegisterPage() {
                                         <input
                                             type="text"
                                             name="username"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "username" ? styles["input-error"] : ""}`}
                                             id="username"
                                             placeholder="Name.."
                                             required="required"
@@ -132,7 +135,7 @@ export default function RegisterPage() {
                                         <input
                                             type="text"
                                             name="email"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "email" ? styles["input-error"] : ""}`}
                                             id="email"
                                             placeholder="Email.."
                                             required="required"
@@ -146,7 +149,7 @@ export default function RegisterPage() {
                                         <input
                                             type="password"
                                             name="password"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "password" ? styles["input-error"] : ""}`}
                                             id="password"
                                             placeholder="Password.."
                                             required="required"
@@ -160,7 +163,7 @@ export default function RegisterPage() {
                                         <input
                                             type="password"
                                             name="rePassword"
-                                            className="form-control p-4"
+                                            className={`form-control p-4 ${inputError === "rePassword" ? styles["input-error"] : ""}`}
                                             id="rePassword"
                                             placeholder="Repeat Password.."
                                             required="required"
@@ -174,7 +177,7 @@ export default function RegisterPage() {
                                         <input
                                             type="text"
                                             name="avatar"
-                                            className="form-control p-4"                                            
+                                            className={`form-control p-4 ${inputError === "avatar" ? styles["input-error"] : ""}`}
                                             id="avatar"
                                             placeholder="Avatar - http/https.."
                                             required="required"
