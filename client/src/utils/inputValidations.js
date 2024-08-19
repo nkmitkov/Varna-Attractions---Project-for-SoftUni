@@ -1,25 +1,50 @@
 export default function inputValidations(formType, formData) {
-    let error = {
-        message: "",
-    };
+    // i can do a loop the check if any input field is empty and return a single error for all formTypes
 
     if (formType === "Login") {
-        if (!formData.email || !formData.password) {
-            error.message = "Both input fields are required";
-            return error;
+        const { email, password } = formData;
+
+        if (!email || !password) {
+            return "Both input fields are required";
+        }
+        if (!emailValidator(email)) {
+            return "Email must be valid";
+        } else if (password.length < 6) {
+            return "Password must be at least 6 characters";
         }
 
-        const emailRegExp = /\w+@\w+\.\w+/;
-        const emailMatch = formData?.email.match(emailRegExp);
+    } else if (formType === "Register") {
+        const { username, email, password, rePassword, avatar } = formData;
 
-        if (!emailMatch) {
-            error.message = "Email must be valid";
-            return error;
-        } else if (formData.password.length < 6) {
-            error.message = "Password must be at least 6 characters";
-            return error;
+        if (!username || !email || !password || !rePassword || !avatar) {
+            return "All input fields are required";
+        }
+        if (username.length < 4) {
+            return "Username must be at least 4 characters";
+        } else if (!emailValidator(email)) {
+            return "Email must be valid";
+        } else if (password.length < 6 ) {
+            return "Password must be at least 6 characters";
+        } else if (password !== rePassword) {
+            return "Both passwords must match";
+        } else if (!avatarValidator(avatar)) {
+            return "Avatar must be a valid link";
         }
     }
 
-    return error;
+    return null;
 };
+
+function emailValidator(email) {
+    const emailRegExp = /\w+@\w+\.\w+/;
+    const emailMatch = email.match(emailRegExp);
+
+    return emailMatch;
+}
+
+function avatarValidator(avatar) {
+    const avatarRegExp = /^https?:\/\//;
+    const avatarMatch = avatar.match(avatarRegExp);
+
+    return avatarMatch;
+}

@@ -1,94 +1,94 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./RegisterPage.module.css";
 import * as userService from "../../services/userService";
-import { useForm } from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
 import UserError from "../UserError/UserError";
+import inputValidations from "../../utils/inputValidations";
 
-const FORM_KEYS = {
-    username: "username",
-    email: "email",
-    password: "password",
-    rePassword: "rePassword",
-    avatar: "avatar",
+const initialValues = {
+    username: "",
+    email: "",
+    password: "",
+    rePassword: "",
+    avatar: "",
 };
 
 export default function RegisterPage() {
     const navigate = useNavigate();
-    const [errors, setErrors] = useState({});
+    const [formValues, setFormValues] = useState(() => {
+        const storedFormData = JSON.parse(localStorage.getItem("form"));
+
+        if (storedFormData) {
+            return {
+                ...storedFormData,
+                password: "",
+                rePassword: "",
+            };
+        }
+
+        return initialValues;
+    });
     const [userErrorMessage, setUserErrorMessage] = useState("");
     const { setAuthHandler } = useContext(AuthContext);
 
-    const onSubmitHandler = async (values) => {
+    const localStorageData = {
+        username: formValues.username,
+        email: formValues.email,
+        avatar: formValues.avatar,
+    };
+
+    localStorage.setItem("form", JSON.stringify(localStorageData));
+
+    useEffect(() => {
+        return () => {
+            localStorage.removeItem("form");
+        };
+    }, []);
+
+    const onChangeHandler = (e) => {
+        setFormValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const resetFormHandler = () => {
+        setFormValues(initialValues);
+        localStorage.removeItem("form");
+    };
+
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
+
         try {
-            if (!values.username || !values.email || !values.password ||
-                values.password !== values.rePassword || !values.avatar) {
-                throw new Error("All input fields are required");
+            const inputErrorMessage = inputValidations("Register", formValues);
+            
+            if (inputErrorMessage) {
+                throw new Error(inputErrorMessage);
             }
 
-            const user = await userService.register(values);
+            const user = await userService.register(formValues);
 
             localStorage.setItem("auth", JSON.stringify(user));
             setAuthHandler(user);
             navigate("/attractions");
-        } catch (error) {
+        } catch (error) {      
+            setFormValues(state => ({
+                ...state,
+                password: "",
+                rePassword: "",
+            }));
+            
             setUserErrorMessage(error.message);
 
             setTimeout(() => { setUserErrorMessage(""); }, 2500);
         }
     };
 
-    const {
-        formValues,
-        onChangeHandler,
-        onSubmit,
-        resetFormHandler
-    } = useForm({
-        [FORM_KEYS.username]: "",
-        [FORM_KEYS.email]: "",
-        [FORM_KEYS.password]: "",
-        [FORM_KEYS.rePassword]: "",
-        [FORM_KEYS.avatar]: "",
-    }, onSubmitHandler);
-
-    const onBlurValidationHandler = (e) => {
-        let message = "";
-
-        switch (e.target.name) {
-            case "username":
-                formValues.username.length < 2 ? message = "Name must be at least 2 characters" : "";
-                break;
-            case "email":
-                const emailRegExp = /\w+@\w+\.\w+/;
-                const emailMatch = formValues.email.match(emailRegExp);
-
-                !emailMatch ? message = "Email must be valid" : "";
-                break;
-            case "password":
-                formValues.password.length < 2 ? message = "Password must be at least 2 characters" : "";
-                break;
-            case "rePassword":
-                formValues.rePassword !== formValues.password ? message = "Both passwords must match" : "";
-                break;
-            case "avatar":
-                const avatarRegExp = /^https?:\/\//;
-                const avatarMatch = formValues.avatar.match(avatarRegExp);
-
-                !avatarMatch ? message = "Avatar must be a valid URL" : "";
-                break;
-        }
-
-        setErrors(state => ({
-            ...state,
-            [e.target.name]: message,
-        }));
-    }
-
     return (
         <>
-
             <div className="container-fluid page-header">
                 <div className="container">
                     <div
@@ -115,112 +115,76 @@ export default function RegisterPage() {
 
                                 {userErrorMessage && <UserError message={userErrorMessage} />}
 
-                                <form name="register" id="registerForm" onSubmit={onSubmit}>
-
+                                <form name="register" id="registerForm" onSubmit={onSubmitHandler}>
                                     <div className="control-group">
                                         <input
                                             type="text"
                                             name="username"
-                                            className={
-                                                `form-control p-4 
-                                                ${errors.username && styles["input-error"]}`
-                                            }
+                                            className="form-control p-4"
                                             id="username"
-                                            placeholder="Name"
+                                            placeholder="Name.."
                                             required="required"
                                             data-validation-required-message="Please enter a username"
                                             value={formValues.username}
                                             onChange={onChangeHandler}
-                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
-
-                                        {errors.username && (<p className={styles["error-message"]}>{errors.username}</p>)}
-
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="text"
                                             name="email"
-                                            className={
-                                                `form-control p-4 
-                                                ${errors.email && styles["input-error"]}`
-                                            }
+                                            className="form-control p-4"
                                             id="email"
-                                            placeholder="Email"
+                                            placeholder="Email.."
                                             required="required"
                                             data-validation-required-message="Please enter an email"
                                             value={formValues.email}
                                             onChange={onChangeHandler}
-                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
-
-                                        {errors.email && <p className={styles["error-message"]}>{errors.email}</p>}
-
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="password"
                                             name="password"
-                                            className={
-                                                `form-control p-4 
-                                                ${errors.password && styles["input-error"]}`
-                                            }
+                                            className="form-control p-4"
                                             id="password"
-                                            placeholder="Password"
+                                            placeholder="Password.."
                                             required="required"
                                             data-validation-required-message="Please enter a password"
                                             value={formValues.password}
                                             onChange={onChangeHandler}
-                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
-
-                                        {errors.password && <p className={styles["error-message"]}>{errors.password}</p>}
-
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="password"
                                             name="rePassword"
-                                            className={
-                                                `form-control p-4 
-                                                ${errors.rePassword && styles["input-error"]}`
-                                            }
+                                            className="form-control p-4"
                                             id="rePassword"
-                                            placeholder="Repeat Password"
+                                            placeholder="Repeat Password.."
                                             required="required"
                                             data-validation-required-message="Please enter a repeat password"
                                             value={formValues.rePassword}
                                             onChange={onChangeHandler}
-                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
-
-                                        {errors.rePassword && <p className={styles["error-message"]}>{errors.rePassword}</p>}
-
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="text"
                                             name="avatar"
-                                            className={
-                                                `form-control p-4 
-                                                ${errors.avatar && styles["input-error"]}`
-                                            }
+                                            className="form-control p-4"                                            
                                             id="avatar"
-                                            placeholder="Avatar - http/https"
+                                            placeholder="Avatar - http/https.."
                                             required="required"
                                             data-validation-required-message="Please enter an URL for your Avatar"
                                             value={formValues.avatar}
                                             onChange={onChangeHandler}
-                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
-
-                                        {errors.avatar && <p className={styles["error-message"]}>{errors.avatar}</p>}
-
                                     </div>
 
                                     <div className="text-center">
@@ -231,7 +195,7 @@ export default function RegisterPage() {
                                         <button className={`btn btn-primary py-3 px-4 ${styles["buttons-margin"]}`}
                                             type="submit"
                                             id="registerButton"
-                                            disabled={Object.values(errors).some(x => x)}
+                                            disabled={userErrorMessage ? true : false}
                                         >
                                             Register
                                         </button>
@@ -241,17 +205,15 @@ export default function RegisterPage() {
                                             id="resetButton"
                                             onClick={resetFormHandler}
                                         >
-                                            Clear
+                                            Reset
                                         </button>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </>
     );
 };

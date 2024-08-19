@@ -47,16 +47,17 @@ export default function LoginPage() {
 
     const resetFormHandler = () => {
         setFormValues(initialValues);
+        localStorage.removeItem("form");
     };
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         try {
-            const inputError = inputValidations("Login", formValues);
+            const inputErrorMessage = inputValidations("Login", formValues);
 
-            if (inputError.message) {
-                throw new Error(inputError.message);
+            if (inputErrorMessage) {
+                throw new Error(inputErrorMessage);
             }
             
             const user = await userService.login(formValues);
@@ -112,7 +113,7 @@ export default function LoginPage() {
                                             name="email"
                                             className="form-control p-4"
                                             id="email"
-                                            placeholder="Email"
+                                            placeholder="Email.."
                                             required="required"
                                             data-validation-required-message="Please enter an email"
                                             value={formValues.email}
@@ -126,7 +127,7 @@ export default function LoginPage() {
                                             name="password"
                                             className="form-control p-4"
                                             id="password"
-                                            placeholder="Password"
+                                            placeholder="Password.."
                                             required="required"
                                             data-validation-required-message="Please enter a password"
                                             value={formValues.password}
