@@ -94,11 +94,12 @@ function phoneValidator(phone) {
 };
 
 function priceValidator(price) {
-    if (Number(price) < 0) {
-        return false;
-    } else if (price !== "Free") {
+    if (!Number(price) && price !== "Free") {
         return false;
     }
-
+    if (Number(price) < 0) {
+        return false;
+    }
+    
     return true;
 };
