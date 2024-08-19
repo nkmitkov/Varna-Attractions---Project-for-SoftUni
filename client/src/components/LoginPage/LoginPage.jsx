@@ -1,73 +1,83 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useForm } from "../../hooks/useForm";
 import * as userService from "../../services/userService";
 import styles from "./LoginPage.module.css";
 import AuthContext from "../../contexts/authContext";
 import UserError from "../UserError/UserError";
+import inputValidations from "../../utils/inputValidations";
 
-const FORM_KEYS = {
-    email: "email",
-    password: "password",
+const initialValues = {
+    email: "",
+    password: "",
 };
 
 export default function LoginPage() {
     const navigate = useNavigate();
-    const [errors, setErrors] = useState({});
+    const [formValues, setFormValues] = useState(() => {
+        const storedFormData = JSON.parse(localStorage.getItem("form"));
+        console.log(storedFormData);
+        
+        if (storedFormData) {
+            return {
+                ...storedFormData,
+                password: "",
+            };
+        }
+
+        return initialValues;
+    });
     const [userErrorMessage, setUserErrorMessage] = useState("");
     const { setAuthHandler } = useContext(AuthContext);
 
-    const onSubmitHandler = async (values) => {
-        try {
-            if (!values.email || !values.password) {
-                throw new Error("Both input fields are required");
-            }
+    localStorage.setItem("form", JSON.stringify({ email: formValues.email }));
 
-            const user = await userService.login(values);
+    useEffect(() => {
+        return () => {
+            localStorage.removeItem("form");
+        };
+    }, []);
+    
+    const onChangeHandler = (e) => {
+        setFormValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const resetFormHandler = () => {
+        setFormValues(initialValues);
+    };
+
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
+
+        try {
+            const inputError = inputValidations("Login", formValues);
+
+            if (inputError.message) {
+                throw new Error(inputError.message);
+            }
+            
+            const user = await userService.login(formValues);
 
             setAuthHandler(user);
             localStorage.setItem("auth", JSON.stringify(user));
             navigate("/attractions");
         } catch (error) {
+            setFormValues(state => ({
+                ...state,
+                password: "",
+            }));
+
             setUserErrorMessage(error.message);
 
             setTimeout(() => { setUserErrorMessage(""); }, 2500);
         }
     };
 
-    const {
-        formValues,
-        onChangeHandler,
-        resetFormHandler,
-        onSubmit,
-    } = useForm({
-        [FORM_KEYS.email]: "",
-        [FORM_KEYS.password]: "",
-    }, onSubmitHandler);
-
-    const onBlurValidationHandler = (e) => {
-        const inputName = e.target.name;
-        let message = "";
-
-        if (inputName === "email") {
-            const emailRegExp = /\w+@\w+\.\w+/;
-            const emailMatch = formValues.email.match(emailRegExp);
-
-            !emailMatch ? message = "Email must be valid" : "";
-        } else if (inputName === "password") {
-            formValues.password.length < 2 ? message = "Password must be at least 2 characters" : "";
-        }
-
-        setErrors(state => ({
-            ...state,
-            [inputName]: message,
-        }));
-    };
-
     return (
         <>
-
             <div className="container-fluid page-header">
                 <div className="container">
                     <div
@@ -94,43 +104,35 @@ export default function LoginPage() {
 
                                 {userErrorMessage && <UserError message={userErrorMessage} />}
 
-                                <form name="login" id="loginForm" noValidate="novalidate" onSubmit={onSubmit}>
+                                <form name="login" id="loginForm" noValidate="novalidate" onSubmit={onSubmitHandler}>
 
                                     <div className="control-group">
                                         <input
                                             type="text"
                                             name="email"
-                                            className={`form-control p-4 ${errors.email && styles["input-error"]}`}
+                                            className="form-control p-4"
                                             id="email"
                                             placeholder="Email"
                                             required="required"
                                             data-validation-required-message="Please enter an email"
                                             value={formValues.email}
                                             onChange={onChangeHandler}
-                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
-
-                                        {errors.email && <p className={styles["error-message"]}>{errors.email}</p>}
-
                                     </div>
                                     <div className="control-group">
                                         <input
                                             type="password"
                                             name="password"
-                                            className={`form-control p-4 ${errors.password && styles["input-error"]}`}
+                                            className="form-control p-4"
                                             id="password"
                                             placeholder="Password"
                                             required="required"
                                             data-validation-required-message="Please enter a password"
                                             value={formValues.password}
                                             onChange={onChangeHandler}
-                                            onBlur={onBlurValidationHandler}
                                         />
                                         <p className="help-block text-danger" />
-
-                                        {errors.password && <p className={styles["error-message"]}>{errors.password}</p>}
-
                                     </div>
 
                                     <div className="text-center">
@@ -147,7 +149,7 @@ export default function LoginPage() {
                                             id="resetButton"
                                             onClick={(e) => resetFormHandler()}
                                         >
-                                            Clear
+                                            Reset
                                         </button>
                                     </div>
 
@@ -157,7 +159,6 @@ export default function LoginPage() {
                     </div>
                 </div>
             </div>
-
         </>
     );
 };
