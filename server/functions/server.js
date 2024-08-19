@@ -178,7 +178,7 @@
             .filter(s => s != '')
             .map(x => x.split('='))
             .reduce((p, [k, v]) => Object.assign(p, { [k]: decodeURIComponent(v) }), {});
-        const body = req.body;
+        const body = await parseBody(req);
 
         return {
             serviceName,
@@ -188,19 +188,19 @@
         };
     }
 
-    // function parseBody(req) {
-    //     return new Promise((resolve, reject) => {
-    //         let body = '';
-    //         req.on('data', (chunk) => body += chunk.toString());
-    //         req.on('end', () => {
-    //             try {
-    //                 resolve(JSON.parse(body));
-    //             } catch (err) {
-    //                 resolve(body);
-    //             }
-    //         });
-    //     });
-    // }
+    function parseBody(req) {
+        return new Promise((resolve, reject) => {
+            let body = '';
+            req.on('data', (chunk) => body += chunk.toString());
+            req.on('end', () => {
+                try {
+                    resolve(JSON.parse(body));
+                } catch (err) {
+                    resolve(body);
+                }
+            });
+        });
+    }
 
     var requestHandler = createHandler;
 
