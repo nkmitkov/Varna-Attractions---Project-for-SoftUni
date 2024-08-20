@@ -35,7 +35,7 @@ export default function Comments({
 
         try {
             const newComment = await commentService.create(attractionId, data);        
-            
+
             setComments(state => [...state, newComment]);
         } catch (error) {
             console.log(error);

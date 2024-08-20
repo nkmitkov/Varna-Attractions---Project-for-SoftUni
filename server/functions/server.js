@@ -1421,10 +1421,19 @@
                 "avatar": "https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745",
                 "_createdOn": 1722876329010,
                 "_id": "e1524fb3-cb88-4cec-84ba-3c1ba46587c1"
-            }
+            },
+            "7bcd01d8-0ab4-4617-ae33-549967bf2dd8": {
+                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+                "attractionId": "66406836-1782-42b0-a481-00f4b172f970",
+                "comment": "One of the largest museums in Bulgaria, it has exhibits from the prehistoric, Thracian, Ancient Greek and Ancient Roman periods of the region's history",
+                "username": "George",
+                "avatar": "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721865600&semt=ais_user",
+                "_createdOn": 1724158953247,
+                "_id": "7bcd01d8-0ab4-4617-ae33-549967bf2dd8",
+            },
         },
         attractions: {
-            "e34483b4-035e-482e-b36b-e8bf510e7378" : {
+            "e34483b4-035e-482e-b36b-e8bf510e7378": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
                 "name": "The 'Dormition of the Mother of God' Cathedral",
                 "image": "https://visit.varna.bg/media/cache/6d/c5/thumb7__DSC0098.jpg",
@@ -1437,7 +1446,7 @@
                 "_createdOn": 1721893122904,
                 "_id": "e34483b4-035e-482e-b36b-e8bf510e7378"
             },
-            "66406836-1782-42b0-a481-00f4b172f970" : {
+            "66406836-1782-42b0-a481-00f4b172f970": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
                 "name": "Archaeological Museum Varna",
                 "image": "https://varnasummerfest.org/wp-content/uploads/2022/03/1.png",
@@ -1450,7 +1459,7 @@
                 "_createdOn": 1721893209465,
                 "_id": "66406836-1782-42b0-a481-00f4b172f970"
             },
-            "0e70cc3d-c0db-4187-a14d-ef5e8154ecef" : {
+            "0e70cc3d-c0db-4187-a14d-ef5e8154ecef": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
                 "name": "Aladzha Monastery",
                 "image": "https://visit.varna.bg/media/cache/cb/42/thumb6_3_Aladzha_view.JPG",
@@ -1463,7 +1472,7 @@
                 "_createdOn": 1721893256055,
                 "_id": "0e70cc3d-c0db-4187-a14d-ef5e8154ecef"
             },
-            "3b17e427-ffcf-4ab4-9f3c-5ed709df23f3" : {
+            "3b17e427-ffcf-4ab4-9f3c-5ed709df23f3": {
                 "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
                 "name": "Dolphinarium Varna",
                 "image": "https://visit.varna.bg/media/cache/3d/00/thumb6_DSC_6688.JPG",
@@ -1476,7 +1485,7 @@
                 "_createdOn": 1721893294179,
                 "_id": "3b17e427-ffcf-4ab4-9f3c-5ed709df23f3"
             },
-            "ff0c520f-377b-4702-aa6b-5f4912040f9b" : {
+            "ff0c520f-377b-4702-aa6b-5f4912040f9b": {
                 "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
                 "name": "Residence Euxinograd",
                 "image": "https://visit.varna.bg/media/cache/6b/42/thumb7_DJI_0510.jpg",
