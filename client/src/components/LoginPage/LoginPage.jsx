@@ -16,7 +16,6 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState(() => {
         const storedFormData = JSON.parse(localStorage.getItem("form"));
-        console.log(storedFormData);
         
         if (storedFormData) {
             return {

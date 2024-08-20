@@ -23,7 +23,7 @@ export default function AttractionsPageAttraction({
                     </Link>
                     <div className="p-4">
                         <div className="d-flex justify-content-between mb-3">
-                            <small className="m-0">
+                            <small className="m-0" >
                                 <i className="fa fa-map-marker-alt text-primary mr-2" />
                                 {address}
                             </small>
@@ -32,7 +32,7 @@ export default function AttractionsPageAttraction({
                             {name}
                         </Link>
                         <div className="d-flex justify-content-between mb-3">
-                            <small className="m-0">
+                            <small className="m-0" >
                                 {description}
                             </small>
                         </div>

@@ -107,10 +107,7 @@ export default function inputValidations(formType, formData) {
         };
     };
 
-    return {
-        inputErrorMessage: null,
-        inputName: null,
-    };
+    return false;
 };
 
 function emailValidator(email) {

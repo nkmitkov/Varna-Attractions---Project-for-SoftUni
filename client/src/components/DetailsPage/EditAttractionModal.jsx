@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 
 import UserError from '../UserError/UserError';
+import inputValidations from '../../utils/inputValidations';
+import styles from "./EditAttractionModal.module.css";
 
 export default function EditAttractionModal({
     show,
@@ -12,7 +14,10 @@ export default function EditAttractionModal({
     onEditHandler,
     attraction,
 }) {
-    const [userErrorMessage, setUserErrorMessage] = useState("");
+    const [userError, setUserError] = useState({
+        inputErrorMessage: "",
+        inputName: ""
+    });
 
 
 
@@ -20,33 +25,18 @@ export default function EditAttractionModal({
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
-        const { name,
-            image,
-            address,
-            hours,
-            phone,
-            price,
-            website,
-            description } = Object.fromEntries(formData);
+        const formValues = Object.fromEntries(formData);
+        const errorInfo = inputValidations("Create", formValues);
 
-        if (!name || !image || !address || !hours || !phone || !price || !website || !description) {
-            setTimeout(() => {
-                setUserErrorMessage("");
-            }, 2500);
+        if (errorInfo.inputErrorMessage) {
+            setUserError(errorInfo);
 
-            return setUserErrorMessage("All input fields are required");
+            return setTimeout(() => {
+                setUserError("");
+            }, 3000);
         };
 
-        onEditHandler({
-            name,
-            image,
-            address,
-            hours,
-            phone,
-            price,
-            website,
-            description
-        });
+        onEditHandler(formValues);
     };
 
     return (
@@ -56,32 +46,72 @@ export default function EditAttractionModal({
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={onSubmitHandler}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" name="name" placeholder="Attraction's name.." defaultValue={attraction.name} />
+                    <Form.Group className={`mb-3 ${userError.inputName === "name" ? styles["input-error"] : ""}`} controlId="formBasicEmail">
+                        <Form.Control 
+                            type="text" 
+                            name="name" 
+                            placeholder="Attraction's name.." 
+                            defaultValue={attraction.name} 
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" name="image" placeholder="Attraction's image URL.." defaultValue={attraction.image} />
+                    <Form.Group className={`mb-3 ${userError.inputName === "image" ? styles["input-error"] : ""}`} controlId="formBasicEmail">
+                        <Form.Control 
+                            type="text" 
+                            name="image" 
+                            placeholder="Attraction's image URL.." 
+                            defaultValue={attraction.image} 
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" name="address" placeholder="Attraction's address.." defaultValue={attraction.address} />
+                    <Form.Group className={`mb-3 ${userError.inputName === "address" ? styles["input-error"] : ""}`} controlId="formBasicEmail">
+                        <Form.Control 
+                            type="text" 
+                            name="address" 
+                            placeholder="Attraction's address.." 
+                            defaultValue={attraction.address} 
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" name="hours" placeholder="Attraction's operating hours.." defaultValue={attraction.hours} />
+                    <Form.Group className={`mb-3 ${userError.inputName === "hours" ? styles["input-error"] : ""}`} controlId="formBasicEmail">
+                        <Form.Control 
+                            type="text" 
+                            name="hours" 
+                            placeholder="Attraction's operating hours.." 
+                            defaultValue={attraction.hours} 
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" name="phone" placeholder="Attraction's phone.." defaultValue={attraction.phone} />
+                    <Form.Group className={`mb-3 ${userError.inputName === "phone" ? styles["input-error"] : ""}`} controlId="formBasicEmail">
+                        <Form.Control 
+                            type="text" 
+                            name="phone" 
+                            placeholder="Attraction's phone.." 
+                            defaultValue={attraction.phone} 
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" name="price" placeholder="Attraction's entrance fee.." defaultValue={attraction.price} />
+                    <Form.Group className={`mb-3 ${userError.inputName === "price" ? styles["input-error"] : ""}`} controlId="formBasicEmail">
+                        <Form.Control 
+                            type="text" 
+                            name="price" 
+                            placeholder="Attraction's entrance fee.." 
+                            defaultValue={attraction.price} 
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" name="website" placeholder="Attraction's website URL.." defaultValue={attraction.website} />
+                    <Form.Group className={`mb-3 ${userError.inputName === "website" ? styles["input-error"] : ""}`} controlId="formBasicEmail">
+                        <Form.Control 
+                            type="text" 
+                            name="website" 
+                            placeholder="Attraction's website URL.." 
+                            defaultValue={attraction.website} 
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" name="description" placeholder="Attraction's short description.." defaultValue={attraction.description} />
+                    <Form.Group className={`mb-3 ${userError.inputName === "description" ? styles["input-error"] : ""}`} controlId="formBasicEmail">
+                        <Form.Control 
+                            type="text" 
+                            name="description" 
+                            placeholder="Attraction's short description.." 
+                            defaultValue={attraction.description} 
+                        />
                     </Form.Group>
 
-                    {userErrorMessage && <UserError message={userErrorMessage} />}
+                    {userError.inputErrorMessage && <UserError message={userError.inputErrorMessage} />}
 
                     <Modal.Footer>
                         <Button variant="primary" type="submit">Save</Button>

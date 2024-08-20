@@ -34,7 +34,11 @@ export default function CreatePage() {
     localStorage.setItem("form", JSON.stringify(formValues));
 
     useEffect(() => {
-        return () => localStorage.removeItem("form");
+        return () => {
+            localStorage.removeItem("form");
+            setUserErrorMessage("");
+            setInputError("");
+        };
     }, []);
 
     const onChangeHandler = (e) => {
@@ -65,7 +69,6 @@ export default function CreatePage() {
             resetFormHandler();
             navigate("/attractions");
         } catch (error) {
-            setInputError("");
             setUserErrorMessage(error.message);
 
             setTimeout(() => { setUserErrorMessage(""); }, 3000);
