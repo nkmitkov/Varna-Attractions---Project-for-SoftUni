@@ -27,6 +27,8 @@ export default function Navigation() {
                         </div>
                         <div className="col-lg-6 text-center text-lg-right">
                             <div className="d-inline-flex align-items-center">
+                                <div id="google_translate_element" style={{ paddingRight: "20px" }}></div>
+
                                 <a className="text-primary px-3" href="#facebook-link">
                                     <i className="fab fa-facebook-f" />
                                 </a>
